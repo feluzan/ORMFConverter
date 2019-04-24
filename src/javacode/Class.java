@@ -13,21 +13,23 @@ import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 
-public class Class {
+import ORM.ClassMapping;
+import writer.Writer;
+
+public class Class extends Writer{
 	
-	private String name;
+//	private String name;
+//	private final String iri = "ORMF-O::Entity_Class";
 	private boolean isEntity;
 	private List<AnnotationExpr> annotations = null;
 	private NodeList<Modifier> modifiers = null;
 	NodeList<ClassOrInterfaceType> extendeds = null;
-//	private ArrayList<String> annotations = new ArrayList<String>();
-//	private ArrayList<String> modifiers = new ArrayList<String>();
-	
 	private List<FieldDeclaration> fields;
 	
 	public Class(ClassOrInterfaceDeclaration node) {
-		this.name = ((NodeWithSimpleName<ClassOrInterfaceDeclaration>) node).getNameAsString();
 		
+		this.iri = "ORMF-O::Entity_Class";
+		this.name = ((NodeWithSimpleName<ClassOrInterfaceDeclaration>) node).getNameAsString();	
 		this.annotations = ((BodyDeclaration<ClassOrInterfaceDeclaration>) node).getAnnotations();	
 		this.modifiers = ((TypeDeclaration<ClassOrInterfaceDeclaration>) node).getModifiers();
 		this.fields = node.findAll(FieldDeclaration.class);
@@ -35,6 +37,15 @@ public class Class {
 		
 	}
 
+	public boolean isEntity() {
+		for (AnnotationExpr ann : this.annotations) {
+			if (ann.getNameAsString().equals("Entity")) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public ArrayList<String> annotations2array(){
 		ArrayList<String> ret = new ArrayList<String>();
 		for (AnnotationExpr ann : this.annotations) {
@@ -56,17 +67,9 @@ public class Class {
 		return ret;
 		
 	}
-	
-	public String getName() {
-		return name;
-	}
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public boolean isEntity() {
-		return isEntity;
 	}
 
 	public List<AnnotationExpr> getAnnotations() {
@@ -88,23 +91,5 @@ public class Class {
 		System.out.println("Fields: " + this.fields.toString());
 		System.out.println("Estende: " + this.extendeds.toString());
 	}
-	
-	public String entityDeclaration() {
-		String ret ="\t<Declaration>\n"
-				+		"\t\t<NamedIndividual IRI=\"#" + this.name + "\"/>\n"
-				+	"\t</Declaration>\n";
-		return ret;
-	}
-	public String entityAssertion() {
-		String ret = "\t<ClassAssertion>\n"
-				+	"\t\t<Class IRI=\"#ORMF-O::Entity_Class\"/>\n"
-				+		"\t\t<NamedIndividual IRI=\"#" + this.name + "\"/>\\n"
-				+ "\t</ClassAssertion>";
-		return ret;
-		
-		
-	}
-	
-	
 
 }

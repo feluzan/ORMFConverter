@@ -10,21 +10,61 @@ import java.util.List;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.Node;
-import com.github.javaparser.ast.NodeList;
-import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
-//import com.github.javaparser.ast.body.FieldDeclaration;
-import com.github.javaparser.ast.body.TypeDeclaration;
-import com.github.javaparser.ast.expr.AnnotationExpr;
-import com.github.javaparser.ast.expr.Name;
-import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 
+import ORM.ClassMapping;
+import ORM.Property;
 import javacode.Class;
 
 public class Converter {
+	static Property entityClassMappedBy = new Property("entity_class_mapped_by");
+	
+	static void processClassNode(Node node) {
+		Class c = new Class((ClassOrInterfaceDeclaration) node);
+		
+		if(c.isEntity()) {
+//			System.out.println(c.getDeclaration());
+//			System.out.println(c.getAssertion());
+			ClassMapping cm = new ClassMapping(c);
+			System.out.println(cm.getDeclaration());
+			System.out.println(cm.getAssertion());
+			System.out.println(entityClassMappedBy.getAssertion(c, cm));
+//					c.entityMapping();
+		
+		}
+		
+	}
+	
+	static void processFieldNode(Node node) {
+		
+	}
+	
+	static void processNode(Node node) {
+		if(node instanceof FieldDeclaration) {
+		}else if(node instanceof ClassOrInterfaceDeclaration) {
+		}else {
+			return;
+		}
+
+	}
+	
+	
+	static void walkOnNode(Node node) {
+		if(node instanceof FieldDeclaration) {
+			processFieldNode(node);
+		}else if(node instanceof ClassOrInterfaceDeclaration) {
+			processClassNode(node);
+		}else {
+			return;
+		}
+		
+		List<Node> nodeList = node.getChildNodes();
+		for(Node n : nodeList) {
+			walkOnNode(n);
+		}
+	}
 
 	public static void main(String[] args){
 		
@@ -37,22 +77,11 @@ public class Converter {
 			e.printStackTrace();
 		}
 		
+		
 		List<Node> nodeList = compilationUnit.getChildNodes();
 
 		for (Node n : nodeList) {
-			
-			if(n instanceof ClassOrInterfaceDeclaration) {
-				
-				Class c = new Class((ClassOrInterfaceDeclaration) n);
-				
-				c.print();
-			
-				System.out.println("------------------");
-				
-				System.out.println(c.annotations2array());
-			
-			}
-		
+			walkOnNode(n);
 		}
 		
 	}
