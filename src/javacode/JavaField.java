@@ -1,5 +1,5 @@
 package javacode;
 
-public class Field {
+public class JavaField {
 
 }

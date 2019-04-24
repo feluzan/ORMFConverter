@@ -1,9 +1,9 @@
 package ORM;
 
 import com.github.javaparser.ast.Node;
-import writer.Writer;
+import owlcode.Item;
 
-public class Property extends Writer{
+public class Property extends Item{
 //	private String name;
 //	private String iri;
 	
@@ -16,7 +16,7 @@ public class Property extends Writer{
 //		this.range = range;
 	}
 	
-	public String getAssertion(Writer domain, Writer range) {
+	public String getAssertion(Item domain, Item range) {
 	String ret =	"\t<ObjectPropertyAssertion>\n"
 				+		"\t\t<ObjectProperty IRI=\"#" + this.iri + "\" />\n"
 				+		"\t\t<NamedIndividual IRI=\"#" + domain.getName() + "\"/>\n"

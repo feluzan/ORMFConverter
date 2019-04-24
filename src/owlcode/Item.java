@@ -1,8 +1,8 @@
-package writer;
+package owlcode;
 
 import com.github.javaparser.ast.Node;
 
-public abstract class Writer {
+public abstract class Item {
 	
 	protected String iri;
 	protected String name;
@@ -27,7 +27,7 @@ public abstract class Writer {
 		String ret = "\t<ClassAssertion>\n"
 				+	"\t\t<Class IRI=\"#" + this.iri + "\"/>\n"
 				+		"\t\t<NamedIndividual IRI=\"#" + this.name + "\"/>\n"
-				+ "\t</ClassAssertion>";
+				+ "\t</ClassAssertion>\n";
 		return ret;
 		
 	}

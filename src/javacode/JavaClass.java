@@ -10,25 +10,22 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.expr.AnnotationExpr;
+import com.github.javaparser.ast.expr.MemberValuePair;
 import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 
 import ORM.ClassMapping;
-import writer.Writer;
+import genericcode.GenericClass;
 
-public class Class extends Writer{
+public class JavaClass extends GenericClass{
 	
-//	private String name;
-//	private final String iri = "ORMF-O::Entity_Class";
-	private boolean isEntity;
 	private List<AnnotationExpr> annotations = null;
 	private NodeList<Modifier> modifiers = null;
 	NodeList<ClassOrInterfaceType> extendeds = null;
 	private List<FieldDeclaration> fields;
 	
-	public Class(ClassOrInterfaceDeclaration node) {
-		
-		this.iri = "ORMF-O::Entity_Class";
+	public JavaClass(ClassOrInterfaceDeclaration node) {
+
 		this.name = ((NodeWithSimpleName<ClassOrInterfaceDeclaration>) node).getNameAsString();	
 		this.annotations = ((BodyDeclaration<ClassOrInterfaceDeclaration>) node).getAnnotations();	
 		this.modifiers = ((TypeDeclaration<ClassOrInterfaceDeclaration>) node).getModifiers();
@@ -45,6 +42,26 @@ public class Class extends Writer{
 		}
 		return false;
 	}
+	
+	public String getTableName() {
+			
+	//		List<AnnotationExpr> ann = c.getAnnotations();
+			
+			for (AnnotationExpr ann : this.getAnnotations()) {
+				if (ann.getNameAsString().equals("Entity")) {
+					List<MemberValuePair> members = ann.findAll(MemberValuePair.class);
+					for(MemberValuePair m : members) {
+						if(m.getName().toString().equals("table")) {
+							return m.getValue().toString().replace("\"", "");
+						}
+						
+					}
+					
+				}
+			}
+			
+			return this.name;
+		}
 	
 	public ArrayList<String> annotations2array(){
 		ArrayList<String> ret = new ArrayList<String>();
@@ -78,10 +95,6 @@ public class Class extends Writer{
 
 	public NodeList<Modifier> getModifiers() {
 		return modifiers;
-	}
-
-	public void setEntity(boolean isEntity) {
-		this.isEntity = isEntity;
 	}
 	
 	public void print() {

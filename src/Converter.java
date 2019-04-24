@@ -16,22 +16,36 @@ import com.github.javaparser.ast.body.FieldDeclaration;
 
 import ORM.ClassMapping;
 import ORM.Property;
-import javacode.Class;
+import genericcode.Table;
+import javacode.JavaClass;
 
 public class Converter {
 	static Property entityClassMappedBy = new Property("entity_class_mapped_by");
+	static Property classMappingTo = new Property("entity_class_mapped_to");
 	
 	static void processClassNode(Node node) {
-		Class c = new Class((ClassOrInterfaceDeclaration) node);
+		JavaClass c = new JavaClass((ClassOrInterfaceDeclaration) node);
 		
 		if(c.isEntity()) {
-//			System.out.println(c.getDeclaration());
-//			System.out.println(c.getAssertion());
+			//Create ClassMapping item
 			ClassMapping cm = new ClassMapping(c);
+			
+			//Create EntityTable item
+			//TODO
+			Table t = new Table(cm.getTable(), true);
+			
+			
+			System.out.println(c.getDeclaration());
+			System.out.println(c.getAssertion());
+			
 			System.out.println(cm.getDeclaration());
 			System.out.println(cm.getAssertion());
+			
+			System.out.println(t.getDeclaration());
+			System.out.println(t.getAssertion());
+			
 			System.out.println(entityClassMappedBy.getAssertion(c, cm));
-//					c.entityMapping();
+			System.out.println(classMappingTo.getAssertion(cm, t));
 		
 		}
 		
