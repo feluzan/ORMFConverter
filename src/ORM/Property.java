@@ -19,8 +19,8 @@ public class Property extends Item{
 	public String getAssertion(Item domain, Item range) {
 	String ret =	"\t<ObjectPropertyAssertion>\n"
 				+		"\t\t<ObjectProperty IRI=\"#" + this.iri + "\" />\n"
-				+		"\t\t<NamedIndividual IRI=\"#" + domain.getName() + "\"/>\n"
-				+		"\t\t<NamedIndividual IRI=\"#" + range.getName() + "\"/>\n"
+				+		"\t\t<NamedIndividual IRI=\"#" + domain.getIndividualName() + "\"/>\n"
+				+		"\t\t<NamedIndividual IRI=\"#" + range.getIndividualName() + "\"/>\n"
 				+ 	"\t</ObjectPropertyAssertion>";
 		return ret;
 	}

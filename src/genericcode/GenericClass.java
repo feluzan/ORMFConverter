@@ -15,5 +15,9 @@ public class GenericClass extends Item{
 	
 	}
 	
+	protected void setIndividualName() {
+		this.individualName = this.codeName.toLowerCase();
+	}
+	
 	
 }

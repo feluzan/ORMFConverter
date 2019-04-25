@@ -13,7 +13,7 @@ public class ClassMapping extends Item{
 	public ClassMapping (JavaClass c) {
 		this.iri = "ORMF-O::Class_Mapping";
 		this.c = c;
-		this.name = nameGenerator();
+		this.individualName = nameGenerator();
 		this.table = c.getTableName();
 //		System.out.println(this.table);
 		
@@ -27,7 +27,7 @@ public class ClassMapping extends Item{
 
 
 	private String nameGenerator() {
-		return "class_mapping_" + c.getName();
+		return "class_mapping_" + c.getIndividualName();
 	}
 	
 }

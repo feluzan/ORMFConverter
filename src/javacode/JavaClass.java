@@ -14,7 +14,6 @@ import com.github.javaparser.ast.expr.MemberValuePair;
 import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 
-import ORM.ClassMapping;
 import genericcode.GenericClass;
 
 public class JavaClass extends GenericClass{
@@ -26,11 +25,12 @@ public class JavaClass extends GenericClass{
 	
 	public JavaClass(ClassOrInterfaceDeclaration node) {
 
-		this.name = ((NodeWithSimpleName<ClassOrInterfaceDeclaration>) node).getNameAsString();	
+		this.codeName = ((NodeWithSimpleName<ClassOrInterfaceDeclaration>) node).getNameAsString();	
 		this.annotations = ((BodyDeclaration<ClassOrInterfaceDeclaration>) node).getAnnotations();	
 		this.modifiers = ((TypeDeclaration<ClassOrInterfaceDeclaration>) node).getModifiers();
 		this.fields = node.findAll(FieldDeclaration.class);
 		this.extendeds = node.getExtendedTypes();
+		this.setIndividualName();
 		
 	}
 
@@ -60,7 +60,7 @@ public class JavaClass extends GenericClass{
 				}
 			}
 			
-			return this.name;
+			return this.individualName;
 		}
 	
 	public ArrayList<String> annotations2array(){
@@ -86,7 +86,7 @@ public class JavaClass extends GenericClass{
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.individualName = name;
 	}
 
 	public List<AnnotationExpr> getAnnotations() {
@@ -98,7 +98,7 @@ public class JavaClass extends GenericClass{
 	}
 	
 	public void print() {
-		System.out.println("Nome da classe: " + this.name);
+		System.out.println("Nome da classe: " + this.individualName);
 		System.out.println("Anotações: " + this.annotations2array());
 		System.out.println("Modifiers: " + this.modifiers2array());
 		System.out.println("Fields: " + this.fields.toString());

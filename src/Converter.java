@@ -1,29 +1,31 @@
 //import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-//import java.io.FileInputStream;
-//import java.io.IOException;
-//import java.io.InputStream;
-//import java.io.InputStreamReader;
-//import java.util.Scanner;
 import java.util.List;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.NodeList;
+import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.body.VariableDeclarator;
+import com.github.javaparser.ast.expr.AnnotationExpr;
 
 import ORM.ClassMapping;
 import ORM.Property;
+import genericcode.GenericClass;
 import genericcode.Table;
 import javacode.JavaClass;
+import javacode.JavaField;
 
 public class Converter {
 	static Property entityClassMappedBy = new Property("entity_class_mapped_by");
 	static Property classMappingTo = new Property("entity_class_mapped_to");
+	static Property memberBelongsTo = new Property("member_belongs_to");
 	
-	static void processClassNode(Node node) {
+	static GenericClass processClassNode(Node node) {
 		JavaClass c = new JavaClass((ClassOrInterfaceDeclaration) node);
 		
 		if(c.isEntity()) {
@@ -31,7 +33,6 @@ public class Converter {
 			ClassMapping cm = new ClassMapping(c);
 			
 			//Create EntityTable item
-			//TODO
 			Table t = new Table(cm.getTable(), true);
 			
 			
@@ -46,12 +47,25 @@ public class Converter {
 			
 			System.out.println(entityClassMappedBy.getAssertion(c, cm));
 			System.out.println(classMappingTo.getAssertion(cm, t));
+			return c;
 		
 		}
+		return null;
 		
 	}
 	
-	static void processFieldNode(Node node) {
+	static void processFieldNode(Node node, GenericClass clazz) {
+		
+		NodeList<AnnotationExpr> annotations = ((BodyDeclaration<ClassOrInterfaceDeclaration>) node).getAnnotations();	
+		for(VariableDeclarator v : ((FieldDeclaration) node).getVariables()) {
+//			System.out.println("processando variable...");
+			JavaField f = new JavaField(v, annotations, clazz);
+			
+			System.out.println(f.getDeclaration());
+			System.out.println(f.getAssertion());
+			
+			System.out.println(memberBelongsTo.getAssertion(f,clazz));
+		}
 		
 	}
 	
@@ -65,19 +79,23 @@ public class Converter {
 	}
 	
 	
-	static void walkOnNode(Node node) {
-		if(node instanceof FieldDeclaration) {
-			processFieldNode(node);
-		}else if(node instanceof ClassOrInterfaceDeclaration) {
-			processClassNode(node);
+	static void walkOnNode(Node node, GenericClass clazz) {
+		if(node instanceof ClassOrInterfaceDeclaration) {
+			GenericClass c = processClassNode(node);
+			List<Node> nodeList = node.getChildNodes();
+			for(Node n : nodeList) {
+				walkOnNode(n, c);
+			}
+		}else if(node instanceof FieldDeclaration) {
+			processFieldNode(node, clazz);
 		}else {
 			return;
 		}
 		
-		List<Node> nodeList = node.getChildNodes();
-		for(Node n : nodeList) {
-			walkOnNode(n);
-		}
+//		List<Node> nodeList = node.getChildNodes();
+//		for(Node n : nodeList) {
+//			walkOnNode(n);
+//		}
 	}
 
 	public static void main(String[] args){
@@ -95,7 +113,7 @@ public class Converter {
 		List<Node> nodeList = compilationUnit.getChildNodes();
 
 		for (Node n : nodeList) {
-			walkOnNode(n);
+			walkOnNode(n, null);
 		}
 		
 	}

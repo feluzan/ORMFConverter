@@ -11,7 +11,7 @@ public class Table extends Item{
 		}else {
 			this.iri = "ORMF-O::Relationship_Association_Table";
 		}
-		this.name = name;
+		this.individualName = name;
 		
 	}
 
