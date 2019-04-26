@@ -1,7 +1,10 @@
 //import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
@@ -14,39 +17,58 @@ import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 
 import ORM.ClassMapping;
-import ORM.Property;
+import ORM.FieldMapping;
+import ORM.InheritanceMapping;
+import genericcode.Column;
 import genericcode.GenericClass;
 import genericcode.Table;
 import javacode.JavaClass;
 import javacode.JavaField;
 
+
+
 public class Converter {
-	static Property entityClassMappedBy = new Property("entity_class_mapped_by");
-	static Property classMappingTo = new Property("entity_class_mapped_to");
-	static Property memberBelongsTo = new Property("member_belongs_to");
+	
+	public static ArrayList<String> declaredSuperclasses = new ArrayList<String>();
+//	public static ArrayList<GenericClass> allClasses = new ArrayList<GenericClass>();
+	public static Map<String, GenericClass> classes = new HashMap<String, GenericClass>();
+	
+	
+	
 	
 	static GenericClass processClassNode(Node node) {
 		JavaClass c = new JavaClass((ClassOrInterfaceDeclaration) node);
 		
+		
 		if(c.isEntity()) {
-			//Create ClassMapping item
-			ClassMapping cm = new ClassMapping(c);
-			
+			classes.put(c.getCodeName(), c);
 			//Create EntityTable item
-			Table t = new Table(cm.getTable(), true);
+			Table t = new Table(c, true);
 			
+			//Create ClassMapping item
+			ClassMapping cm = new ClassMapping(c, t);
 			
-			System.out.println(c.getDeclaration());
-			System.out.println(c.getAssertion());
+//			System.out.println(c.getDeclaration());
+//			System.out.println(c.getAssertion());
 			
-			System.out.println(cm.getDeclaration());
-			System.out.println(cm.getAssertion());
-			
-			System.out.println(t.getDeclaration());
-			System.out.println(t.getAssertion());
-			
-			System.out.println(entityClassMappedBy.getAssertion(c, cm));
-			System.out.println(classMappingTo.getAssertion(cm, t));
+//			if(c.isSubclass()) {
+//				InheritanceMapping im = new InheritanceMapping()
+//				if (!declaredSuperclasses.contains(c.getSuperclass())) {
+//				
+//					System.out.println(GenericClass.getSuperclassAssertion(c.getSuperclass()));
+//					declaredSuperclasses.add(c.getSuperclass());
+//				
+//				}
+//			}
+//			
+//			System.out.println(t.getDeclaration());
+//			System.out.println(t.getAssertion());
+//
+//			System.out.println(cm.getDeclaration());
+//			System.out.println(cm.getAssertion());
+//			
+//			System.out.println(cm.getPropertiesAssertion());	
+
 			return c;
 		
 		}
@@ -58,13 +80,21 @@ public class Converter {
 		
 		NodeList<AnnotationExpr> annotations = ((BodyDeclaration<ClassOrInterfaceDeclaration>) node).getAnnotations();	
 		for(VariableDeclarator v : ((FieldDeclaration) node).getVariables()) {
-//			System.out.println("processando variable...");
 			JavaField f = new JavaField(v, annotations, clazz);
 			
-			System.out.println(f.getDeclaration());
-			System.out.println(f.getAssertion());
 			
-			System.out.println(memberBelongsTo.getAssertion(f,clazz));
+			if(!f.isTransient()) {
+				Column col = new Column(f);
+				FieldMapping fm = new FieldMapping(f, col);
+				
+//				System.out.println(f.getDeclaration());
+//				System.out.println(f.getAssertion());
+////				
+//				System.out.println(col.getDeclaration());
+//				System.out.println(col.getAssertion());
+////				
+//				System.out.println(fm.getPropertiesAssertion());
+			}
 		}
 		
 	}
@@ -87,34 +117,52 @@ public class Converter {
 				walkOnNode(n, c);
 			}
 		}else if(node instanceof FieldDeclaration) {
+
 			processFieldNode(node, clazz);
 		}else {
 			return;
 		}
-		
-//		List<Node> nodeList = node.getChildNodes();
-//		for(Node n : nodeList) {
-//			walkOnNode(n);
-//		}
 	}
 
+	static void processInheritance() {
+		for(GenericClass c : classes.values()) {
+			
+			if(c.isSubclass()) {
+				InheritanceMapping im = new InheritanceMapping (classes.get(c.getCodeName()), classes.get(c.getSuperclass()));
+			}
+			
+			
+		}
+	}
+	
 	public static void main(String[] args){
 		
-		String filePath = "C:\\Users\\Felix Zanetti\\eclipse-workspace\\JavaTest\\src\\Pessoa.java";
-
+		String folderPath = "C:\\Users\\Felix Zanetti\\eclipse-workspace\\JavaTest\\src\\";
+		File folder = new File(folderPath);
+		
 		CompilationUnit compilationUnit = null;
-		try {
-			compilationUnit = JavaParser.parse(new File(filePath));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		
-		List<Node> nodeList = compilationUnit.getChildNodes();
+		for (File f : folder.listFiles()) {
+			try {
+				compilationUnit = JavaParser.parse(f);
+			} catch (FileNotFoundException e) {
+//				e.printStackTrace();
+				//TODO colocar log de arquivo ou diretorio nao encontrado...
+				continue;
+			}
+			List<Node> nodeList = compilationUnit.getChildNodes();
 
-		for (Node n : nodeList) {
-			walkOnNode(n, null);
+			for (Node n : nodeList) {
+				walkOnNode(n, null);
+			}
 		}
+		
+		processInheritance();
+
+		
+		
+		
+		
+		
 		
 	}
 

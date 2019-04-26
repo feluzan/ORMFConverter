@@ -1,6 +1,5 @@
 package ORM;
 
-import com.github.javaparser.ast.Node;
 import owlcode.Item;
 
 public class Property extends Item{
@@ -21,7 +20,13 @@ public class Property extends Item{
 				+		"\t\t<ObjectProperty IRI=\"#" + this.iri + "\" />\n"
 				+		"\t\t<NamedIndividual IRI=\"#" + domain.getIndividualName() + "\"/>\n"
 				+		"\t\t<NamedIndividual IRI=\"#" + range.getIndividualName() + "\"/>\n"
-				+ 	"\t</ObjectPropertyAssertion>";
+				+ 	"\t</ObjectPropertyAssertion>\n";
 		return ret;
+	}
+
+	@Override
+	public void setIndividualName() {
+		// TODO Auto-generated method stub
+		
 	}
 }

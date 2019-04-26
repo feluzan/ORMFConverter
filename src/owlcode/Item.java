@@ -1,6 +1,6 @@
 package owlcode;
 
-import com.github.javaparser.ast.Node;
+
 
 public abstract class Item {
 	
@@ -9,12 +9,18 @@ public abstract class Item {
 	protected String codeName;
 	
 
+	public abstract void setIndividualName();
+	
 	public String getIri() {
 		return iri;
 	}
 
 	public String getIndividualName() {
 		return individualName;
+	}
+	
+	public String getCodeName() {
+		return codeName;
 	}
 
 	public String getDeclaration() {

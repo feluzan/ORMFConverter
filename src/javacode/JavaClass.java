@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.javaparser.ast.Modifier;
+import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
@@ -25,15 +26,23 @@ public class JavaClass extends GenericClass{
 	
 	public JavaClass(ClassOrInterfaceDeclaration node) {
 
-		this.codeName = ((NodeWithSimpleName<ClassOrInterfaceDeclaration>) node).getNameAsString();	
+		this.codeName = ((NodeWithSimpleName<ClassOrInterfaceDeclaration>) node).getNameAsString();
 		this.annotations = ((BodyDeclaration<ClassOrInterfaceDeclaration>) node).getAnnotations();	
 		this.modifiers = ((TypeDeclaration<ClassOrInterfaceDeclaration>) node).getModifiers();
 		this.fields = node.findAll(FieldDeclaration.class);
 		this.extendeds = node.getExtendedTypes();
 		this.setIndividualName();
+//		this.isSubclass();
 		
 	}
-
+	
+	public String getSuperclass() {
+		for(Node n : this.extendeds) {
+			return ((NodeWithSimpleName<ClassOrInterfaceDeclaration>) n).getNameAsString();
+		}
+		return null;
+	}
+	
 	public boolean isEntity() {
 		for (AnnotationExpr ann : this.annotations) {
 			if (ann.getNameAsString().equals("Entity")) {
@@ -43,24 +52,28 @@ public class JavaClass extends GenericClass{
 		return false;
 	}
 	
+	public boolean hasAnnotation(String annotation) {
+		for(AnnotationExpr ann : this.annotations) {
+			if(ann.getNameAsString().equals(annotation)) return true;
+		}
+		return false;
+	}
+	
+	@Override
 	public String getTableName() {
 			
-	//		List<AnnotationExpr> ann = c.getAnnotations();
-			
 			for (AnnotationExpr ann : this.getAnnotations()) {
-				if (ann.getNameAsString().equals("Entity")) {
+				if (ann.getNameAsString().equals("Table")) {
 					List<MemberValuePair> members = ann.findAll(MemberValuePair.class);
 					for(MemberValuePair m : members) {
-						if(m.getName().toString().equals("table")) {
+						if(m.getName().toString().equals("name")) {
 							return m.getValue().toString().replace("\"", "");
 						}
-						
 					}
-					
 				}
 			}
 			
-			return this.individualName;
+			return this.codeName;
 		}
 	
 	public ArrayList<String> annotations2array(){
@@ -72,8 +85,15 @@ public class JavaClass extends GenericClass{
 		
 	}
 	
-	public AnnotationExpr getSomeAnnotation(int index) {
-		return this.annotations.get(index);
+//	public AnnotationExpr getSomeAnnotation(int index) {
+//		return this.annotations.get(index);
+//	}
+	
+	public AnnotationExpr getAnnotation(String annotation) {
+		for(AnnotationExpr ann : this.annotations) {
+			if(ann.getNameAsString().equals(annotation)) return ann;
+		}
+		return null;
 	}
 	
 	public ArrayList<String> modifiers2array(){
@@ -103,6 +123,18 @@ public class JavaClass extends GenericClass{
 		System.out.println("Modifiers: " + this.modifiers2array());
 		System.out.println("Fields: " + this.fields.toString());
 		System.out.println("Estende: " + this.extendeds.toString());
+	}
+
+	@Override
+	public String getInheritanceStrategy() {
+		AnnotationExpr ann = this.getAnnotation("Inheritance");
+		List<MemberValuePair> members = ann.findAll(MemberValuePair.class);
+		for(MemberValuePair m : members) {
+			if(m.getName().toString().equals("strategy")) {
+				return m.getValue().toString().replace("\"", "").toLowerCase();
+			}
+		}
+		return null;
 	}
 
 }
