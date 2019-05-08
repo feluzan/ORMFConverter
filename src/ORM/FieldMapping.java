@@ -20,15 +20,15 @@ public class FieldMapping extends Item{
 			if(f.isPk()) {
 				this.iri = "ORMF-O::Primary_Key_Mapping";
 				this.variableMappedBy = new Property("pk_mapped_by");
-				this.variableMappingTo = new Property("pk_mapping_to");
+				this.variableMappingTo = new Property("pk_mapped_to");
 			}else if(f.isFk()) {
 				this.iri = "ORMF-O::Foreign_Key_Mapping";
 				this.variableMappedBy = new Property("fk_mapped_by");
-				this.variableMappingTo = new Property("fk_mapping_to");
+				this.variableMappingTo = new Property("fk_mapped_to");
 			}else {
 				this.iri = "ORMF-O::Variable_Mapping";
 				this.variableMappedBy = new Property("variable_mapped_by");
-				this.variableMappingTo = new Property("variable_mapping_to");
+				this.variableMappingTo = new Property("variable_mapped_to");
 			}
 			
 			this.field = f;

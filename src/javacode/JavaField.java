@@ -25,7 +25,7 @@ public class JavaField extends GenericField{
 		this.valueType = variable.getType();
 		this.annotations = annotations;
 		this.iri = "ORMF-O::Mapped_Variable";
-		if(this.isPk()) this.iri = "ORMF-O::Mapped_Primary_key";
+		if(this.isPk()) this.iri = "ORMF-O::Mapped_Primary_Key";
 		if(this.isFk()) this.iri = "ORMF-O::Mapped_Variable";
 
 		this.setIndividualName();

@@ -30,36 +30,34 @@ import javacode.JavaField;
 public class Converter {
 	
 	public static ArrayList<String> declaredSuperclasses = new ArrayList<String>();
-//	public static ArrayList<GenericClass> allClasses = new ArrayList<GenericClass>();
+	
 	public static Map<String, GenericClass> classes = new HashMap<String, GenericClass>();
+	public static Map<GenericClass, Table> tables = new HashMap<GenericClass, Table>();
+	public static Map<GenericClass, ClassMapping> classMappings = new HashMap<GenericClass, ClassMapping>();
+	
+	public static Map<GenericClass, InheritanceMapping> inheritanceMappings = new HashMap<GenericClass, InheritanceMapping>();
 	
 	
 	
 	
 	static GenericClass processClassNode(Node node) {
 		JavaClass c = new JavaClass((ClassOrInterfaceDeclaration) node);
+//		System.out.println(c.getCodeName());
 		
 		
 		if(c.isEntity()) {
 			classes.put(c.getCodeName(), c);
+			
 			//Create EntityTable item
-			Table t = new Table(c, true);
+			//Table t = new Table(c, true);
+			//tables.put(c,t);
 			
 			//Create ClassMapping item
-			ClassMapping cm = new ClassMapping(c, t);
+			//ClassMapping cm = new ClassMapping(c, t);
+			//classMappings.put(c, cm);
 			
 //			System.out.println(c.getDeclaration());
 //			System.out.println(c.getAssertion());
-			
-//			if(c.isSubclass()) {
-//				InheritanceMapping im = new InheritanceMapping()
-//				if (!declaredSuperclasses.contains(c.getSuperclass())) {
-//				
-//					System.out.println(GenericClass.getSuperclassAssertion(c.getSuperclass()));
-//					declaredSuperclasses.add(c.getSuperclass());
-//				
-//				}
-//			}
 //			
 //			System.out.println(t.getDeclaration());
 //			System.out.println(t.getAssertion());
@@ -76,6 +74,57 @@ public class Converter {
 		
 	}
 	
+	static GenericClass getHierarchyMother(GenericClass c) {
+		GenericClass mother = classes.get(c.getSuperclass());
+		if(mother.isSubclass()) return getHierarchyMother(mother);
+		return mother;
+	}
+	
+	static void processInheritance() {
+		for(GenericClass c : classes.values()) {
+			
+			if(c.isSubclass()) {
+				GenericClass superclass = classes.get(c.getSuperclass());
+				GenericClass subclass = classes.get(c.getCodeName());
+				if(subclass.getInheritanceStrategy()==null) {
+					GenericClass supremeMother = getHierarchyMother(subclass);
+					c.setInheritanceStrategy(supremeMother);
+				}				
+				
+				InheritanceMapping im = new InheritanceMapping(superclass, subclass);
+				inheritanceMappings.put(subclass,im);
+				
+			}
+			
+			
+		}
+	}
+	
+	static void processTables() {
+		for(GenericClass c : classes.values()) {
+			if(!c.isSubclass()) {
+				Table t = new Table(c, true);
+				tables.put(c,t);
+			}
+		}
+		for(GenericClass c : classes.values()) {
+			if(c.isSubclass()) {
+				String inheritanceStrategy = c.getInheritanceStrategy();
+				if(inheritanceStrategy.equals("table_per_class")){
+					
+				}if(inheritanceStrategy.equals("table_per_concrete_class")){
+					if(!c.isAbstract()) {
+						Table t = new Table(c,true);
+						tables.put(c, t);
+					}
+				}else {
+					Table t = getHierarchyMother(c).getTable();
+					tables.put(c,  t);
+				}
+			}
+		}
+	}
+	
 	static void processFieldNode(Node node, GenericClass clazz) {
 		
 		NodeList<AnnotationExpr> annotations = ((BodyDeclaration<ClassOrInterfaceDeclaration>) node).getAnnotations();	
@@ -87,52 +136,56 @@ public class Converter {
 				Column col = new Column(f);
 				FieldMapping fm = new FieldMapping(f, col);
 				
-//				System.out.println(f.getDeclaration());
-//				System.out.println(f.getAssertion());
-////				
-//				System.out.println(col.getDeclaration());
-//				System.out.println(col.getAssertion());
-////				
-//				System.out.println(fm.getPropertiesAssertion());
+				System.out.println(f.getDeclaration());
+				System.out.println(f.getAssertion());
+			
+				System.out.println(col.getDeclaration());
+				System.out.println(col.getAssertion());
+			
+				System.out.println(fm.getDeclaration());
+				System.out.println(fm.getAssertion());
+				System.out.println(fm.getPropertiesAssertion());
 			}
 		}
 		
 	}
 	
-	static void processNode(Node node) {
-		if(node instanceof FieldDeclaration) {
-		}else if(node instanceof ClassOrInterfaceDeclaration) {
-		}else {
-			return;
-		}
-
-	}
-	
-	
-	static void walkOnNode(Node node, GenericClass clazz) {
-		if(node instanceof ClassOrInterfaceDeclaration) {
-			GenericClass c = processClassNode(node);
-			List<Node> nodeList = node.getChildNodes();
-			for(Node n : nodeList) {
-				walkOnNode(n, c);
-			}
-		}else if(node instanceof FieldDeclaration) {
-
-			processFieldNode(node, clazz);
-		}else {
-			return;
-		}
-	}
-
-	static void processInheritance() {
+	static void processClassMapping() {
 		for(GenericClass c : classes.values()) {
-			
-			if(c.isSubclass()) {
-				InheritanceMapping im = new InheritanceMapping (classes.get(c.getCodeName()), classes.get(c.getSuperclass()));
-			}
-			
-			
+			ClassMapping cm = new ClassMapping(c,c.getTable());
+			classMappings.put(c, cm);
 		}
+	}
+	
+	static void printClasses() {
+		for(GenericClass c : classes.values()) {
+			System.out.println(c.getDeclaration());
+			System.out.println(c.getAssertion());
+		}
+	}
+	
+	static void printTables() {
+		for(Table t : tables.values()) {
+			System.out.println(t.getDeclaration());
+			System.out.println(t.getAssertion());
+		}
+	}
+	
+	static void printInheritanceMappings() {
+		for(InheritanceMapping im : inheritanceMappings.values()) {
+			System.out.println(im.getDeclaration());
+			System.out.println(im.getAssertion());
+		}
+	}
+	
+	static void printClassMappings() {
+		for(ClassMapping cm : classMappings.values()) {
+			System.out.println(cm.getDeclaration());
+			System.out.println(cm.getAssertion());
+			
+			System.out.println(cm.getPropertiesAssertion());
+		}
+
 	}
 	
 	public static void main(String[] args){
@@ -152,11 +205,21 @@ public class Converter {
 			List<Node> nodeList = compilationUnit.getChildNodes();
 
 			for (Node n : nodeList) {
-				walkOnNode(n, null);
+				if(n instanceof ClassOrInterfaceDeclaration) {
+					GenericClass c = processClassNode(n);
+//					processFieldNode(n,c);
+				}
 			}
 		}
 		
 		processInheritance();
+		processTables();
+		
+		
+		printClasses();
+		printTables();
+		printClassMappings();
+		printInheritanceMappings();
 
 		
 		

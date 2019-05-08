@@ -24,6 +24,7 @@ public class JavaClass extends GenericClass{
 	NodeList<ClassOrInterfaceType> extendeds = null;
 	private List<FieldDeclaration> fields;
 	
+	
 	public JavaClass(ClassOrInterfaceDeclaration node) {
 
 		this.codeName = ((NodeWithSimpleName<ClassOrInterfaceDeclaration>) node).getNameAsString();
@@ -36,6 +37,7 @@ public class JavaClass extends GenericClass{
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public String getSuperclass() {
 		for(Node n : this.extendeds) {
 			return ((NodeWithSimpleName<ClassOrInterfaceDeclaration>) n).getNameAsString();
@@ -62,28 +64,28 @@ public class JavaClass extends GenericClass{
 	@Override
 	public String getTableName() {
 			
-			for (AnnotationExpr ann : this.getAnnotations()) {
-				if (ann.getNameAsString().equals("Table")) {
-					List<MemberValuePair> members = ann.findAll(MemberValuePair.class);
-					for(MemberValuePair m : members) {
-						if(m.getName().toString().equals("name")) {
-							return m.getValue().toString().replace("\"", "");
-						}
+		for (AnnotationExpr ann : this.getAnnotations()) {
+			if (ann.getNameAsString().equals("Table")) {
+				List<MemberValuePair> members = ann.findAll(MemberValuePair.class);
+				for(MemberValuePair m : members) {
+					if(m.getName().toString().equals("name")) {
+						return m.getValue().toString().replace("\"", "");
 					}
 				}
 			}
-			
-			return this.codeName;
 		}
-	
-	public ArrayList<String> annotations2array(){
-		ArrayList<String> ret = new ArrayList<String>();
-		for (AnnotationExpr ann : this.annotations) {
-			ret.add(ann.toString());
-		}
-		return ret;
 		
+		return this.codeName;
 	}
+	
+//	public ArrayList<String> annotations2array(){
+//		ArrayList<String> ret = new ArrayList<String>();
+//		for (AnnotationExpr ann : this.annotations) {
+//			ret.add(ann.toString());
+//		}
+//		return ret;
+//		
+//	}
 	
 //	public AnnotationExpr getSomeAnnotation(int index) {
 //		return this.annotations.get(index);
@@ -95,15 +97,7 @@ public class JavaClass extends GenericClass{
 		}
 		return null;
 	}
-	
-	public ArrayList<String> modifiers2array(){
-		ArrayList<String> ret = new ArrayList<String>();
-		for (Modifier mod : this.modifiers) {
-			ret.add(mod.toString());
-		}
-		return ret;
-		
-	}
+
 
 	public void setName(String name) {
 		this.individualName = name;
@@ -117,24 +111,37 @@ public class JavaClass extends GenericClass{
 		return modifiers;
 	}
 	
-	public void print() {
-		System.out.println("Nome da classe: " + this.individualName);
-		System.out.println("Anotações: " + this.annotations2array());
-		System.out.println("Modifiers: " + this.modifiers2array());
-		System.out.println("Fields: " + this.fields.toString());
-		System.out.println("Estende: " + this.extendeds.toString());
-	}
+//	public void print() {
+//		System.out.println("Nome da classe: " + this.individualName);
+//		System.out.println("Anotações: " + this.annotations2array());
+//		System.out.println("Modifiers: " + this.modifiers2array());
+//		System.out.println("Fields: " + this.fields.toString());
+//		System.out.println("Estende: " + this.extendeds.toString());
+//	}
 
 	@Override
-	public String getInheritanceStrategy() {
+	public String getCodeInheritanceStrategy() {
 		AnnotationExpr ann = this.getAnnotation("Inheritance");
+		if (ann==null) return "single_table";
 		List<MemberValuePair> members = ann.findAll(MemberValuePair.class);
 		for(MemberValuePair m : members) {
 			if(m.getName().toString().equals("strategy")) {
-				return m.getValue().toString().replace("\"", "").toLowerCase();
+				String value = m.getValue().toString().replace("\"", "").toLowerCase();
+				if(value.contentEquals("joined")) return "table_per_class";
+				if(value.contentEquals("table_per_class")) return "table_per_concrete_class";
 			}
 		}
-		return null;
+		return "single_table";
+	}
+
+	@Override
+	public void setInheritanceStrategy(GenericClass supremeMother) {
+		if(supremeMother.getInheritanceStrategy()==null) {
+			supremeMother.setInheritanceStragegy(supremeMother.getCodeInheritanceStrategy());
+		}
+		this.setInheritanceStragegy(supremeMother.getInheritanceStrategy());
+		// TODO Auto-generated method stub
+		
 	}
 
 }

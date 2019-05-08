@@ -1,10 +1,12 @@
 package genericcode;
 
+import java.util.ArrayList;
+
 import owlcode.Item;
 
 public class Table extends Item{
 	
-	GenericClass clazz;
+	ArrayList<GenericClass> classes = new ArrayList<GenericClass>();
 	
 	
 	public Table(GenericClass c, boolean isEntityTable) {
@@ -13,15 +15,18 @@ public class Table extends Item{
 		}else {
 			this.iri = "ORMF-O::Relationship_Association_Table";
 		}
-		this.clazz = c;
+		this.classes.add(c);
 		this.setIndividualName();
+		c.setTable(this);
 		
 	}
 
 
 	@Override
 	public void setIndividualName() {
-		this.individualName = "table__" + this.clazz.getTableName();
+		this.individualName = "table__" + this.classes.get(0).getTableName();
 	}
+	
+//	public void set
 
 }
