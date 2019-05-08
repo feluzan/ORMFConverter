@@ -23,7 +23,10 @@ public class ClassMapping extends Item{
 	
 	
 	public String getPropertiesAssertion() {
-		return entityClassMappedBy.getAssertion(this.clazz, this) + classMappingTo.getAssertion(this, this.table);
+		String ret = "";
+		ret+= entityClassMappedBy.getAssertion(this.clazz, this);
+		ret+=classMappingTo.getAssertion(this, this.table);
+		return ret;
 	}
 	
 
@@ -34,7 +37,6 @@ public class ClassMapping extends Item{
 	@Override
 	public void setIndividualName() {
 		this.individualName = "class_mapping__" + this.clazz.getIndividualName() + "__to__" + this.table.getIndividualName();
-		// TODO Auto-generated method stub
 		
 	}
 	

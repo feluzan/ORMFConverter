@@ -17,6 +17,7 @@ public class Table extends Item{
 		}
 		this.classes.add(c);
 		this.setIndividualName();
+		this.codeName = c.getTableName();
 		c.setTable(this);
 		
 	}
