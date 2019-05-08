@@ -33,12 +33,21 @@ public class JavaClass extends GenericClass{
 		this.fields = node.findAll(FieldDeclaration.class);
 		this.extendeds = node.getExtendedTypes();
 		this.setIndividualName();
+		this.setIsAbstract();
 //		this.isSubclass();
 		
 	}
 	
+	public void setIsAbstract() {
+		for(Modifier m : this.modifiers) {
+			if(m.getKeyword().asString().equals("abstract")) {
+				this.isAbstract = true;
+			}
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
-	public String getSuperclass() {
+	public String getSuperclassName() {
 		for(Node n : this.extendeds) {
 			return ((NodeWithSimpleName<ClassOrInterfaceDeclaration>) n).getNameAsString();
 		}

@@ -75,7 +75,7 @@ public class Converter {
 	}
 	
 	static GenericClass getHierarchyMother(GenericClass c) {
-		GenericClass mother = classes.get(c.getSuperclass());
+		GenericClass mother = classes.get(c.getSuperclassName());
 		if(mother.isSubclass()) return getHierarchyMother(mother);
 		return mother;
 	}
@@ -84,15 +84,15 @@ public class Converter {
 		for(GenericClass c : classes.values()) {
 			
 			if(c.isSubclass()) {
-				GenericClass superclass = classes.get(c.getSuperclass());
-				GenericClass subclass = classes.get(c.getCodeName());
-				if(subclass.getInheritanceStrategy()==null) {
-					GenericClass supremeMother = getHierarchyMother(subclass);
+				GenericClass superclass = classes.get(c.getSuperclassName());
+				c.setSuperclass(superclass);
+				if(c.getInheritanceStrategy()==null) {
+					GenericClass supremeMother = getHierarchyMother(c);
 					c.setInheritanceStrategy(supremeMother);
 				}				
-				
-				InheritanceMapping im = new InheritanceMapping(superclass, subclass);
-				inheritanceMappings.put(subclass,im);
+//				
+				InheritanceMapping im = new InheritanceMapping(superclass, c);
+				inheritanceMappings.put(c,im);
 				
 			}
 			
@@ -101,25 +101,37 @@ public class Converter {
 	}
 	
 	static void processTables() {
+//		System.out.println("-> For de classes que não não são subclasses...");
 		for(GenericClass c : classes.values()) {
 			if(!c.isSubclass()) {
-				Table t = new Table(c, true);
-				tables.put(c,t);
+//				System.out.println("Processando tabela da classe " + c.getCodeName());
+//				Table t = 
+				tables.put(c,new Table(c, true));
+				c.setTable(tables.get(c));
 			}
 		}
+		
+//		System.out.println("-> For de classes que não não são subclasses...");
 		for(GenericClass c : classes.values()) {
+			
 			if(c.isSubclass()) {
+//				System.out.println("Processando tabela da classe " + c.getCodeName());
 				String inheritanceStrategy = c.getInheritanceStrategy();
-				if(inheritanceStrategy.equals("table_per_class")){
+//				System.out.println("Estrategia: " + inheritanceStrategy);
+				if(inheritanceStrategy.equals("single_table")){
 					
-				}if(inheritanceStrategy.equals("table_per_concrete_class")){
-					if(!c.isAbstract()) {
+					Table t = tables.get(getHierarchyMother(c));
+//					System.out.println("Classe mae da hierarquia: " + getHierarchyMother(c).getCodeName());
+//					System.out.println("Tabela da hierarquia: " + t.getCodeName());
+					tables.put(c,  t);
+					c.setTable(t);
+					
+				}else {
+					if(c.isMapped()) {
 						Table t = new Table(c,true);
 						tables.put(c, t);
 					}
-				}else {
-					Table t = getHierarchyMother(c).getTable();
-					tables.put(c,  t);
+					
 				}
 			}
 		}
@@ -150,10 +162,16 @@ public class Converter {
 		
 	}
 	
-	static void processClassMapping() {
+	static void processClassMappings() {
+//		System.out.println("Processando Class Mappings...");
 		for(GenericClass c : classes.values()) {
-			ClassMapping cm = new ClassMapping(c,c.getTable());
-			classMappings.put(c, cm);
+//			System.out.println(c.getCodeName() + "-----------");
+			if(c.isMapped()) {
+//				System.out.println("Classe: " + c.getCodeName());
+				ClassMapping cm = new ClassMapping(c,tables.get(c));
+				classMappings.put(c, cm);
+			}
+			
 		}
 	}
 	
@@ -175,6 +193,8 @@ public class Converter {
 		for(InheritanceMapping im : inheritanceMappings.values()) {
 			System.out.println(im.getDeclaration());
 			System.out.println(im.getAssertion());
+			
+			System.out.println(im.getPropertiesAssertion());
 		}
 	}
 	
@@ -214,6 +234,7 @@ public class Converter {
 		
 		processInheritance();
 		processTables();
+		processClassMappings();
 		
 		
 		printClasses();

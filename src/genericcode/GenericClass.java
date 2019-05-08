@@ -6,11 +6,10 @@ import owlcode.Item;
 
 public abstract class GenericClass extends Item{
 	
-	private boolean isSubclass;
-	private boolean isSuperclass;
+	private GenericClass superclass = null;
 	
 	private String inheritanceStrategy = null;
-	private boolean isAbstract;
+	protected boolean isAbstract;
 	
 	public Table table=null;
 	
@@ -19,10 +18,24 @@ public abstract class GenericClass extends Item{
 			this.iri = "ORMF-O::Entity_Class";
 	}
 	
+	public void setSuperclass(GenericClass superclass) {
+		this.superclass = superclass;
+	}
+	
+	public GenericClass getSuperclass() {
+		return this.superclass;
+	}
 	public boolean isAbstract() {
 		return this.isAbstract;
 	}
 	
+	public boolean isMapped() {
+//		System.out.println(this.isAbstract());
+//		System.out.println(this.inheritanceStrategy);
+		if(this.isAbstract() & this.inheritanceStrategy.equals("table_per_class")) return true;
+//		if()
+		return true;
+	}
 	public void setTable(Table t) {
 		this.table=t;
 	}
@@ -36,7 +49,7 @@ public abstract class GenericClass extends Item{
 	}
 
 	public abstract String getTableName();
-	public abstract String getSuperclass();
+	public abstract String getSuperclassName();
 	public abstract String getCodeInheritanceStrategy();
 	public abstract void setInheritanceStrategy(GenericClass supremeMother);
 	
@@ -58,7 +71,7 @@ public abstract class GenericClass extends Item{
 	}
 	
 	public boolean isSubclass() {
-		if(this.getSuperclass()==null) {
+		if(this.getSuperclassName()==null) {
 			return false;
 		}
 		return true;

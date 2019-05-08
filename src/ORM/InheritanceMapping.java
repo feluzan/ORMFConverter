@@ -10,10 +10,9 @@ public class InheritanceMapping extends Item{
 	
 	Property superclassMappedBy = new Property("superclass_mapped_by");
 	Property subclassMappedBy = new Property("subclass_mapped_by");
-	Property inheritanceMapedTo;
+	Property inheritanceMappedTo;
 	
 	String inheritanceStrategy;
-//	Property classMappingTo = new Property("entity_class_mapped_to");
 	
 	public InheritanceMapping(GenericClass superclass, GenericClass subclass) {
 		this.superclass = superclass;
@@ -23,13 +22,13 @@ public class InheritanceMapping extends Item{
 		
 		if(inheritanceStrategy.contentEquals("single_table")){
 			this.iri = "ORMF-O::Single_Table_Inheritance_Mapping";
-			inheritanceMapedTo = new Property("single_table_inheritance_mapped_to");
+			this.inheritanceMappedTo = new Property("single_table_inheritance_mapped_to");
 		}else if (inheritanceStrategy.contentEquals("joined")){
 			this.iri = "ORMF-O::Table_per_Class_Inheritance_Mapping";
-			inheritanceMapedTo = new Property("table_per_class_inheritance_mapped_to");
+			this.inheritanceMappedTo = new Property("table_per_class_inheritance_mapped_to");
 		}else {
 			this.iri = "ORMF-O::Table_per_Concrete_Class_Inheritance_Mapping";
-			inheritanceMapedTo = new Property("table_per_concrete_class_inheritance_mapped_to");
+			this.inheritanceMappedTo = new Property("table_per_concrete_class_inheritance_mapped_to");
 		}
 		this.setIndividualName();
 		
@@ -45,14 +44,27 @@ public class InheritanceMapping extends Item{
 	public String getSubclassPropertyAssertion(GenericClass subclass) {
 		String ret = "";
 		ret += this.subclassMappedBy.getAssertion(subclass, this);
-//		ret += this.inheritanceMapedTo.getAssertion(this,)
+
 		return ret;
 	}
 	
-	public String getPropertyAssertion() {
+	public String getPropertiesAssertion() {
 		String ret = "";
 		ret += this.superclassMappedBy.getAssertion(this.superclass, this);
-//		ret += this.subclassMappedBy.getAssertion(this.subclass, this);
+		ret += this.subclassMappedBy.getAssertion(this.subclass, this);
+		
+		ret+=this.inheritanceMappedTo.getAssertion(this, this.subclass.getTable());
+		
+		if(this.inheritanceStrategy.equals("table_per_class")) {
+			GenericClass parentClass = this.superclass;
+			ret+=this.inheritanceMappedTo.getAssertion(this, parentClass.getTable());
+			while(parentClass.isSubclass()) {
+				parentClass = parentClass.getSuperclass();
+				ret+=this.inheritanceMappedTo.getAssertion(this, parentClass.getTable());
+			}
+			
+		}
+		
 		return ret;
 	}
 	
@@ -62,8 +74,6 @@ public class InheritanceMapping extends Item{
 	
 	public String getAssertion() {
 		String ret = "";
-//		ret += this.subclass.getSubclassAssertion();
-//		ret += this.superclass.getSuperclassAssertion();
 		ret += super.getAssertion();
 		
 		
