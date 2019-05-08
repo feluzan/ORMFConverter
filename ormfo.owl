@@ -1,0 +1,376 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/felixzanetti/ontologies/2019/3/untitled-ontology-4"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/felixzanetti/ontologies/2019/3/untitled-ontology-4">
+    <Prefix name="" IRI="http://www.semanticweb.org/felixzanetti/ontologies/2019/3/untitled-ontology-4"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#OOC-O::Class"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Extendable_Class"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Member"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Member_Variable"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Subclass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Superclass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Variable"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Entity_Subclass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Entity_Superclass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Entity_Table"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Many_To_Many_Relationship_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Many_To_One_Relationship_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Mapped_Foreign_Key"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Mapped_Primary_Key"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Multiple_Entity_Table"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Nullability"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::One_To_Many_Relationship_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::One_To_One_Relationship_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Relationship_Association_Table"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Single_Entity_Table"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Single_Table_Inheritance_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Table_per_Class_Inheritance_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Table_per_Subclass_Inheritance_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Column"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Column_Constraint"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Column_Type_Constraint"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Constraint"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Foreign_Key_Column"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Foreign_Key_Constraint"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Primary_Key_Column"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Primary_Key_Constraint"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Table"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#member_belongs_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#pk_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#pk_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#single_table_inheritance_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#subclass_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#superclass_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#variable_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#variable_mapped_to"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#OOC-O::Extendable_Class"/>
+        <Class IRI="#OOC-O::Class"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <Class IRI="#OOC-O::Member_Variable"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OOC-O::Member_Variable"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#OOC-O::Member"/>
+            <Class IRI="#OOC-O::Variable"/>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OOC-O::Subclass"/>
+        <Class IRI="#OOC-O::Class"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OOC-O::Superclass"/>
+        <Class IRI="#OOC-O::Extendable_Class"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+        <Class IRI="#OOC-O::Class"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Entity_Subclass"/>
+        <Class IRI="#OOC-O::Subclass"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Entity_Superclass"/>
+        <Class IRI="#OOC-O::Superclass"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Entity_Table"/>
+        <Class IRI="#RDBS-O::Table"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Many_To_Many_Relationship_Mapping"/>
+        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Many_To_One_Relationship_Mapping"/>
+        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Mapped_Foreign_Key"/>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Mapped_Primary_Key"/>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Multiple_Entity_Table"/>
+        <Class IRI="#ORMF-O::Entity_Table"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::One_To_Many_Relationship_Mapping"/>
+        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::One_To_One_Relationship_Mapping"/>
+        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Relationship_Association_Table"/>
+        <Class IRI="#RDBS-O::Table"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Single_Entity_Table"/>
+        <Class IRI="#ORMF-O::Entity_Table"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Single_Table_Inheritance_Mapping"/>
+        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Table_per_Class_Inheritance_Mapping"/>
+        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Table_per_Subclass_Inheritance_Mapping"/>
+        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RDBS-O::Column_Constraint"/>
+        <Class IRI="#RDBS-O::Constraint"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RDBS-O::Column_Type_Constraint"/>
+        <Class IRI="#RDBS-O::Column_Constraint"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RDBS-O::Foreign_Key_Column"/>
+        <Class IRI="#RDBS-O::Column"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RDBS-O::Foreign_Key_Constraint"/>
+        <Class IRI="#RDBS-O::Column_Constraint"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RDBS-O::Primary_Key_Column"/>
+        <Class IRI="#RDBS-O::Column"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RDBS-O::Primary_Key_Constraint"/>
+        <Class IRI="#RDBS-O::Column_Constraint"/>
+    </SubClassOf>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#member_belongs_to"/>
+        <Class IRI="#OOC-O::Member"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#pk_mapped_by"/>
+        <Class IRI="#ORMF-O::Mapped_Primary_Key"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#pk_mapped_to"/>
+        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#single_table_inheritance_mapped_to"/>
+        <Class IRI="#ORMF-O::Single_Table_Inheritance_Mapping"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#subclass_mapped_by"/>
+        <Class IRI="#ORMF-O::Entity_Subclass"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#superclass_mapped_by"/>
+        <Class IRI="#ORMF-O::Entity_Superclass"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#variable_mapped_by"/>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#variable_mapped_to"/>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <Class IRI="#ORMF-O::Entity_Table"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#member_belongs_to"/>
+        <Class IRI="#OOC-O::Class"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#pk_mapped_by"/>
+        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#pk_mapped_to"/>
+        <Class IRI="#RDBS-O::Primary_Key_Column"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#single_table_inheritance_mapped_to"/>
+        <Class IRI="#ORMF-O::Entity_Table"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#subclass_mapped_by"/>
+        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#superclass_mapped_by"/>
+        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#variable_mapped_by"/>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#variable_mapped_to"/>
+        <Class IRI="#RDBS-O::Column"/>
+    </ObjectPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
