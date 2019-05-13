@@ -4,20 +4,21 @@ import owlcode.Item;
 
 public class Column extends Item {
 	
-	GenericField field;
+	GenericVariable variable;
 	
-	public Column (GenericField f) {
-		if(f.isPk()) {
+	public Column (GenericVariable v) {
+		if(v.isPk()) {
 			this.iri = "RDBS-O::Primary_Key_Column";
-		}else if(f.isFk()) {
+		}else if(v.isFk()) {
 			this.iri = "RDBS-O::Foreign_Key_Column";
 		}else {
 			this.iri = "RDBS-O::Column";
 		}
 		
-		this.codeName = f.getColumnCodeName();
-		this.field = f;
+		this.codeName = this.variable.getClazz().getTable().getCodeName() + "." + v.getColumnCodeName();
+		this.variable = v;
 		this.setIndividualName();
+		v.setColumn(this);
 //		this.setIndividualName(f);
 	}
 	
@@ -28,7 +29,7 @@ public class Column extends Item {
 
 	@Override
 	public void setIndividualName() {
-		this.individualName = "column__" + this.codeName + "__" + this.field.getIndividualName();
+		this.individualName = "column__" + this.codeName;
 		// TODO Auto-generated method stub
 		
 	}

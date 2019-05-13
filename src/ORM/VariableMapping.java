@@ -1,12 +1,12 @@
 package ORM;
 
 import genericcode.Column;
-import genericcode.GenericField;
+import genericcode.GenericVariable;
 import owlcode.Item;
 
-public class FieldMapping extends Item{
+public class VariableMapping extends Item{
 
-		GenericField field;
+		GenericVariable field;
 		Column column;
 		
 		Property variableMappedBy;//				new Property("variable_mapped_by");
@@ -15,7 +15,7 @@ public class FieldMapping extends Item{
 		
 		
 		
-		public FieldMapping (GenericField f, Column col) {
+		public VariableMapping (GenericVariable f, Column col) {
 			
 			if(f.isPk()) {
 				this.iri = "ORMF-O::Primary_Key_Mapping";

@@ -17,13 +17,15 @@ import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 
 import ORM.ClassMapping;
-import ORM.FieldMapping;
+import ORM.VariableMapping;
 import ORM.InheritanceMapping;
+import ORM.RelationshipMapping;
 import genericcode.Column;
 import genericcode.GenericClass;
+import genericcode.GenericVariable;
 import genericcode.Table;
 import javacode.JavaClass;
-import javacode.JavaField;
+import javacode.JavaVariable;
 
 
 
@@ -34,39 +36,23 @@ public class Converter {
 	public static Map<String, GenericClass> classes = new HashMap<String, GenericClass>();
 	public static Map<GenericClass, Table> tables = new HashMap<GenericClass, Table>();
 	public static Map<GenericClass, ClassMapping> classMappings = new HashMap<GenericClass, ClassMapping>();
-	
 	public static Map<GenericClass, InheritanceMapping> inheritanceMappings = new HashMap<GenericClass, InheritanceMapping>();
+	
+	public static Map<String, GenericVariable> variables = new HashMap<String, GenericVariable>();
+	public static Map<GenericVariable, Column> columns = new HashMap<GenericVariable, Column>();
+	
+	public static Map<GenericVariable, VariableMapping> variableMappings = new HashMap<GenericVariable, VariableMapping>();
+	public static Map<GenericClass, RelationshipMapping> relationshipMappings = new HashMap<GenericClass, RelationshipMapping>();
+	
 	
 	
 	
 	
 	static GenericClass processClassNode(Node node) {
 		JavaClass c = new JavaClass((ClassOrInterfaceDeclaration) node);
-//		System.out.println(c.getCodeName());
-		
 		
 		if(c.isEntity()) {
-			classes.put(c.getCodeName(), c);
-			
-			//Create EntityTable item
-			//Table t = new Table(c, true);
-			//tables.put(c,t);
-			
-			//Create ClassMapping item
-			//ClassMapping cm = new ClassMapping(c, t);
-			//classMappings.put(c, cm);
-			
-//			System.out.println(c.getDeclaration());
-//			System.out.println(c.getAssertion());
-//			
-//			System.out.println(t.getDeclaration());
-//			System.out.println(t.getAssertion());
-//
-//			System.out.println(cm.getDeclaration());
-//			System.out.println(cm.getAssertion());
-//			
-//			System.out.println(cm.getPropertiesAssertion());	
-
+			classes.put(c.getCodeName(), c);	
 			return c;
 		
 		}
@@ -89,8 +75,7 @@ public class Converter {
 				if(c.getInheritanceStrategy()==null) {
 					GenericClass supremeMother = getHierarchyMother(c);
 					c.setInheritanceStrategy(supremeMother);
-				}				
-//				
+				}						
 				InheritanceMapping im = new InheritanceMapping(superclass, c);
 				inheritanceMappings.put(c,im);
 				
@@ -101,28 +86,20 @@ public class Converter {
 	}
 	
 	static void processTables() {
-//		System.out.println("-> For de classes que não não são subclasses...");
 		for(GenericClass c : classes.values()) {
 			if(!c.isSubclass()) {
-//				System.out.println("Processando tabela da classe " + c.getCodeName());
-//				Table t = 
 				tables.put(c,new Table(c, true));
 				c.setTable(tables.get(c));
 			}
 		}
 		
-//		System.out.println("-> For de classes que não não são subclasses...");
 		for(GenericClass c : classes.values()) {
 			
 			if(c.isSubclass()) {
-//				System.out.println("Processando tabela da classe " + c.getCodeName());
 				String inheritanceStrategy = c.getInheritanceStrategy();
-//				System.out.println("Estrategia: " + inheritanceStrategy);
 				if(inheritanceStrategy.equals("single_table")){
 					
 					Table t = tables.get(getHierarchyMother(c));
-//					System.out.println("Classe mae da hierarquia: " + getHierarchyMother(c).getCodeName());
-//					System.out.println("Tabela da hierarquia: " + t.getCodeName());
 					tables.put(c,  t);
 					c.setTable(t);
 					
@@ -137,37 +114,9 @@ public class Converter {
 		}
 	}
 	
-	static void processFieldNode(Node node, GenericClass clazz) {
-		
-		NodeList<AnnotationExpr> annotations = ((BodyDeclaration<ClassOrInterfaceDeclaration>) node).getAnnotations();	
-		for(VariableDeclarator v : ((FieldDeclaration) node).getVariables()) {
-			JavaField f = new JavaField(v, annotations, clazz);
-			
-			
-			if(!f.isTransient()) {
-				Column col = new Column(f);
-				FieldMapping fm = new FieldMapping(f, col);
-				
-				System.out.println(f.getDeclaration());
-				System.out.println(f.getAssertion());
-			
-				System.out.println(col.getDeclaration());
-				System.out.println(col.getAssertion());
-			
-				System.out.println(fm.getDeclaration());
-				System.out.println(fm.getAssertion());
-				System.out.println(fm.getPropertiesAssertion());
-			}
-		}
-		
-	}
-	
 	static void processClassMappings() {
-//		System.out.println("Processando Class Mappings...");
 		for(GenericClass c : classes.values()) {
-//			System.out.println(c.getCodeName() + "-----------");
 			if(c.isMapped()) {
-//				System.out.println("Classe: " + c.getCodeName());
 				ClassMapping cm = new ClassMapping(c,tables.get(c));
 				classMappings.put(c, cm);
 			}
@@ -208,7 +157,65 @@ public class Converter {
 
 	}
 	
-	public static void main(String[] args){
+	static void processClassFields(Node node, GenericClass clazz) {
+		for(Node childNode : node.findAll(FieldDeclaration.class)) {
+			JavaVariable v = new JavaVariable(childNode,clazz);
+			variables.put(v.getCodeName(),v);
+		}
+	}
+
+	public static void processColumns() {
+		for(GenericVariable v : variables.values()) {
+			if(!v.isMapped()) continue;
+			Column c = new Column(v);
+			columns.put(v,c);
+		}
+	}
+	
+	public static void processVariableMappings() {
+		for(GenericVariable v : variables.values()) {
+			if(!v.isMapped()) continue;
+			Column c = columns.get(v);
+			VariableMapping vm = new VariableMapping(v,c);
+			variableMappings.put(v,vm);
+		}
+	}
+	
+//	public static void processRelationship(GenericVariable v) {
+//		System.out.println(v.getCodeName());
+//		
+//	}
+	
+	public static String typeFilter(String type) {
+		if(!type.contains("<")) return type;
+		String aux = type.substring(type.indexOf("<") + 1);
+		System.out.println(aux + " ---- ");
+		aux = aux.substring(0, aux.indexOf(">"));
+		return aux;
+	}
+	
+	public static void processRelationships() {
+		for(GenericClass c : classes.values()) {
+			for(GenericVariable v : c.getVariables()) {
+				if(v.isFk()) {
+					GenericClass range = classes.get(typeFilter(v.getType()));
+					RelationshipMapping rm = new RelationshipMapping(c,range, v);
+					relationshipMappings.put(c,rm);
+				}
+			}
+		}
+	}
+	
+	public static void printRelationshipMappings() {
+		for(RelationshipMapping rm : relationshipMappings.values()) {
+			System.out.println(rm.getDeclaration());
+			System.out.println(rm.getAssertion());
+			
+			System.out.println(rm.getPropertiesAssertion());
+		}
+	}
+	
+public static void main(String[] args){
 		
 		String folderPath = "C:\\Users\\Felix Zanetti\\eclipse-workspace\\JavaTest\\src\\";
 		File folder = new File(folderPath);
@@ -218,8 +225,6 @@ public class Converter {
 			try {
 				compilationUnit = JavaParser.parse(f);
 			} catch (FileNotFoundException e) {
-//				e.printStackTrace();
-				//TODO colocar log de arquivo ou diretorio nao encontrado...
 				continue;
 			}
 			List<Node> nodeList = compilationUnit.getChildNodes();
@@ -227,7 +232,8 @@ public class Converter {
 			for (Node n : nodeList) {
 				if(n instanceof ClassOrInterfaceDeclaration) {
 					GenericClass c = processClassNode(n);
-//					processFieldNode(n,c);
+					processClassFields(n,c);
+					
 				}
 			}
 		}
@@ -235,12 +241,17 @@ public class Converter {
 		processInheritance();
 		processTables();
 		processClassMappings();
-		
+		//---------------------
+		processColumns();
+		processVariableMappings();
+		//---------------------
+		processRelationships();
 		
 		printClasses();
 		printTables();
 		printClassMappings();
 		printInheritanceMappings();
+		printRelationshipMappings();
 
 		
 		

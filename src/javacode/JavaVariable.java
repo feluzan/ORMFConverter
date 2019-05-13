@@ -2,34 +2,44 @@ package javacode;
 
 import java.util.List;
 
+import com.github.javaparser.ast.Modifier;
+import com.github.javaparser.ast.Node;
 //import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.expr.MemberValuePair;
+import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import com.github.javaparser.ast.type.Type;
+import com.github.javaparser.ast.body.BodyDeclaration;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.FieldDeclaration;
+
 
 import genericcode.GenericClass;
-import genericcode.GenericField;
+import genericcode.GenericVariable;
 
-public class JavaField extends GenericField{
+public class JavaVariable extends GenericVariable{
 	
 
 	private List<AnnotationExpr> annotations = null;
+	private List<Modifier> modifiers = null;
 	Type valueType;
-//	private NodeList<Modifier> modifiers = null;
 	
-	public JavaField(VariableDeclarator variable, NodeList<AnnotationExpr> annotations, GenericClass clazz) {
+	public JavaVariable(Node node, GenericClass clazz) {
 		this.clazz = clazz;
-		this.codeName = variable.getNameAsString();
-		this.valueType = variable.getType();
-		this.annotations = annotations;
+		this.annotations = ((BodyDeclaration<FieldDeclaration>) node).getAnnotations();
+
+		VariableDeclarator variable = ((FieldDeclaration) node).getVariables().get(0);
+		this.codeName = clazz.getCodeName() + "." + variable.getNameAsString();
+		this.type = variable.getTypeAsString();
+		
 		this.iri = "ORMF-O::Mapped_Variable";
 		if(this.isPk()) this.iri = "ORMF-O::Mapped_Primary_Key";
 		if(this.isFk()) this.iri = "ORMF-O::Mapped_Variable";
 
 		this.setIndividualName();
-		
+		clazz.addVariable(this);
 	}
 	
 	
@@ -46,9 +56,8 @@ public class JavaField extends GenericField{
 		}
 		return null;
 	}
-	
-	
-	public boolean isTransient() {
+		
+	public boolean isMapped() {
 		return this.hasAnnotation("Transient");
 	}
 	
@@ -57,9 +66,9 @@ public class JavaField extends GenericField{
 	}
 	
 	public boolean isFk() {
-		return this.hasAnnotation("ForeignKey");
+//		return this.hasAnnotation("ForeignKey");
+		return this.hasAnnotation("OneToOne") | this.hasAnnotation("OneToMany") | this.hasAnnotation("ManyToOne") | this.hasAnnotation("ManyToMany");
 	}
-
 
 	@Override
 	public String getColumnCodeName() {
@@ -76,6 +85,15 @@ public class JavaField extends GenericField{
 			
 		}
 		return this.codeName;
+	}
+
+	@Override
+	public String getRelationshipType() {
+		if(this.hasAnnotation("OneToOne")) return "o2o";
+		if(this.hasAnnotation("OneToMany")) return "o2m";
+		if(this.hasAnnotation("ManyToOne")) return "m2o";
+		if(this.hasAnnotation("ManyToMany")) return "m2m";
+		return null;
 	}
 
 }

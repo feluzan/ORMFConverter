@@ -3,7 +3,7 @@ package genericcode;
 import ORM.Property;
 import owlcode.Item;
 
-public abstract class GenericField extends Item{
+public abstract class GenericVariable extends Item{
 	
 	protected String type;
 	protected Column column;
@@ -13,12 +13,15 @@ public abstract class GenericField extends Item{
 	
 
 	public void setIndividualName() {
-		this.individualName = "mapped_variable__" + this.codeName + "__" + this.clazz.getIndividualName();
+		this.individualName = "mapped_variable__" + this.codeName;
 	}
 	
+	
+	public abstract boolean isMapped();
 	public abstract boolean isPk();
 	public abstract boolean isFk();
 	public abstract String getColumnCodeName();
+	public abstract String getRelationshipType();
 	
 	
 	@Override
@@ -27,6 +30,9 @@ public abstract class GenericField extends Item{
 		
 	}
 	
+	public String getType() {
+		return this.type;
+	}
 	public Column getColumn(){
 		return column;
 	}

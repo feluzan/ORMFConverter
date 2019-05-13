@@ -7,15 +7,26 @@ import owlcode.Item;
 public abstract class GenericClass extends Item{
 	
 	private GenericClass superclass = null;
-	
 	private String inheritanceStrategy = null;
 	protected boolean isAbstract;
-	
 	public Table table=null;
+	ArrayList<GenericVariable> variables = new ArrayList<GenericVariable>();
 	
 	
 	public GenericClass() {
 			this.iri = "ORMF-O::Entity_Class";
+	}
+	
+	public void addVariable(GenericVariable f) {
+		this.variables.add(f);
+	}
+	
+	public ArrayList<GenericVariable> getVariables(){
+		return this.variables;
+	}
+	
+	public GenericVariable getVariable(int i) {
+		return this.variables.get(i);
 	}
 	
 	public void setSuperclass(GenericClass superclass) {
