@@ -61,7 +61,7 @@ public abstract class GenericClass extends Item{
 		return this.table;
 	}
 	
-	public void setIndividualName() {
+	public void setNamedIndividualIRI() {
 		this.namedIndividualIRI = "entity_class__" + this.codeName;
 	}
 

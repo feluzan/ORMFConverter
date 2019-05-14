@@ -17,7 +17,7 @@ public class ClassMapping extends Item{
 		this.clazz = c;
 //		System.out.println("---");
 		this.table = t;
-		this.setIndividualName();
+		this.setNamedIndividualIRI();
 		
 	}
 	
@@ -40,8 +40,8 @@ public class ClassMapping extends Item{
 //	}
 
 	@Override
-	public void setIndividualName() {
-		this.namedIndividualIRI = "class_mapping__" + this.clazz.getIndividualName() + "__to__" + this.table.getIndividualName();
+	public void setNamedIndividualIRI() {
+		this.namedIndividualIRI = "class_mapping__" + this.clazz.getNamedIndividualIRI() + "__to__" + this.table.getNamedIndividualIRI();
 		
 	}
 	

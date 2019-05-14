@@ -31,7 +31,7 @@ public class JavaClass extends GenericClass{
 		this.modifiers = ((TypeDeclaration<ClassOrInterfaceDeclaration>) node).getModifiers();
 		this.fields = node.findAll(FieldDeclaration.class);
 		this.extendeds = node.getExtendedTypes();
-		this.setIndividualName();
+		this.setNamedIndividualIRI();
 		this.setIsAbstract();
 //		this.isSubclass();
 		

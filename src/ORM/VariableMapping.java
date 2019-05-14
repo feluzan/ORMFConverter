@@ -33,7 +33,7 @@ public class VariableMapping extends Item{
 			
 			this.field = f;
 			this.column = col;
-			this.setIndividualName();
+			this.setNamedIndividualIRI();
 			
 //			this.column = f.getColumnIndividualName();
 //			System.out.println(this.table);
@@ -45,7 +45,7 @@ public class VariableMapping extends Item{
 		}
 
 		@Override
-		public void setIndividualName() {
+		public void setNamedIndividualIRI() {
 			String prefix = "variable_mapping__";
 			if(this.field.isPk()) {
 				prefix = "primary_key_mapping__";
@@ -53,7 +53,7 @@ public class VariableMapping extends Item{
 			if(this.field.isFk()) {
 				prefix = "foreign_key_mapping__";
 			}
-			this.namedIndividualIRI =  prefix + this.field.getIndividualName() + "__to__" + this.column.getIndividualName();
+			this.namedIndividualIRI =  prefix + this.field.getNamedIndividualIRI() + "__to__" + this.column.getNamedIndividualIRI();
 			
 			
 		}

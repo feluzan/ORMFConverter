@@ -18,14 +18,14 @@ public class Property extends Item{
 	public String getAssertion(Item domain, Item range) {
 	String ret =	"\t<ObjectPropertyAssertion>\n"
 				+		"\t\t<ObjectProperty IRI=\"#" + this.classIRI + "\" />\n"
-				+		"\t\t<NamedIndividual IRI=\"#" + domain.getIndividualName() + "\"/>\n"
-				+		"\t\t<NamedIndividual IRI=\"#" + range.getIndividualName() + "\"/>\n"
+				+		"\t\t<NamedIndividual IRI=\"#" + domain.getNamedIndividualIRI() + "\"/>\n"
+				+		"\t\t<NamedIndividual IRI=\"#" + range.getNamedIndividualIRI() + "\"/>\n"
 				+ 	"\t</ObjectPropertyAssertion>\n";
 		return ret;
 	}
 
 	@Override
-	public void setIndividualName() {
+	public void setNamedIndividualIRI() {
 		// TODO Auto-generated method stub
 		
 	}

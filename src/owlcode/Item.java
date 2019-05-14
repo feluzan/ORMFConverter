@@ -4,21 +4,19 @@ package owlcode;
 
 public abstract class Item {
 	
-	//class or object iri
 	protected String classIRI;
 	
-	//namedIndividual iri
 	protected String namedIndividualIRI;
 	protected String codeName;
 	
 
-	public abstract void setIndividualName();
+	public abstract void setNamedIndividualIRI();
 	
 	public String getIri() {
 		return classIRI;
 	}
 
-	public String getIndividualName() {
+	public String getNamedIndividualIRI() {
 		return namedIndividualIRI;
 	}
 	

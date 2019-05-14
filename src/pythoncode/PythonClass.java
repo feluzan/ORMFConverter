@@ -16,7 +16,7 @@ public class PythonClass extends GenericClass {
 	}
 	
 	@Override
-	public void setIndividualName() {
+	public void setNamedIndividualIRI() {
 		// TODO Auto-generated method stub
 
 	}

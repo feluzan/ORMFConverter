@@ -38,7 +38,7 @@ public class JavaVariable extends GenericVariable{
 		if(this.isPk()) this.classIRI = "ORMF-O::Mapped_Primary_Key";
 		if(this.isFk()) this.classIRI = "ORMF-O::Mapped_Variable";
 
-		this.setIndividualName();
+		this.setNamedIndividualIRI();
 		clazz.addVariable(this);
 	}
 	

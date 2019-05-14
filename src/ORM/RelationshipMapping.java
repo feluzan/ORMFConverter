@@ -21,7 +21,7 @@ public class RelationshipMapping extends Item{
 		this.range = range;
 		this.type = v.getRelationshipType();
 		this.variable = v;
-		this.setIndividualName();
+		this.setNamedIndividualIRI();
 		if(this.type.equals("o2o")) {
 			this.classIRI = "ORMF-O::One_To_One_Relationship_Mapping";
 //			relationshipMappedTo = new Property("one_to_one_mapped_to");
@@ -74,7 +74,7 @@ public class RelationshipMapping extends Item{
 	}
 
 	@Override
-	public void setIndividualName() {
+	public void setNamedIndividualIRI() {
 		String name = "";
 		if(this.type.equals("o2o")) {
 			name += "one_to_one___";

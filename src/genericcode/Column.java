@@ -17,7 +17,7 @@ public class Column extends Item {
 		
 		this.codeName = this.variable.getClazz().getTable().getCodeName() + "." + v.getColumnCodeName();
 		this.variable = v;
-		this.setIndividualName();
+		this.setNamedIndividualIRI();
 		v.setColumn(this);
 //		this.setIndividualName(f);
 	}
@@ -28,7 +28,7 @@ public class Column extends Item {
 //	}
 
 	@Override
-	public void setIndividualName() {
+	public void setNamedIndividualIRI() {
 		this.namedIndividualIRI = "column__" + this.codeName;
 		// TODO Auto-generated method stub
 		

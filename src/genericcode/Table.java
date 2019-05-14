@@ -16,7 +16,7 @@ public class Table extends Item{
 			this.classIRI = "ORMF-O::Relationship_Association_Table";
 		}
 		this.classes.add(c);
-		this.setIndividualName();
+		this.setNamedIndividualIRI();
 		this.codeName = c.getTableName();
 		c.setTable(this);
 		
@@ -28,7 +28,7 @@ public class Table extends Item{
 
 
 	@Override
-	public void setIndividualName() {
+	public void setNamedIndividualIRI() {
 		this.namedIndividualIRI = "table__" + this.classes.get(0).getTableName();
 	}
 	

@@ -30,7 +30,7 @@ public class InheritanceMapping extends Item{
 			this.classIRI = "ORMF-O::Table_per_Concrete_Class_Inheritance_Mapping";
 			this.inheritanceMappedTo = new Property("table_per_concrete_class_inheritance_mapped_to");
 		}
-		this.setIndividualName();
+		this.setNamedIndividualIRI();
 		
 
 	}
@@ -88,8 +88,8 @@ public class InheritanceMapping extends Item{
 
 
 	@Override
-	public void setIndividualName() {
-		this.namedIndividualIRI = "inheritance_mapping__" + this.superclass.getIndividualName() + "__" + this.inheritanceStrategy;
+	public void setNamedIndividualIRI() {
+		this.namedIndividualIRI = "inheritance_mapping__" + this.superclass.getNamedIndividualIRI() + "__" + this.inheritanceStrategy;
 		// TODO Auto-generated method stub
 		
 	}

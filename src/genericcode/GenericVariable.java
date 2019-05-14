@@ -12,7 +12,7 @@ public abstract class GenericVariable extends Item{
 	Property memberBelongsTo = new Property("member_belongs_to");
 	
 
-	public void setIndividualName() {
+	public void setNamedIndividualIRI() {
 		this.namedIndividualIRI = "mapped_variable__" + this.codeName;
 	}
 	
@@ -42,7 +42,7 @@ public abstract class GenericVariable extends Item{
 	}
 	
 	public String getClassIndividualName() {
-		return this.clazz.getIndividualName();
+		return this.clazz.getNamedIndividualIRI();
 	}
 	
 	public String getClassCodeName() {
