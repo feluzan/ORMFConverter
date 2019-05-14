@@ -56,7 +56,7 @@ public abstract class GenericClass extends Item{
 	}
 	
 	public void setIndividualName() {
-		this.individualName = "entity_class__" + this.codeName.toLowerCase();
+		this.individualName = "entity_class__" + this.codeName;
 	}
 
 	public abstract String getTableName();

@@ -4,7 +4,10 @@ package owlcode;
 
 public abstract class Item {
 	
+	//class or object iri
 	protected String iri;
+	
+	//namedIndividual iri
 	protected String individualName;
 	protected String codeName;
 	

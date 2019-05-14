@@ -35,6 +35,11 @@ public class InheritanceMapping extends Item{
 
 	}
 	
+	public InheritanceMapping(String classIri, String individualName) {
+		this.iri = classIri;
+		this.individualName = individualName;
+	}
+	
 	public String getSuperclassPropertyAssertion() {
 		String ret = "";
 		ret += this.superclassMappedBy.getAssertion(this.superclass, this);

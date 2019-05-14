@@ -40,6 +40,10 @@ public class RelationshipMapping extends Item{
 		
 	}
 
+	public RelationshipMapping(String classIri, String individualName) {
+		this.iri = classIri;
+		this.individualName = individualName;
+	}
 	
 	public String getPropertiesAssertion() {
 		String ret = "";

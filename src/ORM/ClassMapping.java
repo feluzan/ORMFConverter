@@ -21,6 +21,11 @@ public class ClassMapping extends Item{
 		
 	}
 	
+	public ClassMapping(String classIri, String individualName) {
+		this.iri = classIri;
+		this.individualName = individualName;
+	}
+	
 	
 	public String getPropertiesAssertion() {
 		String ret = "";

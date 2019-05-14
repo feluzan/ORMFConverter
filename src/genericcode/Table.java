@@ -21,6 +21,10 @@ public class Table extends Item{
 		c.setTable(this);
 		
 	}
+	
+	public Table(String name) {
+		this.codeName = name;
+	}
 
 
 	@Override

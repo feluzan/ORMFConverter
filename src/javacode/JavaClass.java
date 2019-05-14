@@ -1,6 +1,5 @@
 package javacode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.github.javaparser.ast.Modifier;
@@ -87,26 +86,12 @@ public class JavaClass extends GenericClass{
 		return this.codeName;
 	}
 	
-//	public ArrayList<String> annotations2array(){
-//		ArrayList<String> ret = new ArrayList<String>();
-//		for (AnnotationExpr ann : this.annotations) {
-//			ret.add(ann.toString());
-//		}
-//		return ret;
-//		
-//	}
-	
-//	public AnnotationExpr getSomeAnnotation(int index) {
-//		return this.annotations.get(index);
-//	}
-	
 	public AnnotationExpr getAnnotation(String annotation) {
 		for(AnnotationExpr ann : this.annotations) {
 			if(ann.getNameAsString().equals(annotation)) return ann;
 		}
 		return null;
 	}
-
 
 	public void setName(String name) {
 		this.individualName = name;
@@ -120,14 +105,6 @@ public class JavaClass extends GenericClass{
 		return modifiers;
 	}
 	
-//	public void print() {
-//		System.out.println("Nome da classe: " + this.individualName);
-//		System.out.println("Anotações: " + this.annotations2array());
-//		System.out.println("Modifiers: " + this.modifiers2array());
-//		System.out.println("Fields: " + this.fields.toString());
-//		System.out.println("Estende: " + this.extendeds.toString());
-//	}
-
 	@Override
 	public String getCodeInheritanceStrategy() {
 		AnnotationExpr ann = this.getAnnotation("Inheritance");
