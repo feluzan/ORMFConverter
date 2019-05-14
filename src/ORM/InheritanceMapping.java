@@ -21,13 +21,13 @@ public class InheritanceMapping extends Item{
 		this.inheritanceStrategy = this.superclass.getInheritanceStrategy();
 		
 		if(inheritanceStrategy.contentEquals("single_table")){
-			this.iri = "ORMF-O::Single_Table_Inheritance_Mapping";
+			this.classIRI = "ORMF-O::Single_Table_Inheritance_Mapping";
 			this.inheritanceMappedTo = new Property("single_table_inheritance_mapped_to");
 		}else if (inheritanceStrategy.contentEquals("joined")){
-			this.iri = "ORMF-O::Table_per_Class_Inheritance_Mapping";
+			this.classIRI = "ORMF-O::Table_per_Class_Inheritance_Mapping";
 			this.inheritanceMappedTo = new Property("table_per_class_inheritance_mapped_to");
 		}else {
-			this.iri = "ORMF-O::Table_per_Concrete_Class_Inheritance_Mapping";
+			this.classIRI = "ORMF-O::Table_per_Concrete_Class_Inheritance_Mapping";
 			this.inheritanceMappedTo = new Property("table_per_concrete_class_inheritance_mapped_to");
 		}
 		this.setIndividualName();
@@ -36,8 +36,8 @@ public class InheritanceMapping extends Item{
 	}
 	
 	public InheritanceMapping(String classIri, String individualName) {
-		this.iri = classIri;
-		this.individualName = individualName;
+		this.classIRI = classIri;
+		this.namedIndividualIRI = individualName;
 	}
 	
 	public String getSuperclassPropertyAssertion() {
@@ -89,7 +89,7 @@ public class InheritanceMapping extends Item{
 
 	@Override
 	public void setIndividualName() {
-		this.individualName = "inheritance_mapping__" + this.superclass.getIndividualName() + "__" + this.inheritanceStrategy;
+		this.namedIndividualIRI = "inheritance_mapping__" + this.superclass.getIndividualName() + "__" + this.inheritanceStrategy;
 		// TODO Auto-generated method stub
 		
 	}

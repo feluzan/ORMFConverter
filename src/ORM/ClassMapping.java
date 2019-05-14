@@ -13,7 +13,7 @@ public class ClassMapping extends Item{
 //	String name;
 	
 	public ClassMapping (GenericClass c, Table t) {
-		this.iri = "ORMF-O::Class_Mapping";
+		this.classIRI = "ORMF-O::Class_Mapping";
 		this.clazz = c;
 //		System.out.println("---");
 		this.table = t;
@@ -22,8 +22,8 @@ public class ClassMapping extends Item{
 	}
 	
 	public ClassMapping(String classIri, String individualName) {
-		this.iri = classIri;
-		this.individualName = individualName;
+		this.classIRI = classIri;
+		this.namedIndividualIRI = individualName;
 	}
 	
 	
@@ -41,7 +41,7 @@ public class ClassMapping extends Item{
 
 	@Override
 	public void setIndividualName() {
-		this.individualName = "class_mapping__" + this.clazz.getIndividualName() + "__to__" + this.table.getIndividualName();
+		this.namedIndividualIRI = "class_mapping__" + this.clazz.getIndividualName() + "__to__" + this.table.getIndividualName();
 		
 	}
 	

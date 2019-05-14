@@ -18,15 +18,15 @@ public class VariableMapping extends Item{
 		public VariableMapping (GenericVariable f, Column col) {
 			
 			if(f.isPk()) {
-				this.iri = "ORMF-O::Primary_Key_Mapping";
+				this.classIRI = "ORMF-O::Primary_Key_Mapping";
 				this.variableMappedBy = new Property("pk_mapped_by");
 				this.variableMappingTo = new Property("pk_mapped_to");
 			}else if(f.isFk()) {
-				this.iri = "ORMF-O::Foreign_Key_Mapping";
+				this.classIRI = "ORMF-O::Foreign_Key_Mapping";
 				this.variableMappedBy = new Property("fk_mapped_by");
 				this.variableMappingTo = new Property("fk_mapped_to");
 			}else {
-				this.iri = "ORMF-O::Variable_Mapping";
+				this.classIRI = "ORMF-O::Variable_Mapping";
 				this.variableMappedBy = new Property("variable_mapped_by");
 				this.variableMappingTo = new Property("variable_mapped_to");
 			}
@@ -53,7 +53,7 @@ public class VariableMapping extends Item{
 			if(this.field.isFk()) {
 				prefix = "foreign_key_mapping__";
 			}
-			this.individualName =  prefix + this.field.getIndividualName() + "__to__" + this.column.getIndividualName();
+			this.namedIndividualIRI =  prefix + this.field.getIndividualName() + "__to__" + this.column.getIndividualName();
 			
 			
 		}

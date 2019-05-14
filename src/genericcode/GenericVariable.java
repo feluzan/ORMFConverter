@@ -13,7 +13,7 @@ public abstract class GenericVariable extends Item{
 	
 
 	public void setIndividualName() {
-		this.individualName = "mapped_variable__" + this.codeName;
+		this.namedIndividualIRI = "mapped_variable__" + this.codeName;
 	}
 	
 	

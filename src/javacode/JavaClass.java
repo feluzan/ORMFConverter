@@ -94,7 +94,7 @@ public class JavaClass extends GenericClass{
 	}
 
 	public void setName(String name) {
-		this.individualName = name;
+		this.namedIndividualIRI = name;
 	}
 
 	public List<AnnotationExpr> getAnnotations() {

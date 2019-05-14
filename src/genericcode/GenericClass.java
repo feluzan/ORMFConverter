@@ -15,7 +15,7 @@ public abstract class GenericClass extends Item{
 	
 	
 	public GenericClass() {
-			this.iri = "ORMF-O::Entity_Class";
+			this.classIRI = "ORMF-O::Entity_Class";
 	}
 	
 	public void addVariable(GenericVariable f) {
@@ -62,7 +62,7 @@ public abstract class GenericClass extends Item{
 	}
 	
 	public void setIndividualName() {
-		this.individualName = "entity_class__" + this.codeName;
+		this.namedIndividualIRI = "entity_class__" + this.codeName;
 	}
 
 	public abstract String getTableName();
@@ -104,7 +104,7 @@ public abstract class GenericClass extends Item{
 	public String getSubclassAssertion() {
 		String ret = "\t<ClassAssertion>\n"
 				+	"\t\t<Class IRI=\"#ORMF-O::Entity_Subclass\"/>\n"
-				+		"\t\t<NamedIndividual IRI=\"#" + this.individualName + "\"/>\n"
+				+		"\t\t<NamedIndividual IRI=\"#" + this.namedIndividualIRI + "\"/>\n"
 				+ "\t</ClassAssertion>\n";
 		return ret;
 	}
@@ -116,7 +116,7 @@ public abstract class GenericClass extends Item{
 //		}
 		String ret = "\t<ClassAssertion>\n"
 				+	"\t\t<Class IRI=\"#ORMF-O::Entity_Superclass\"/>\n"
-				+		"\t\t<NamedIndividual IRI=\"#entity_class__" + this.individualName + "\"/>\n"
+				+		"\t\t<NamedIndividual IRI=\"#entity_class__" + this.namedIndividualIRI + "\"/>\n"
 				+ "\t</ClassAssertion>\n";
 		return ret;
 	}

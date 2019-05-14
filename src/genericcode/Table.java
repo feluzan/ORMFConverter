@@ -11,9 +11,9 @@ public class Table extends Item{
 	
 	public Table(GenericClass c, boolean isEntityTable) {
 		if(isEntityTable) {
-			 this.iri = "ORMF-O::Entity_Table";
+			 this.classIRI = "ORMF-O::Entity_Table";
 		}else {
-			this.iri = "ORMF-O::Relationship_Association_Table";
+			this.classIRI = "ORMF-O::Relationship_Association_Table";
 		}
 		this.classes.add(c);
 		this.setIndividualName();
@@ -29,7 +29,7 @@ public class Table extends Item{
 
 	@Override
 	public void setIndividualName() {
-		this.individualName = "table__" + this.classes.get(0).getTableName();
+		this.namedIndividualIRI = "table__" + this.classes.get(0).getTableName();
 	}
 	
 //	public void set

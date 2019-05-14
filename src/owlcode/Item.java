@@ -5,21 +5,21 @@ package owlcode;
 public abstract class Item {
 	
 	//class or object iri
-	protected String iri;
+	protected String classIRI;
 	
 	//namedIndividual iri
-	protected String individualName;
+	protected String namedIndividualIRI;
 	protected String codeName;
 	
 
 	public abstract void setIndividualName();
 	
 	public String getIri() {
-		return iri;
+		return classIRI;
 	}
 
 	public String getIndividualName() {
-		return individualName;
+		return namedIndividualIRI;
 	}
 	
 	public String getCodeName() {
@@ -28,15 +28,15 @@ public abstract class Item {
 
 	public String getDeclaration() {
 		String ret ="\t<Declaration>\n"
-				+		"\t\t<NamedIndividual IRI=\"#" + this.individualName + "\"/>\n"
+				+		"\t\t<NamedIndividual IRI=\"#" + this.namedIndividualIRI + "\"/>\n"
 				+	"\t</Declaration>\n";
 		return ret;
 	}
 	
 	public String getAssertion() {
 		String ret = "\t<ClassAssertion>\n"
-				+	"\t\t<Class IRI=\"#" + this.iri + "\"/>\n"
-				+		"\t\t<NamedIndividual IRI=\"#" + this.individualName + "\"/>\n"
+				+	"\t\t<Class IRI=\"#" + this.classIRI + "\"/>\n"
+				+		"\t\t<NamedIndividual IRI=\"#" + this.namedIndividualIRI + "\"/>\n"
 				+ "\t</ClassAssertion>\n";
 		return ret;
 		

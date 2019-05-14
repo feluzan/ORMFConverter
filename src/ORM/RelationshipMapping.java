@@ -23,16 +23,16 @@ public class RelationshipMapping extends Item{
 		this.variable = v;
 		this.setIndividualName();
 		if(this.type.equals("o2o")) {
-			this.iri = "ORMF-O::One_To_One_Relationship_Mapping";
+			this.classIRI = "ORMF-O::One_To_One_Relationship_Mapping";
 //			relationshipMappedTo = new Property("one_to_one_mapped_to");
 		}else if(this.type.equals("o2m")) {
-			this.iri = "ORMF-O::One_To_Many_Relationship_Mapping";
+			this.classIRI = "ORMF-O::One_To_Many_Relationship_Mapping";
 //			relationshipMappedTo = new Property("one_to_many_mapped_to");
 		}else if(this.type.equals("m2o")) {
-			this.iri = "ORMF-O::Many_To_One_Relationship_Mapping";
+			this.classIRI = "ORMF-O::Many_To_One_Relationship_Mapping";
 //			relationshipMappedTo = new Property("many_to_one_mapped_to");
 		}else {
-			this.iri = "ORMF-O::Many_To_Many_Relationship_Mapping";
+			this.classIRI = "ORMF-O::Many_To_Many_Relationship_Mapping";
 //			relationshipMappedTo = new Property("many_to_many_mapped_to");
 		}		
 //		System.out.println("-----Relationship Mapping------");
@@ -41,8 +41,8 @@ public class RelationshipMapping extends Item{
 	}
 
 	public RelationshipMapping(String classIri, String individualName) {
-		this.iri = classIri;
-		this.individualName = individualName;
+		this.classIRI = classIri;
+		this.namedIndividualIRI = individualName;
 	}
 	
 	public String getPropertiesAssertion() {
@@ -86,7 +86,7 @@ public class RelationshipMapping extends Item{
 			name += "many_to_many__";
 		}
 		name += this.variable.getCodeName() + "__" + this.range.getCodeName();
-		this.individualName = name;
+		this.namedIndividualIRI = name;
 		
 	}
 

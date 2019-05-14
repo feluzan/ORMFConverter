@@ -34,9 +34,9 @@ public class JavaVariable extends GenericVariable{
 		this.codeName = clazz.getCodeName() + "." + variable.getNameAsString();
 		this.type = variable.getTypeAsString();
 		
-		this.iri = "ORMF-O::Mapped_Variable";
-		if(this.isPk()) this.iri = "ORMF-O::Mapped_Primary_Key";
-		if(this.isFk()) this.iri = "ORMF-O::Mapped_Variable";
+		this.classIRI = "ORMF-O::Mapped_Variable";
+		if(this.isPk()) this.classIRI = "ORMF-O::Mapped_Primary_Key";
+		if(this.isFk()) this.classIRI = "ORMF-O::Mapped_Variable";
 
 		this.setIndividualName();
 		clazz.addVariable(this);
