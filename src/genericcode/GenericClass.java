@@ -9,6 +9,7 @@ public abstract class GenericClass extends Item{
 	private GenericClass superclass = null;
 	private String inheritanceStrategy = null;
 	protected boolean isAbstract;
+	boolean isSuperclas = false;
 	public Table table=null;
 	ArrayList<GenericVariable> variables = new ArrayList<GenericVariable>();
 	
@@ -31,6 +32,11 @@ public abstract class GenericClass extends Item{
 	
 	public void setSuperclass(GenericClass superclass) {
 		this.superclass = superclass;
+		superclass.setIsSuperclass(true);
+	}
+	
+	public void setIsSuperclass(boolean b) {
+		this.isSuperclas=b;
 	}
 	
 	public GenericClass getSuperclass() {
@@ -77,6 +83,9 @@ public abstract class GenericClass extends Item{
 		if(this.isSubclass()){
 			ret += this.getSubclassAssertion();
 		}
+		if(isSuperclass()) {
+			ret+=this.getSuperclassAssertion();
+		}
 		return ret;
 		
 	}
@@ -88,6 +97,10 @@ public abstract class GenericClass extends Item{
 		return true;
 	}
 	
+	public boolean isSuperclass() {
+		return this.isSuperclas;
+	}
+
 	public String getSubclassAssertion() {
 		String ret = "\t<ClassAssertion>\n"
 				+	"\t\t<Class IRI=\"#ORMF-O::Entity_Subclass\"/>\n"
