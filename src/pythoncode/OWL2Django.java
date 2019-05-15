@@ -18,7 +18,9 @@ import ORM.InheritanceMapping;
 import ORM.RelationshipMapping;
 import genericcode.GenericClass;
 import genericcode.GenericVariable;
+import genericcode.PrimitiveType;
 import genericcode.Table;
+import genericcode.Type;
 import genericcode.ValueType;
 
 public class OWL2Django {
@@ -30,6 +32,8 @@ public class OWL2Django {
 	private Map<String, RelationshipMapping> relationshipMappings = new HashMap<String,RelationshipMapping>();
 	private Map<String, ValueType> valueTypes = new HashMap<String, ValueType>();
 	private Map<String, GenericVariable> variables = new HashMap<String,GenericVariable>();
+	
+	private Map<String, PrimitiveType> primitiveTypes = new HashMap<String,PrimitiveType>();
 	
 	public OWL2Django(File file) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -54,6 +58,13 @@ public class OWL2Django {
 			e.printStackTrace();
 		}
 	}
+	
+	public Type getType(String iri) {
+		if(classes.containsKey(iri)) return classes.get(iri);
+		if(primitiveTypes.containsKey(iri)) return primitiveTypes.get(iri);
+		System.out.println("[ERROR] Type não encontrado: " + iri);
+		return null;
+	}
 
 	
 	public void processClassNodes(NodeList nodeList) {
@@ -66,6 +77,15 @@ public class OWL2Django {
 				Element e = (Element) n;
 				Element clazz = (Element) e.getElementsByTagName("Class").item(0);
 				String class_iri = clazz.getAttribute("IRI").replace("#", "");
+				
+				if(class_iri.equals("OOC-O::Primitive_Type")) {
+					Element namedIndividual = (Element) e.getElementsByTagName("NamedIndividual").item(0);
+					String iri = namedIndividual.getAttribute("IRI").replace("#", "");
+					
+					PrimitiveType pType = new PrimitiveType(class_iri, iri);
+					primitiveTypes.put(iri,pType);
+					continue;
+				}
 				
 				if(class_iri.equals("ORMF-O::Entity_Class")) {
 					Element namedIndividual = (Element) e.getElementsByTagName("NamedIndividual").item(0);
@@ -184,11 +204,6 @@ public class OWL2Django {
 				
 				System.out.println("Class: " + class_iri);
 				
-				
-				
-				
-				
-				
 			}
 		}
 		
@@ -288,6 +303,44 @@ public class OWL2Django {
 					continue;
 				}
 				
+				if(object_iri.equals("is_type_of")){
+					Element domain = (Element) e.getElementsByTagName("NamedIndividual").item(0);
+					Element range = (Element) e.getElementsByTagName("NamedIndividual").item(1);
+					String domain_iri = domain.getAttribute("IRI").replace("#", "");
+					String range_iri = range.getAttribute("IRI").replace("#", "");
+
+					GenericVariable v = variables.get(domain_iri);
+					ValueType vType = valueTypes.get(range_iri);
+					v.setValueType(vType);
+					vType.setVariable(v);
+					continue;
+				}
+				
+				if(object_iri.equals("refers_to")){
+					Element domain = (Element) e.getElementsByTagName("NamedIndividual").item(0);
+					Element range = (Element) e.getElementsByTagName("NamedIndividual").item(1);
+					String domain_iri = domain.getAttribute("IRI").replace("#", "");
+					String range_iri = range.getAttribute("IRI").replace("#", "");
+
+					ValueType v = valueTypes.get(domain_iri);
+					Type type = getType(range_iri);
+					v.setType(type);
+					continue;
+				}
+				
+				
+				if(object_iri.equals("member_belongs_to")){
+					Element domain = (Element) e.getElementsByTagName("NamedIndividual").item(0);
+					Element range = (Element) e.getElementsByTagName("NamedIndividual").item(1);
+					String domain_iri = domain.getAttribute("IRI").replace("#", "");
+					String range_iri = range.getAttribute("IRI").replace("#", "");
+
+					GenericVariable v = variables.get(domain_iri);
+					GenericClass c = classes.get(range_iri);
+					c.addVariable(v);
+					v.setClazz(c);
+					continue;
+				}
 				System.out.println("Property: " + object_iri);
 			}
 		}

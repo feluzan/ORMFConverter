@@ -22,6 +22,11 @@ public class ValueType extends Item {
 		this.namedIndividualIRI = individualName;
 	}
 	
+	
+	public void setVariable(GenericVariable variable) {
+		this.variable = variable;
+	}
+
 	public void setType(Type type) {
 		this.type = type;
 	}

@@ -33,7 +33,6 @@ public abstract class GenericVariable extends Item{
 		String ret = "";
 		ret += super.getAssertion();
 		ret += memberBelongsTo.getAssertion(this, this.clazz);
-//		ret += this.getTypeAssertion();
 		ret+= isTypeOf.getAssertion(this,this.getValueType());
 		return ret;
 		
@@ -49,9 +48,10 @@ public abstract class GenericVariable extends Item{
 	
 	public void setValueType(Type type) {
 		this.valueType = new ValueType(this,type);
-//		this.valueType.setType(type);
-		
-//		this.valueType = valueType;
+	}
+	
+	public void setValueType(ValueType type) {
+		this.valueType = type;
 	}
 	
 	public String getCodeValueType() {
@@ -78,4 +78,7 @@ public abstract class GenericVariable extends Item{
 		this.column = col;
 	}
 
+	public void setClazz(GenericClass clazz) {
+		this.clazz = clazz;
+	}
 }

@@ -8,6 +8,11 @@ public class PrimitiveType extends Type {
 		this.codeName = typeName;
 		this.setNamedIndividualIRI();
 	}
+	
+	public PrimitiveType(String classIri, String individualName) {
+		this.classIRI = classIri;
+		this.namedIndividualIRI = individualName;
+	}
 
 	@Override
 	public void setNamedIndividualIRI() {
