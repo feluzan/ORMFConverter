@@ -12,6 +12,7 @@ public abstract class Item {
 
 	public abstract void setNamedIndividualIRI();
 	
+
 	public String getIri() {
 		return classIRI;
 	}

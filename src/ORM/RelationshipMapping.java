@@ -7,18 +7,19 @@ import owlcode.Item;
 public class RelationshipMapping extends Item{
 	
 	GenericClass source;
-	GenericClass range;
+	GenericClass target;
 	GenericVariable variable;
 	String type;
 	
-	Property relationshipMappedBy = new Property("relationship_mapped_by");
+	Property relationshipSourceMappedBy = new Property("relationship_source_mapped_by");
+	Property relationshipTargetMappedBy = new Property("relationship_target_mapped_by");
 	Property relationshipMappedTo = new Property("relationship_mapped_to");
 	
-	public RelationshipMapping (GenericClass source, GenericClass range, GenericVariable v) {
+	public RelationshipMapping (GenericClass source, GenericClass target, GenericVariable v) {
 		
 		
 		this.source = source;
-		this.range = range;
+		this.target = target;
 		this.type = v.getRelationshipType();
 		this.variable = v;
 		this.setNamedIndividualIRI();
@@ -47,9 +48,9 @@ public class RelationshipMapping extends Item{
 	
 	public String getPropertiesAssertion() {
 		String ret = "";
-		ret += this.relationshipMappedBy.getAssertion(this.source,this);
-		ret += this.relationshipMappedBy.getAssertion(this.range,this);
-		ret += this.relationshipMappedTo.getAssertion(this,this.range.getTable());
+		ret += this.relationshipSourceMappedBy.getAssertion(this.source,this);
+		ret += this.relationshipTargetMappedBy.getAssertion(this.target,this);
+		ret += this.relationshipMappedTo.getAssertion(this,this.target.getTable());
 		ret += this.relationshipMappedTo.getAssertion(this,this.source.getTable());
 		if(this.type.equals("m2m")) {
 			//TODO incuir mapeamento com relationship association table
@@ -61,8 +62,8 @@ public class RelationshipMapping extends Item{
 		return source;
 	}
 
-	public GenericClass getRange() {
-		return range;
+	public GenericClass getTarget() {
+		return target;
 	}
 
 	public GenericVariable getVariable() {
@@ -85,9 +86,17 @@ public class RelationshipMapping extends Item{
 		}else {
 			name += "many_to_many__";
 		}
-		name += this.variable.getCodeName() + "__" + this.range.getCodeName();
+		name += this.variable.getCodeName() + "__" + this.target.getCodeName();
 		this.namedIndividualIRI = name;
 		
+	}
+
+	public void setSource(GenericClass source) {
+		this.source = source;
+	}
+
+	public void setTarget(GenericClass range) {
+		this.target = range;
 	}
 
 }

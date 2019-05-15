@@ -4,8 +4,9 @@ import genericcode.GenericClass;
 
 public class PythonClass extends GenericClass {
 	
-	public PythonClass(String codeName) {
-		this.codeName = codeName;
+	public PythonClass(String classIRI, String namedIndividualIRI) {
+		this.classIRI = classIRI;
+		this.namedIndividualIRI = namedIndividualIRI;
 	}
 
 	public String getLikeCode() {

@@ -22,8 +22,9 @@ public class Table extends Item{
 		
 	}
 	
-	public Table(String name) {
-		this.codeName = name;
+	public Table(String classIRI, String namedIndividualIRI) {
+		this.classIRI = classIRI;
+		this.namedIndividualIRI = namedIndividualIRI;
 	}
 
 

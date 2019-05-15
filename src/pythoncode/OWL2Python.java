@@ -39,7 +39,11 @@ public class OWL2Python {
 			//Get the OWL nodes (elements)
 			NodeList nodeList = doc.getElementsByTagName("ClassAssertion");
 			
-			processNodes(nodeList);
+			processClassNodes(nodeList);
+			
+			NodeList propertiesList = doc.getElementsByTagName("ObjectPropertyAssertion");
+			processPropertiesNodes(propertiesList);
+			
 		 
 		
 		} catch (ParserConfigurationException | SAXException | IOException e) {
@@ -47,7 +51,7 @@ public class OWL2Python {
 		}
 	}
 	
-	public void processNodes(NodeList nodeList) {
+	public void processClassNodes(NodeList nodeList) {
 		
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Node n = nodeList.item(i);
@@ -60,19 +64,19 @@ public class OWL2Python {
 				
 				if(class_iri.equals("ORMF-O::Entity_Class")) {
 					Element namedIndividual = (Element) e.getElementsByTagName("NamedIndividual").item(0);
-					String codeName = namedIndividual.getAttribute("IRI").replace("#entity_class__", "");
+					String iri = namedIndividual.getAttribute("IRI").replace("#", "");
 					
-					PythonClass c = new PythonClass(codeName);
-					classes.put(codeName,c);
+					PythonClass c = new PythonClass(class_iri, iri);
+					classes.put(iri,c);
 					continue;
 				}
 				
 				if(class_iri.equals("ORMF-O::Entity_Table")) {
 					Element namedIndividual = (Element) e.getElementsByTagName("NamedIndividual").item(0);
-					String codeName = namedIndividual.getAttribute("IRI").replace("#table__", "");
+					String iri = namedIndividual.getAttribute("IRI").replace("#table__", "");
 					
-					Table t = new Table(codeName);
-					tables.put(codeName,t);
+					Table t = new Table(class_iri, iri);
+					tables.put(iri,t);
 					continue;
 				}
 				
@@ -123,5 +127,90 @@ public class OWL2Python {
 		
 	}
 	
-	
+	public void processPropertiesNodes(NodeList nodeList) {
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Node n = nodeList.item(i);
+			
+			if (n.getNodeType() == Node.ELEMENT_NODE) {
+				
+				Element e = (Element) n;
+				Element clazz = (Element) e.getElementsByTagName("ObjectProperty").item(0);
+				String object_iri = clazz.getAttribute("IRI").replace("#", "");
+				
+				if(object_iri.equals("entity_class_mapped_by")){
+					Element domain = (Element) e.getElementsByTagName("NamedIndividual").item(0);
+					Element range = (Element) e.getElementsByTagName("NamedIndividual").item(1);
+					String domain_iri = domain.getAttribute("IRI").replace("#", "");
+					String range_iri = range.getAttribute("IRI").replace("#", "");
+					
+					GenericClass c = classes.get(domain_iri);
+					ClassMapping cm = classMappings.get(range_iri);
+					cm.setClazz(c);
+					continue;
+				}
+				
+				if(object_iri.equals("entity_class_mapped_to")){
+					Element domain = (Element) e.getElementsByTagName("NamedIndividual").item(0);
+					Element range = (Element) e.getElementsByTagName("NamedIndividual").item(1);
+					String domain_iri = domain.getAttribute("IRI").replace("#", "");
+					String range_iri = range.getAttribute("IRI").replace("#", "");
+
+					ClassMapping cm = classMappings.get(domain_iri);
+					Table t = tables.get(range_iri);
+					cm.setTable(t);
+					continue;
+				}
+				
+				if(object_iri.equals("superclass_mapped_by")){
+					Element domain = (Element) e.getElementsByTagName("NamedIndividual").item(0);
+					Element range = (Element) e.getElementsByTagName("NamedIndividual").item(1);
+					String domain_iri = domain.getAttribute("IRI").replace("#", "");
+					String range_iri = range.getAttribute("IRI").replace("#", "");
+
+					GenericClass c = classes.get(domain_iri);
+					InheritanceMapping im = inheritanceMappings.get(range_iri);
+					im.setSuperclass(c);
+					continue;
+				}
+				
+				if(object_iri.equals("subclass_mapped_by")){
+					Element domain = (Element) e.getElementsByTagName("NamedIndividual").item(0);
+					Element range = (Element) e.getElementsByTagName("NamedIndividual").item(1);
+					String domain_iri = domain.getAttribute("IRI").replace("#", "");
+					String range_iri = range.getAttribute("IRI").replace("#", "");
+
+					GenericClass c = classes.get(domain_iri);
+					InheritanceMapping im = inheritanceMappings.get(range_iri);
+					im.setSubclass(c);
+					continue;
+				}
+				
+				if(object_iri.equals("relationship_source_mapped_by")){
+					Element domain = (Element) e.getElementsByTagName("NamedIndividual").item(0);
+					Element range = (Element) e.getElementsByTagName("NamedIndividual").item(1);
+					String domain_iri = domain.getAttribute("IRI").replace("#", "");
+					String range_iri = range.getAttribute("IRI").replace("#", "");
+
+					GenericClass c = classes.get(domain_iri);
+					RelationshipMapping rm = relationshipMappings.get(range_iri);
+					rm.setSource(c);
+					continue;
+				}
+				
+				if(object_iri.equals("relationship_target_mapped_by")){
+					Element domain = (Element) e.getElementsByTagName("NamedIndividual").item(0);
+					Element range = (Element) e.getElementsByTagName("NamedIndividual").item(1);
+					String domain_iri = domain.getAttribute("IRI").replace("#", "");
+					String range_iri = range.getAttribute("IRI").replace("#", "");
+
+					GenericClass c = classes.get(domain_iri);
+					RelationshipMapping rm = relationshipMappings.get(range_iri);
+					rm.setTarget(c);
+					continue;
+				}
+				
+				System.out.println("Class: " + object_iri);
+			}
+		}
+	}
 }

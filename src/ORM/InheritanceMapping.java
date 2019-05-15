@@ -86,6 +86,21 @@ public class InheritanceMapping extends Item{
 		return ret;	
 	}
 
+	public GenericClass getSuperclass() {
+		return superclass;
+	}
+
+	public void setSuperclass(GenericClass superclass) {
+		this.superclass = superclass;
+	}
+
+	public GenericClass getSubclass() {
+		return subclass;
+	}
+
+	public void setSubclass(GenericClass subclass) {
+		this.subclass = subclass;
+	}
 
 	@Override
 	public void setNamedIndividualIRI() {

@@ -26,18 +26,28 @@ public class ClassMapping extends Item{
 		this.namedIndividualIRI = individualName;
 	}
 	
-	
 	public String getPropertiesAssertion() {
 		String ret = "";
 		ret+= entityClassMappedBy.getAssertion(this.clazz, this);
 		ret+=classMappingTo.getAssertion(this, this.table);
 		return ret;
 	}
-	
 
-//	public Table getTable() {
-//		return this.table;
-//	}
+	public GenericClass getClazz() {
+		return clazz;
+	}
+
+	public Table getTable() {
+		return table;
+	}
+
+	public void setClazz(GenericClass clazz) {
+		this.clazz = clazz;
+	}
+
+	public void setTable(Table table) {
+		this.table = table;
+	}
 
 	@Override
 	public void setNamedIndividualIRI() {
