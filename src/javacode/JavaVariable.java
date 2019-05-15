@@ -24,7 +24,8 @@ public class JavaVariable extends GenericVariable{
 
 	private List<AnnotationExpr> annotations = null;
 	private List<Modifier> modifiers = null;
-	Type valueType;
+	
+//	Type valueType;
 	
 	public JavaVariable(Node node, GenericClass clazz) {
 		this.clazz = clazz;
@@ -32,7 +33,7 @@ public class JavaVariable extends GenericVariable{
 
 		VariableDeclarator variable = ((FieldDeclaration) node).getVariables().get(0);
 		this.codeName = clazz.getCodeName() + "." + variable.getNameAsString();
-		this.type = variable.getTypeAsString();
+		this.codeValueType = variable.getTypeAsString();
 		
 		this.classIRI = "ORMF-O::Mapped_Variable";
 		if(this.isPk()) this.classIRI = "ORMF-O::Mapped_Primary_Key";
@@ -41,7 +42,6 @@ public class JavaVariable extends GenericVariable{
 		this.setNamedIndividualIRI();
 		clazz.addVariable(this);
 	}
-	
 	
 	public boolean hasAnnotation(String annotation) {
 		for(AnnotationExpr ann : this.annotations) {
@@ -70,6 +70,7 @@ public class JavaVariable extends GenericVariable{
 		return this.hasAnnotation("OneToOne") | this.hasAnnotation("OneToMany") | this.hasAnnotation("ManyToOne") | this.hasAnnotation("ManyToMany");
 	}
 
+	
 	@Override
 	public String getColumnCodeName() {
 		AnnotationExpr ann = this.getAnnotation("Column");
@@ -95,5 +96,16 @@ public class JavaVariable extends GenericVariable{
 		if(this.hasAnnotation("ManyToMany")) return "m2m";
 		return null;
 	}
+
+//	@Override
+//	public String getTypeAssertion() {
+//		String ret = "";
+////		if(this.type.equals("int")) {
+////			System.out.println("int");
+////		}else {
+////			System.out.println("Nao considerado: " + this.type);
+////		}
+//		return ret;
+//	}
 
 }

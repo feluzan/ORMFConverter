@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import owlcode.Item;
 
-public abstract class GenericClass extends Item{
+public abstract class GenericClass extends Type{
 	
 	private GenericClass superclass = null;
 	private String inheritanceStrategy = null;
@@ -53,6 +53,7 @@ public abstract class GenericClass extends Item{
 //		if()
 		return true;
 	}
+	
 	public void setTable(Table t) {
 		this.table=t;
 	}

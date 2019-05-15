@@ -28,10 +28,19 @@
         <Class IRI="#OOC-O::Member_Variable"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#OOC-O::Primitive_Type"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#OOC-O::Subclass"/>
     </Declaration>
     <Declaration>
         <Class IRI="#OOC-O::Superclass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Type"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Value_Type"/>
     </Declaration>
     <Declaration>
         <Class IRI="#OOC-O::Variable"/>
@@ -145,6 +154,9 @@
         <ObjectProperty IRI="#entity_class_relationship_mapped_by"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#is_type_of"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#member_belongs_to"/>
     </Declaration>
     <Declaration>
@@ -190,6 +202,10 @@
         <ObjectProperty IRI="#variable_mapped_to"/>
     </Declaration>
     <SubClassOf>
+        <Class IRI="#OOC-O::Class"/>
+        <Class IRI="#OOC-O::Type"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#OOC-O::Extendable_Class"/>
         <Class IRI="#OOC-O::Class"/>
     </SubClassOf>
@@ -203,6 +219,10 @@
             <Class IRI="#OOC-O::Member"/>
             <Class IRI="#OOC-O::Variable"/>
         </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OOC-O::Primitive_Type"/>
+        <Class IRI="#OOC-O::Type"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#OOC-O::Subclass"/>
@@ -325,6 +345,10 @@
         <Class IRI="#ORMF-O::Entity_Class"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
+        <ObjectProperty IRI="#is_type_of"/>
+        <Class IRI="#OOC-O::Variable"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
         <ObjectProperty IRI="#member_belongs_to"/>
         <Class IRI="#OOC-O::Member"/>
     </ObjectPropertyDomain>
@@ -395,6 +419,10 @@
     <ObjectPropertyRange>
         <ObjectProperty IRI="#entity_class_relationship_mapped_by"/>
         <Class IRI="#ORMF-O::Relationship_Mapping"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#is_type_of"/>
+        <Class IRI="#OOC-O::Value_Type"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#member_belongs_to"/>

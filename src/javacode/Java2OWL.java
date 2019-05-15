@@ -24,13 +24,17 @@ import ORM.VariableMapping;
 import genericcode.Column;
 import genericcode.GenericClass;
 import genericcode.GenericVariable;
+import genericcode.PrimitiveType;
 import genericcode.Table;
 import owlcode.OWLFile;
 
 public class Java2OWL {
-public static ArrayList<String> declaredSuperclasses = new ArrayList<String>();
-	
+	public static ArrayList<String> declaredSuperclasses = new ArrayList<String>();
+
+	public static Map<String, PrimitiveType> primitiveTypes = new HashMap<String, PrimitiveType>();
 	public static Map<String, GenericClass> classes = new HashMap<String, GenericClass>();
+	
+	
 	public static Map<GenericClass, Table> tables = new HashMap<GenericClass, Table>();
 	public static Map<GenericClass, ClassMapping> classMappings = new HashMap<GenericClass, ClassMapping>();
 	public static Map<GenericClass, InheritanceMapping> inheritanceMappings = new HashMap<GenericClass, InheritanceMapping>();
@@ -42,6 +46,8 @@ public static ArrayList<String> declaredSuperclasses = new ArrayList<String>();
 	public static Map<GenericClass, RelationshipMapping> relationshipMappings = new HashMap<GenericClass, RelationshipMapping>();
 	
 	public Java2OWL(File folder) {
+		this.setPrimitiveTypes();
+		
 		CompilationUnit compilationUnit = null;
 		for (File f : folder.listFiles()) {
 			if(!f.isFile()) continue;
@@ -63,6 +69,8 @@ public static ArrayList<String> declaredSuperclasses = new ArrayList<String>();
 			}
 		}
 		
+		processTypes();
+		
 		processInheritance();
 		processTables();
 		processClassMappings();
@@ -72,14 +80,19 @@ public static ArrayList<String> declaredSuperclasses = new ArrayList<String>();
 		//---------------------
 		processRelationships();
 		
-//		printClasses();
-//		printTables();
-//		printClassMappings();
-//		printInheritanceMappings();
-//		printRelationshipMappings();
 		
-//		this.printFile("output.owl");
-		
+	}
+	
+	public void setPrimitiveTypes() {
+		primitiveTypes.put("boolean",new PrimitiveType("boolean"));
+		primitiveTypes.put("byte",new PrimitiveType("byte"));
+		primitiveTypes.put("char",new PrimitiveType("char"));
+		primitiveTypes.put("double",new PrimitiveType("double"));
+		primitiveTypes.put("float",new PrimitiveType("float"));
+		primitiveTypes.put("int",new PrimitiveType("int"));
+		primitiveTypes.put("long",new PrimitiveType("long"));
+		primitiveTypes.put("short",new PrimitiveType("short"));
+		primitiveTypes.put("String",new PrimitiveType("String"));
 	}
 	
 	public void printFile(String filePath) {
@@ -89,11 +102,18 @@ public static ArrayList<String> declaredSuperclasses = new ArrayList<String>();
 		    PrintWriter printWriter = new PrintWriter(fileWriter);
 		    OWLFile owl = new OWLFile();
 		    printWriter.print(owl.getOwlHead());
+		    
+		    printWriter.print(this.getPrimitiveTypes());
+		    
 		    printWriter.print(this.getClasses());
 		    printWriter.print(this.getTables());
 		    printWriter.print(this.getClassMappings());
 		    printWriter.print(this.getInheritanceMappings());
 		    printWriter.print(this.getRelationshipMappings());
+		    
+		    printWriter.print(this.getVariables());
+//		    System.out.println(this.getVariables());
+		    
 		    printWriter.print(owl.getOwlClosure());
 		        
 		    printWriter.close();
@@ -104,6 +124,7 @@ public static ArrayList<String> declaredSuperclasses = new ArrayList<String>();
 		
 		
 	}
+
 	
 	static GenericClass processClassNode(Node node) {
 		JavaClass c = new JavaClass((ClassOrInterfaceDeclaration) node);
@@ -115,6 +136,25 @@ public static ArrayList<String> declaredSuperclasses = new ArrayList<String>();
 		}
 		return null;
 		
+	}
+	
+	static void processTypes() {
+		for(GenericVariable v : variables.values()) {
+			
+			if(classes.containsKey(v.getCodeValueType())) {
+				v.setValueType(classes.get(v.getCodeValueType()));
+				continue;	
+			}
+			
+			if(primitiveTypes.containsKey(v.getCodeValueType())) {
+				v.setValueType(primitiveTypes.get(v.getCodeValueType()));
+				continue;	
+			}
+			
+			System.out.println("[ERROR] Type nao encontrado: " + v.getCodeValueType());
+			
+			
+		}
 	}
 	
 	static GenericClass getHierarchyMother(GenericClass c) {
@@ -191,6 +231,16 @@ public static ArrayList<String> declaredSuperclasses = new ArrayList<String>();
 		}
 	}
 	
+	public String getPrimitiveTypes() {
+		String ret = "";
+		for(PrimitiveType pType : primitiveTypes.values()) {
+			ret += pType.getDeclaration();
+			ret+= pType.getAssertion();
+		}
+		
+		return ret;
+	}
+	
 	public String getClasses() {
 		String ret = "";
 		for(GenericClass c : classes.values()) {
@@ -231,6 +281,19 @@ public static ArrayList<String> declaredSuperclasses = new ArrayList<String>();
 
 	}
 	
+	public String getVariables() {
+		String ret = "";
+		
+		for(GenericVariable v : variables.values()) {
+			ret += v.getDeclaration();
+			ret += v.getAssertion();
+			ret += v.getValueType().getDeclaration();
+			ret += v.getValueType().getAssertion();
+		}
+		
+		return ret;
+	}
+
 	static void processClassFields(Node node, GenericClass clazz) {
 		for(Node childNode : node.findAll(FieldDeclaration.class)) {
 			JavaVariable v = new JavaVariable(childNode,clazz);
@@ -267,7 +330,7 @@ public static ArrayList<String> declaredSuperclasses = new ArrayList<String>();
 		for(GenericClass c : classes.values()) {
 			for(GenericVariable v : c.getVariables()) {
 				if(v.isFk()) {
-					GenericClass range = classes.get(typeFilter(v.getType()));
+					GenericClass range = classes.get(typeFilter(v.getCodeValueType()));
 					RelationshipMapping rm = new RelationshipMapping(c,range, v);
 					relationshipMappings.put(c,rm);
 				}
