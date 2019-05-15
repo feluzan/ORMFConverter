@@ -17,17 +17,21 @@ import ORM.ClassMapping;
 import ORM.InheritanceMapping;
 import ORM.RelationshipMapping;
 import genericcode.GenericClass;
+import genericcode.GenericVariable;
 import genericcode.Table;
+import genericcode.ValueType;
 
-public class OWL2Python {
+public class OWL2Django {
 	
 	private Map<String,GenericClass> classes = new HashMap<String,GenericClass>();
 	private Map<String, Table> tables = new HashMap<String, Table>();
 	private Map<String, ClassMapping> classMappings = new HashMap<String,ClassMapping>();
 	private Map<String, InheritanceMapping> inheritanceMappings = new HashMap<String,InheritanceMapping>();
 	private Map<String, RelationshipMapping> relationshipMappings = new HashMap<String,RelationshipMapping>();
-
-	public OWL2Python(File file) {
+	private Map<String, ValueType> valueTypes = new HashMap<String, ValueType>();
+	private Map<String, GenericVariable> variables = new HashMap<String,GenericVariable>();
+	
+	public OWL2Django(File file) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder;
 		
@@ -50,6 +54,7 @@ public class OWL2Python {
 			e.printStackTrace();
 		}
 	}
+
 	
 	public void processClassNodes(NodeList nodeList) {
 		
@@ -66,10 +71,16 @@ public class OWL2Python {
 					Element namedIndividual = (Element) e.getElementsByTagName("NamedIndividual").item(0);
 					String iri = namedIndividual.getAttribute("IRI").replace("#", "");
 					
-					PythonClass c = new PythonClass(class_iri, iri);
+					DjangoClass c = new DjangoClass(class_iri, iri);
 					classes.put(iri,c);
 					continue;
 				}
+				
+				if(class_iri.equals("ORMF-O::Entity_Superclass") |
+						class_iri.equals("ORMF-O::Entity_Subclass")) {
+					continue;
+				}
+								
 				
 				if(class_iri.equals("ORMF-O::Entity_Table")) {
 					Element namedIndividual = (Element) e.getElementsByTagName("NamedIndividual").item(0);
@@ -125,10 +136,8 @@ public class OWL2Python {
 						class_iri.equals("ORMF-O::Single_Table_Inheritance_Mapping")) {
 					Element namedIndividual = (Element) e.getElementsByTagName("NamedIndividual").item(0);
 					String iri = namedIndividual.getAttribute("IRI").replace("#", "");
-//					System.out.println(iri);
-					
+		
 					InheritanceMapping im = new InheritanceMapping(class_iri, iri);
-
 					inheritanceMappings.put(iri, im);
 					continue;
 				}
@@ -141,8 +150,35 @@ public class OWL2Python {
 					String iri = namedIndividual.getAttribute("IRI").replace("#", "");
 
 					RelationshipMapping rm = new RelationshipMapping(class_iri, iri);
-
 					relationshipMappings.put(iri, rm);
+					continue;
+				}
+				
+				if(class_iri.equals("OOC-O::Value_Type")) {
+					Element namedIndividual = (Element) e.getElementsByTagName("NamedIndividual").item(0);
+					String iri = namedIndividual.getAttribute("IRI").replace("#", "");
+
+					ValueType v = new ValueType(class_iri, iri);
+					valueTypes.put(iri, v);
+					continue;
+				}
+				
+				if(class_iri.equals("ORMF-O::Mapped_Variable")) {
+					Element namedIndividual = (Element) e.getElementsByTagName("NamedIndividual").item(0);
+					String iri = namedIndividual.getAttribute("IRI").replace("#", "");
+					
+					DjangoVariable v = new DjangoVariable(class_iri, iri);
+					variables.put(iri, v);
+					continue;
+				}
+				
+				if(class_iri.equals("ORMF-O::Mapped_Primary_Key")) {
+					Element namedIndividual = (Element) e.getElementsByTagName("NamedIndividual").item(0);
+					String iri = namedIndividual.getAttribute("IRI").replace("#", "");
+					
+					DjangoVariable v = new DjangoVariable(class_iri, iri);
+					v.setIsPK(true);
+					variables.put(iri, v);
 					continue;
 				}
 				

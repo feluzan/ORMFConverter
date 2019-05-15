@@ -17,6 +17,11 @@ public class ValueType extends Item {
 		this.setNamedIndividualIRI();
 	}
 	
+	public ValueType(String classIri, String individualName) {
+		this.classIRI = classIri;
+		this.namedIndividualIRI = individualName;
+	}
+	
 	public void setType(Type type) {
 		this.type = type;
 	}

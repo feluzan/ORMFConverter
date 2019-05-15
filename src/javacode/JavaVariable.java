@@ -4,15 +4,10 @@ import java.util.List;
 
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.Node;
-//import com.github.javaparser.ast.Modifier;
-import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.expr.MemberValuePair;
-import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
-import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.body.BodyDeclaration;
-import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 
 
@@ -41,6 +36,7 @@ public class JavaVariable extends GenericVariable{
 
 		this.setNamedIndividualIRI();
 		clazz.addVariable(this);
+		this.setIsPK();
 	}
 	
 	public boolean hasAnnotation(String annotation) {
@@ -62,8 +58,13 @@ public class JavaVariable extends GenericVariable{
 	}
 	
 	public boolean isPk() {
-		return this.hasAnnotation("Id");
+		return this.isPK;
 	}
+	
+	public void setIsPK() {
+		if(this.hasAnnotation("Id")) this.isPK = true;
+	}
+	
 	
 	public boolean isFk() {
 //		return this.hasAnnotation("ForeignKey");

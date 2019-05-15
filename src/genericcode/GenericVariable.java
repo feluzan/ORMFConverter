@@ -11,6 +11,8 @@ public abstract class GenericVariable extends Item{
 	protected Column column;
 	protected GenericClass clazz;
 	
+	protected boolean isPK = false;
+	
 	Property memberBelongsTo = new Property("member_belongs_to");
 	Property isTypeOf = new Property("is_type_of");
 	
@@ -35,6 +37,10 @@ public abstract class GenericVariable extends Item{
 		ret+= isTypeOf.getAssertion(this,this.getValueType());
 		return ret;
 		
+	}
+	
+	public void setIsPK(boolean ispk) {
+		this.isPK=ispk;
 	}
 	
 	public ValueType getValueType() {

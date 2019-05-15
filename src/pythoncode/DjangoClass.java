@@ -2,9 +2,9 @@ package pythoncode;
 
 import genericcode.GenericClass;
 
-public class PythonClass extends GenericClass {
+public class DjangoClass extends GenericClass {
 	
-	public PythonClass(String classIRI, String namedIndividualIRI) {
+	public DjangoClass(String classIRI, String namedIndividualIRI) {
 		this.classIRI = classIRI;
 		this.namedIndividualIRI = namedIndividualIRI;
 	}

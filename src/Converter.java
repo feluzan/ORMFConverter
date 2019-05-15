@@ -3,7 +3,7 @@ import java.io.File;
 import java.util.Scanner;
 
 import javacode.Java2OWL;
-import pythoncode.OWL2Python;
+import pythoncode.OWL2Django;
 
 
 
@@ -44,7 +44,7 @@ public static void main(String[] args){
 	
 	File owlfile = new File(owlPath);
 	
-	OWL2Python owl2Python = new OWL2Python(owlfile);
+	OWL2Django owl2Python = new OWL2Django(owlfile);
 	
 	
 	
