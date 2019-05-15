@@ -76,6 +76,37 @@ public class OWL2Python {
 					String iri = namedIndividual.getAttribute("IRI").replace("#table__", "");
 					
 					Table t = new Table(class_iri, iri);
+					t.setType("entity_table");
+					tables.put(iri,t);
+					continue;
+				}
+				
+				if(class_iri.equals("ORMF-O::Single_Entity_Table")) {
+					Element namedIndividual = (Element) e.getElementsByTagName("NamedIndividual").item(0);
+					String iri = namedIndividual.getAttribute("IRI").replace("#table__", "");
+					
+					Table t = new Table(class_iri, iri);
+					t.setType("single_entity_table");
+					tables.put(iri,t);
+					continue;
+				}
+				
+				if(class_iri.equals("ORMF-O::Multiple_Entities_Table")) {
+					Element namedIndividual = (Element) e.getElementsByTagName("NamedIndividual").item(0);
+					String iri = namedIndividual.getAttribute("IRI").replace("#table__", "");
+					
+					Table t = new Table(class_iri, iri);
+					t.setType("multiple_entities_table");
+					tables.put(iri,t);
+					continue;
+				}
+				
+				if(class_iri.equals("ORMF-O::Relationship_Association_Table")) {
+					Element namedIndividual = (Element) e.getElementsByTagName("NamedIndividual").item(0);
+					String iri = namedIndividual.getAttribute("IRI").replace("#table__", "");
+					
+					Table t = new Table(class_iri, iri);
+					t.setType("relationship_association_table");
 					tables.put(iri,t);
 					continue;
 				}
@@ -209,7 +240,19 @@ public class OWL2Python {
 					continue;
 				}
 				
-				System.out.println("Class: " + object_iri);
+				if(object_iri.equals("relationship_reverse_of")){
+					Element domain = (Element) e.getElementsByTagName("NamedIndividual").item(0);
+					Element range = (Element) e.getElementsByTagName("NamedIndividual").item(1);
+					String domain_iri = domain.getAttribute("IRI").replace("#", "");
+					String range_iri = range.getAttribute("IRI").replace("#", "");
+
+					RelationshipMapping rm1 = relationshipMappings.get(domain_iri);
+					RelationshipMapping rm2 = relationshipMappings.get(range_iri);
+					rm1.setReverse(rm2);
+					continue;
+				}
+				
+				System.out.println("Property: " + object_iri);
 			}
 		}
 	}

@@ -144,13 +144,24 @@ public static ArrayList<String> declaredSuperclasses = new ArrayList<String>();
 	static void processTables() {
 		for(GenericClass c : classes.values()) {
 			if(!c.isSubclass()) {
-				tables.put(c,new Table(c, true));
+				String tableType;
+				if(c.isSuperclass()) {
+					String inheritanceStrategy = c.getInheritanceStrategy();
+					if(inheritanceStrategy.equals("single_table")) {
+						tableType = "multiple_entities_table";
+					}else {
+						tableType = "single_entity_table";
+					}
+				}else {
+					tableType = "entity_class";
+				}
+				Table t = new Table(c,tableType);
+				tables.put(c,t);
 				c.setTable(tables.get(c));
 			}
 		}
 		
 		for(GenericClass c : classes.values()) {
-			
 			if(c.isSubclass()) {
 				String inheritanceStrategy = c.getInheritanceStrategy();
 				if(inheritanceStrategy.equals("single_table")){
@@ -161,7 +172,7 @@ public static ArrayList<String> declaredSuperclasses = new ArrayList<String>();
 					
 				}else {
 					if(c.isMapped()) {
-						Table t = new Table(c,true);
+						Table t = new Table(c,"single_entity_table");
 						tables.put(c, t);
 					}
 					

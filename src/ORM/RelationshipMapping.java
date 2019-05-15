@@ -11,6 +11,8 @@ public class RelationshipMapping extends Item{
 	GenericVariable variable;
 	String type;
 	
+	RelationshipMapping reverse;
+	
 	Property relationshipSourceMappedBy = new Property("relationship_source_mapped_by");
 	Property relationshipTargetMappedBy = new Property("relationship_target_mapped_by");
 	Property relationshipMappedTo = new Property("relationship_mapped_to");
@@ -56,6 +58,10 @@ public class RelationshipMapping extends Item{
 			//TODO incuir mapeamento com relationship association table
 		}
 		return ret;
+	}
+	
+	public void setReverse(RelationshipMapping reverse) {
+		this.reverse = reverse;
 	}
 	
 	public GenericClass getSource() {

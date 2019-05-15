@@ -7,13 +7,25 @@ import owlcode.Item;
 public class Table extends Item{
 	
 	ArrayList<GenericClass> classes = new ArrayList<GenericClass>();
+	String type;
 	
 	
-	public Table(GenericClass c, boolean isEntityTable) {
-		if(isEntityTable) {
-			 this.classIRI = "ORMF-O::Entity_Table";
-		}else {
+	public Table(GenericClass c, String type) {
+		// Tipos de Table:
+		// Entity Table
+		// Entity Table > Multiple Entities Table
+		// Entity Table > Single Entity Table
+		// Relationship Association Table
+		if (type.equals("entity_table")){
+			this.classIRI = "ORMF-O::Entity_Table";
+		}else if(type.equals("single_entity_table")) {
+			 this.classIRI = "ORMF-O::Single_Entity_Table";
+		}else if (type.equals("multiple_entities_table")){
+			this.classIRI = "ORMF-O::Multiple_Entities_Table";
+		}else if (type.equals("relationship_association_table")){
 			this.classIRI = "ORMF-O::Relationship_Association_Table";
+		}else {
+			System.out.println("[ERROR] Tipo de tabela incorreto!");
 		}
 		this.classes.add(c);
 		this.setNamedIndividualIRI();
@@ -27,6 +39,9 @@ public class Table extends Item{
 		this.namedIndividualIRI = namedIndividualIRI;
 	}
 
+		public void setType(String type) {
+			this.type = type;
+		}
 
 	@Override
 	public void setNamedIndividualIRI() {
