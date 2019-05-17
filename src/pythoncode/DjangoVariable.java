@@ -63,14 +63,32 @@ public class DjangoVariable extends GenericVariable {
 			ret += "', on_delete=models.CASCADE)";
 			return ret;
 		}else {
-			if(type.getCodeName().equals("int")) ret = "models.IntegerField";
-			if(type.getCodeName().equals("char")) ret = "models.CharField";
-			if(type.getCodeName().equals("date")) ret = "models.DateField";
-			if(type.getCodeName().equals("datetime")) ret = "models.DateTimeField";
-			if(type.getCodeName().equals("float")) ret = "models.FloatField";
+			
+			switch (type.getCodeName()) {  
+		       case "int":
+		    	   ret = "models.IntegerField"; 
+		    	   break;
+		       case "char":
+		    	   ret = "models.CharField";
+		    	   break;
+		       
+		       case "date":
+		    	   ret = "models.DateField";
+		    	   break;
+		       case "datetime":
+		    	   ret = "models.DateTimeField";
+		    	   break;
+		       case "float":
+		    	   ret = "models.FloatField";
+		    	   break;
+		       case "String":
+		    	   ret = "models.CharField";
+		    	   break;
+		       
+		       default:
+		    	   System.out.println("[ERROR] Tipo " + type.getCodeName() + " está sem equivalente.");  
+		     }
 		}
-		
-		
 		ret += "(" + pk + ")";
 		
 		return ret;

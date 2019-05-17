@@ -36,10 +36,11 @@ public class Table extends Item{
 	
 	public Table(String classIRI, String namedIndividualIRI) {
 		this.classIRI = classIRI;
-		this.namedIndividualIRI = namedIndividualIRI.replace("table__", "");
+		this.namedIndividualIRI = namedIndividualIRI;
+		this.codeName = namedIndividualIRI.replace("table__","");
 	}
 
-		public void setType(String type) {
+	public void setType(String type) {
 			this.type = type;
 		}
 
@@ -48,6 +49,10 @@ public class Table extends Item{
 		this.namedIndividualIRI = "table__" + this.classes.get(0).getTableName();
 	}
 	
+	
+	public void addClass(GenericClass c) {
+		classes.add(c);
+	}
 //	public void set
 
 }

@@ -2,12 +2,21 @@ package genericcode;
 
 import java.util.ArrayList;
 
-import owlcode.Item;
+import ORM.InheritanceMapping;
 
 public abstract class GenericClass extends Type{
 	
 	private GenericClass superclass = null;
 	private String inheritanceStrategy = null;
+	private InheritanceMapping inheritanceMapping = null;
+	public InheritanceMapping getInheritanceMapping() {
+		return inheritanceMapping;
+	}
+
+	public void setInheritanceMapping(InheritanceMapping inheritanceMapping) {
+		this.inheritanceMapping = inheritanceMapping;
+	}
+
 	protected boolean isAbstract;
 	boolean isSuperclas = false;
 	boolean isSubclass = false;

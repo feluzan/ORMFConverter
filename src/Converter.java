@@ -1,6 +1,8 @@
 //import java.io.BufferedReader;
 import java.io.File;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javacode.Java2OWL;
 import pythoncode.OWL2Django;
@@ -10,6 +12,8 @@ import pythoncode.OWL2Django;
 public class Converter {
 	
 	
+private static Logger logger;
+
 public static void main(String[] args){
 	
 //	String folderPath = "C:\\Users\\Felix Zanetti\\eclipse-workspace\\JavaTest\\src\\";
@@ -30,6 +34,7 @@ public static void main(String[] args){
 //	String folderPath = "C:\\Users\\Felix Zanetti\\eclipse-workspace\\JavaTest\\src\\";
 //	String owlPath = "output.owl";
 //	String djangoPath = "outputDjango.py";
+	
 		
 
 	System.out.println("[INFO] Carregando pasta...");

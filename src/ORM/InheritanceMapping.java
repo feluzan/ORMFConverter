@@ -38,8 +38,19 @@ public class InheritanceMapping extends Item{
 	public InheritanceMapping(String classIri, String individualName) {
 		this.classIRI = classIri;
 		this.namedIndividualIRI = individualName;
+		
+//		System.out.println("---- " + this.namedIndividualIRI);
+		this.inheritanceStrategy = this.namedIndividualIRI.split("__")[3];
 	}
 	
+	public String getInheritanceStrategy() {
+		return inheritanceStrategy;
+	}
+
+	public void setInheritanceStrategy(String inheritanceStrategy) {
+		this.inheritanceStrategy = inheritanceStrategy;
+	}
+
 	public String getSuperclassPropertyAssertion() {
 		String ret = "";
 		ret += this.superclassMappedBy.getAssertion(this.superclass, this);

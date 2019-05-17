@@ -39,6 +39,8 @@ public class OWL2Django {
 	private Map<String, PrimitiveType> primitiveTypes = new HashMap<String,PrimitiveType>();
 	private Map<String, Inheritance> inheritances = new HashMap<String, Inheritance>();
 	
+	private Map<GenericClass, InheritanceMapping> subclassesInheritanceMapping = new HashMap<GenericClass, InheritanceMapping>();
+	
 	public OWL2Django(File file) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder;
@@ -57,6 +59,7 @@ public class OWL2Django {
 			processPropertiesNodes(propertiesList);
 			
 			processInheritance();
+			processTables();
 			
 		 
 		
@@ -104,6 +107,16 @@ public class OWL2Django {
 			
 		}
 	}
+	
+	public void processTables() {
+		for(ClassMapping cm : classMappings.values()) {
+			GenericClass c = cm.getClazz();
+			Table t = cm.getTable();
+			t.addClass(c);
+			c.setTable(t);
+		}
+	}
+	
 	public void processClassNodes(NodeList nodeList) {
 		
 		for (int i = 0; i < nodeList.getLength(); i++) {
@@ -262,6 +275,7 @@ public class OWL2Django {
 					GenericClass c = classes.get(domain_iri);
 					InheritanceMapping im = inheritanceMappings.get(range_iri);
 					im.setSuperclass(c);
+					c.setInheritanceStragegy(im.getInheritanceStrategy());
 					continue;
 				}
 				
@@ -269,6 +283,9 @@ public class OWL2Django {
 					GenericClass c = classes.get(domain_iri);
 					InheritanceMapping im = inheritanceMappings.get(range_iri);
 					im.setSubclass(c);
+					c.setInheritanceStragegy(im.getInheritanceStrategy());
+					c.setInheritanceMapping(im);
+//					subclassesInheritanceMapping.put(c, im);
 					continue;
 				}
 				

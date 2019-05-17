@@ -203,6 +203,7 @@ public class Java2OWL {
 				Table t = new Table(c,tableType);
 				tables.put(c,t);
 				c.setTable(tables.get(c));
+				t.addClass(c);
 			}
 		}
 		
