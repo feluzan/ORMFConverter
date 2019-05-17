@@ -12,18 +12,24 @@ public class Converter {
 	
 public static void main(String[] args){
 	
-	String folderPath = "C:\\Users\\Felix Zanetti\\eclipse-workspace\\JavaTest\\src\\";
+//	String folderPath = "C:\\Users\\Felix Zanetti\\eclipse-workspace\\JavaTest\\src\\";
 //	File folder = new File(folderPath);
 	
-	System.out.println("Digite o path da pasta que contem os arquivos das classes Java:");
+	
 	Scanner scanner = new Scanner(System.in);
+	System.out.println("Digite o path da pasta que contem os arquivos das classes Java:");
+	String folderPath = scanner.nextLine();
 	
-//	String folderPath = scanner.nextLine();
-//	System.out.println("Digite o path da arquivo de saída que conterá a OWL:");
-//	String owlPath = scanner.nextLine();
-	String owlPath = "output.owl";
+	System.out.println("Digite o path da arquivo de saída que conterá a OWL:");
+	String owlPath = scanner.nextLine();
 	
-
+	System.out.println("Digite o path da arquivo de saída que conterá o código em Ptrhon com Django:");
+	String djangoPath = scanner.nextLine();
+	
+	
+//	String folderPath = "C:\\Users\\Felix Zanetti\\eclipse-workspace\\JavaTest\\src\\";
+//	String owlPath = "output.owl";
+//	String djangoPath = "outputDjango.py";
 		
 
 	System.out.println("[INFO] Carregando pasta...");
@@ -43,8 +49,11 @@ public static void main(String[] args){
 	System.out.println("\n\n--- Iniciando Etapa OWL -> Python");
 	
 	File owlfile = new File(owlPath);
+	OWL2Django owl2Django = new OWL2Django(owlfile);
 	
-	OWL2Django owl2Python = new OWL2Django(owlfile);
+	File djangoFile = new File(djangoPath);
+	
+	owl2Django.printFile(djangoFile);
 	
 	
 	

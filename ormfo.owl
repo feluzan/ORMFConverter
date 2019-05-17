@@ -19,6 +19,9 @@
         <Class IRI="#OOC-O::Extendable_Class"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#OOC-O::Inheritance"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#OOC-O::Instance_Variable"/>
     </Declaration>
     <Declaration>
@@ -154,6 +157,12 @@
         <ObjectProperty IRI="#entity_class_relationship_mapped_by"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#inherited_from"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#inherits_from"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#is_type_of"/>
     </Declaration>
     <Declaration>
@@ -164,6 +173,9 @@
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#pk_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#refers_to"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#relationship_association_mapped_to"/>
@@ -345,6 +357,14 @@
         <Class IRI="#ORMF-O::Entity_Class"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
+        <ObjectProperty IRI="#inherited_from"/>
+        <Class IRI="#OOC-O::Superclass"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#inherits_from"/>
+        <Class IRI="#OOC-O::Subclass"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
         <ObjectProperty IRI="#is_type_of"/>
         <Class IRI="#OOC-O::Variable"/>
     </ObjectPropertyDomain>
@@ -359,6 +379,10 @@
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#pk_mapped_to"/>
         <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#refers_to"/>
+        <Class IRI="#OOC-O::Value_Type"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#relationship_association_mapped_to"/>
@@ -421,6 +445,14 @@
         <Class IRI="#ORMF-O::Relationship_Mapping"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
+        <ObjectProperty IRI="#inherited_from"/>
+        <Class IRI="#OOC-O::Inheritance"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#inherits_from"/>
+        <Class IRI="#OOC-O::Inheritance"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
         <ObjectProperty IRI="#is_type_of"/>
         <Class IRI="#OOC-O::Value_Type"/>
     </ObjectPropertyRange>
@@ -435,6 +467,10 @@
     <ObjectPropertyRange>
         <ObjectProperty IRI="#pk_mapped_to"/>
         <Class IRI="#RDBS-O::Primary_Key_Column"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#refers_to"/>
+        <Class IRI="#OOC-O::Type"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#relationship_association_mapped_to"/>

@@ -12,6 +12,11 @@ public class PrimitiveType extends Type {
 	public PrimitiveType(String classIri, String individualName) {
 		this.classIRI = classIri;
 		this.namedIndividualIRI = individualName;
+		this.setCodeName();
+	}
+	
+	public void setCodeName() {
+		this.codeName = this.namedIndividualIRI.split("__")[1];
 	}
 
 	@Override

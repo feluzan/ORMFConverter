@@ -10,6 +10,7 @@ public abstract class GenericClass extends Type{
 	private String inheritanceStrategy = null;
 	protected boolean isAbstract;
 	boolean isSuperclas = false;
+	boolean isSubclass = false;
 	public Table table=null;
 	ArrayList<GenericVariable> variables = new ArrayList<GenericVariable>();
 	
@@ -18,6 +19,11 @@ public abstract class GenericClass extends Type{
 			this.classIRI = "ORMF-O::Entity_Class";
 	}
 	
+	public abstract String getTableName();
+	public abstract String getSuperclassName();
+	public abstract String getCodeInheritanceStrategy();
+	public abstract void setInheritanceStrategy(GenericClass supremeMother);
+
 	public void addVariable(GenericVariable f) {
 		this.variables.add(f);
 	}
@@ -32,6 +38,7 @@ public abstract class GenericClass extends Type{
 	
 	public void setSuperclass(GenericClass superclass) {
 		this.superclass = superclass;
+		this.isSubclass = true;
 		superclass.setIsSuperclass(true);
 	}
 	
@@ -39,9 +46,14 @@ public abstract class GenericClass extends Type{
 		this.isSuperclas=b;
 	}
 	
+	public void setIsSubclass(boolean b) {
+		this.isSubclass = b;
+	}
+	
 	public GenericClass getSuperclass() {
 		return this.superclass;
 	}
+	
 	public boolean isAbstract() {
 		return this.isAbstract;
 	}
@@ -66,11 +78,6 @@ public abstract class GenericClass extends Type{
 		this.namedIndividualIRI = "entity_class__" + this.codeName;
 	}
 
-	public abstract String getTableName();
-	public abstract String getSuperclassName();
-	public abstract String getCodeInheritanceStrategy();
-	public abstract void setInheritanceStrategy(GenericClass supremeMother);
-	
 	public void setInheritanceStragegy(String strategy) {
 		this.inheritanceStrategy = strategy;
 	}
@@ -92,10 +99,7 @@ public abstract class GenericClass extends Type{
 	}
 	
 	public boolean isSubclass() {
-		if(this.getSuperclassName()==null) {
-			return false;
-		}
-		return true;
+		return this.isSubclass;
 	}
 	
 	public boolean isSuperclass() {

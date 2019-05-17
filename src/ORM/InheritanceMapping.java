@@ -77,14 +77,11 @@ public class InheritanceMapping extends Item{
 		return "";
 	}
 	
-	public String getAssertion() {
-		String ret = "";
-		ret += super.getAssertion();
-		
-		
-		
-		return ret;	
-	}
+//	public String getAssertion() {
+//		String ret = "";
+//		ret += super.getAssertion();
+//		return ret;	
+//	}
 
 	public GenericClass getSuperclass() {
 		return superclass;

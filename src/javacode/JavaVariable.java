@@ -20,6 +20,7 @@ public class JavaVariable extends GenericVariable{
 	private List<AnnotationExpr> annotations = null;
 	private List<Modifier> modifiers = null;
 	
+
 //	Type valueType;
 	
 	public JavaVariable(Node node, GenericClass clazz) {
@@ -30,13 +31,15 @@ public class JavaVariable extends GenericVariable{
 		this.codeName = clazz.getCodeName() + "." + variable.getNameAsString();
 		this.codeValueType = variable.getTypeAsString();
 		
+		this.setIsPK();
+		this.setIsFK();
+		
 		this.classIRI = "ORMF-O::Mapped_Variable";
 		if(this.isPk()) this.classIRI = "ORMF-O::Mapped_Primary_Key";
-		if(this.isFk()) this.classIRI = "ORMF-O::Mapped_Variable";
+		if(this.isFk()) this.classIRI = "ORMF-O::Mapped_Foreign_Key";
 
 		this.setNamedIndividualIRI();
 		clazz.addVariable(this);
-		this.setIsPK();
 	}
 	
 	public boolean hasAnnotation(String annotation) {
@@ -65,12 +68,13 @@ public class JavaVariable extends GenericVariable{
 		if(this.hasAnnotation("Id")) this.isPK = true;
 	}
 	
-	
-	public boolean isFk() {
-//		return this.hasAnnotation("ForeignKey");
-		return this.hasAnnotation("OneToOne") | this.hasAnnotation("OneToMany") | this.hasAnnotation("ManyToOne") | this.hasAnnotation("ManyToMany");
+	public void setIsFK() {
+		this.isFK = this.hasAnnotation("OneToOne") | this.hasAnnotation("OneToMany") | this.hasAnnotation("ManyToOne") | this.hasAnnotation("ManyToMany");
 	}
-
+		
+	public boolean isFk() {
+		return this.isFK;
+	}
 	
 	@Override
 	public String getColumnCodeName() {
@@ -98,15 +102,5 @@ public class JavaVariable extends GenericVariable{
 		return null;
 	}
 
-//	@Override
-//	public String getTypeAssertion() {
-//		String ret = "";
-////		if(this.type.equals("int")) {
-////			System.out.println("int");
-////		}else {
-////			System.out.println("Nao considerado: " + this.type);
-////		}
-//		return ret;
-//	}
 
 }

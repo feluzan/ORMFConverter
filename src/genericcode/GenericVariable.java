@@ -12,7 +12,7 @@ public abstract class GenericVariable extends Item{
 	protected GenericClass clazz;
 	
 	protected boolean isPK = false;
-	
+	protected boolean isFK = false;
 	Property memberBelongsTo = new Property("member_belongs_to");
 	Property isTypeOf = new Property("is_type_of");
 	
@@ -40,6 +40,10 @@ public abstract class GenericVariable extends Item{
 	
 	public void setIsPK(boolean ispk) {
 		this.isPK=ispk;
+	}
+	
+	public void setIsFK(boolean isfk) {
+		this.isFK=isfk;
 	}
 	
 	public ValueType getValueType() {

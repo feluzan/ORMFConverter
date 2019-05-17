@@ -1,6 +1,5 @@
 package javacode;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -24,6 +23,7 @@ import ORM.VariableMapping;
 import genericcode.Column;
 import genericcode.GenericClass;
 import genericcode.GenericVariable;
+import genericcode.Inheritance;
 import genericcode.PrimitiveType;
 import genericcode.Table;
 import owlcode.OWLFile;
@@ -38,6 +38,7 @@ public class Java2OWL {
 	public static Map<GenericClass, Table> tables = new HashMap<GenericClass, Table>();
 	public static Map<GenericClass, ClassMapping> classMappings = new HashMap<GenericClass, ClassMapping>();
 	public static Map<GenericClass, InheritanceMapping> inheritanceMappings = new HashMap<GenericClass, InheritanceMapping>();
+	public static Map<GenericClass, Inheritance> inheritances = new HashMap<GenericClass, Inheritance>();
 	
 	public static Map<String, GenericVariable> variables = new HashMap<String, GenericVariable>();
 	public static Map<GenericVariable, Column> columns = new HashMap<GenericVariable, Column>();
@@ -108,6 +109,7 @@ public class Java2OWL {
 		    printWriter.print(this.getClasses());
 		    printWriter.print(this.getTables());
 		    printWriter.print(this.getClassMappings());
+		    printWriter.print(this.getInheritance());
 		    printWriter.print(this.getInheritanceMappings());
 		    printWriter.print(this.getRelationshipMappings());
 		    
@@ -175,6 +177,9 @@ public class Java2OWL {
 				}						
 				InheritanceMapping im = new InheritanceMapping(superclass, c);
 				inheritanceMappings.put(c,im);
+				
+				Inheritance i = new Inheritance(superclass,c);
+				inheritances.put(c, i);
 				
 			}
 			
@@ -259,6 +264,16 @@ public class Java2OWL {
 		return ret;
 	}
 	
+	private String getInheritance() {
+		String ret = "";
+		for(Inheritance i : inheritances.values()) {
+			ret+=i.getDeclaration();
+			ret+=i.getAssertion();
+			ret+=i.getPropertiesAssertion();
+		}
+		return ret;
+	}
+
 	public String getInheritanceMappings() {
 		String ret = "";
 		for(InheritanceMapping im : inheritanceMappings.values()) {

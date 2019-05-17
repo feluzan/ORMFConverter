@@ -33,6 +33,7 @@ public class JavaClass extends GenericClass{
 		this.extendeds = node.getExtendedTypes();
 		this.setNamedIndividualIRI();
 		this.setIsAbstract();
+		this.setIsSubclass();
 //		this.isSubclass();
 		
 	}
@@ -51,6 +52,14 @@ public class JavaClass extends GenericClass{
 			return ((NodeWithSimpleName<ClassOrInterfaceDeclaration>) n).getNameAsString();
 		}
 		return null;
+	}
+	
+	public void setIsSubclass() {
+		if(this.getSuperclassName()==null) {
+			this.setIsSubclass(false);
+			return;
+		}
+		this.setIsSubclass(true);
 	}
 	
 	public boolean isEntity() {

@@ -36,7 +36,7 @@ public class Table extends Item{
 	
 	public Table(String classIRI, String namedIndividualIRI) {
 		this.classIRI = classIRI;
-		this.namedIndividualIRI = namedIndividualIRI;
+		this.namedIndividualIRI = namedIndividualIRI.replace("table__", "");
 	}
 
 		public void setType(String type) {
