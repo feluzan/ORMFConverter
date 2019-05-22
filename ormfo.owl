@@ -166,7 +166,13 @@
         <ObjectProperty IRI="#is_type_of"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#many_to_many_association_mapped_to"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#member_belongs_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#one_to_many_association_mapped_to"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#pk_mapped_by"/>
@@ -176,9 +182,6 @@
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#refers_to"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#relationship_association_mapped_to"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#relationship_mapped_to"/>
@@ -369,8 +372,16 @@
         <Class IRI="#OOC-O::Variable"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
+        <ObjectProperty IRI="#many_to_many_association_mapped_to"/>
+        <Class IRI="#ORMF-O::Many_To_Many_Relationship_Mapping"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
         <ObjectProperty IRI="#member_belongs_to"/>
         <Class IRI="#OOC-O::Member"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#one_to_many_association_mapped_to"/>
+        <Class IRI="#ORMF-O::One_To_Many_Relationship_Mapping"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#pk_mapped_by"/>
@@ -383,10 +394,6 @@
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#refers_to"/>
         <Class IRI="#OOC-O::Value_Type"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#relationship_association_mapped_to"/>
-        <Class IRI="#ORMF-O::Many_To_Many_Relationship_Mapping"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#relationship_mapped_to"/>
@@ -457,8 +464,16 @@
         <Class IRI="#OOC-O::Value_Type"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
+        <ObjectProperty IRI="#many_to_many_association_mapped_to"/>
+        <Class IRI="#ORMF-O::Relationship_Association_Table"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
         <ObjectProperty IRI="#member_belongs_to"/>
         <Class IRI="#OOC-O::Class"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#one_to_many_association_mapped_to"/>
+        <Class IRI="#ORMF-O::Relationship_Association_Table"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#pk_mapped_by"/>
@@ -471,10 +486,6 @@
     <ObjectPropertyRange>
         <ObjectProperty IRI="#refers_to"/>
         <Class IRI="#OOC-O::Type"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#relationship_association_mapped_to"/>
-        <Class IRI="#ORMF-O::Relationship_Association_Table"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#relationship_mapped_to"/>
