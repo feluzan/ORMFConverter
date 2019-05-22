@@ -25,6 +25,7 @@ import genericcode.GenericClass;
 import genericcode.GenericVariable;
 import genericcode.Inheritance;
 import genericcode.PrimitiveType;
+import genericcode.RelationshipAssociationTable;
 import genericcode.Table;
 import owlcode.OWLFile;
 
@@ -44,7 +45,9 @@ public class Java2OWL {
 	public static Map<GenericVariable, Column> columns = new HashMap<GenericVariable, Column>();
 	
 	public static Map<GenericVariable, VariableMapping> variableMappings = new HashMap<GenericVariable, VariableMapping>();
-	public static Map<GenericClass, RelationshipMapping> relationshipMappings = new HashMap<GenericClass, RelationshipMapping>();
+	public static Map<GenericVariable, RelationshipMapping> relationshipMappings = new HashMap<GenericVariable, RelationshipMapping>();
+	public static Map<RelationshipMapping, RelationshipAssociationTable> relationshipAssociationTables = new HashMap<RelationshipMapping, RelationshipAssociationTable>();
+	
 	
 	public Java2OWL(File folder) {
 		this.setPrimitiveTypes();
@@ -80,7 +83,10 @@ public class Java2OWL {
 		processVariableMappings();
 		//---------------------
 		processRelationships();
-		
+		//---------------------
+		checkRelationshipReverses();
+		//---------------------
+		processRelationshipAssociationTables();
 		
 	}
 	
@@ -92,12 +98,12 @@ public class Java2OWL {
 		primitiveTypes.put("float",new PrimitiveType("float"));
 		primitiveTypes.put("int",new PrimitiveType("int"));
 		primitiveTypes.put("long",new PrimitiveType("long"));
+		primitiveTypes.put("Long",new PrimitiveType("long"));
 		primitiveTypes.put("short",new PrimitiveType("short"));
 		primitiveTypes.put("String",new PrimitiveType("String"));
 	}
 	
 	public void printFile(String filePath) {
-//		BufferedWriter writer;
 		try {
 			FileWriter fileWriter = new FileWriter(filePath);
 		    PrintWriter printWriter = new PrintWriter(fileWriter);
@@ -127,7 +133,6 @@ public class Java2OWL {
 		
 	}
 
-	
 	static GenericClass processClassNode(Node node) {
 		JavaClass c = new JavaClass((ClassOrInterfaceDeclaration) node);
 		
@@ -198,7 +203,7 @@ public class Java2OWL {
 						tableType = "single_entity_table";
 					}
 				}else {
-					tableType = "entity_class";
+					tableType = "entity_table";
 				}
 				Table t = new Table(c,tableType);
 				tables.put(c,t);
@@ -234,6 +239,50 @@ public class Java2OWL {
 				classMappings.put(c, cm);
 			}
 			
+		}
+	}
+	
+	static void checkRelationshipReverses() {
+		
+		for(RelationshipMapping rm : relationshipMappings.values()) {
+//			GenericClass source = rm.getSource();
+			GenericClass target = rm.getTarget();
+			
+			GenericVariable v = rm.getVariable();
+			if(v.isFk()) {
+				String mappedBy = ((JavaVariable)v).getMappedBy(rm.getType());
+				if(mappedBy==null) continue;
+				GenericVariable vreverse = variables.get(target.getCodeName()+"."+mappedBy);
+				RelationshipMapping reverse = relationshipMappings.get(vreverse);
+				rm.setReverse(reverse);
+				reverse.setReverse(rm);
+			}
+			
+		}
+	}
+	
+	static void processRelationshipAssociationTables() {
+		
+		for(RelationshipMapping rm : relationshipMappings.values() ) {
+			if(rm.getType().equals("m2m")) {
+				if(((JavaVariable) rm.getVariable()).getMappedBy("m2m")!=null) continue;
+				RelationshipAssociationTable rat = new RelationshipAssociationTable(rm);
+				relationshipAssociationTables.put(rm,rat);
+				rm.setRelationshipAssociationTable(rat);
+			}
+			
+			if(rm.getType().equals("o2m")) {
+				if(rm.getReverse()!=null) continue;
+				RelationshipAssociationTable rat = new RelationshipAssociationTable(rm);
+				relationshipAssociationTables.put(rm,rat);
+				rm.setRelationshipAssociationTable(rat);
+			}
+		}
+		
+		for(RelationshipMapping rm : relationshipMappings.values() ) {
+			if(rm.getReverse()!=null & rm.getRelationshipAssociationTable()==null) {
+				rm.setRelationshipAssociationTable(rm.getReverse().getRelationshipAssociationTable());
+			}
 		}
 	}
 	
@@ -348,7 +397,7 @@ public class Java2OWL {
 				if(v.isFk()) {
 					GenericClass range = classes.get(typeFilter(v.getCodeValueType()));
 					RelationshipMapping rm = new RelationshipMapping(c,range, v);
-					relationshipMappings.put(c,rm);
+					relationshipMappings.put(v,rm);
 				}
 			}
 		}

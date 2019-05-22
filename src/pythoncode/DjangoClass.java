@@ -52,7 +52,7 @@ public class DjangoClass extends GenericClass {
 			switch(this.getInheritanceMapping().getInheritanceStrategy()) {
 				
 			case "single_table":
-				System.out.println("[ALERT] SINGLE TABLE não possui equivalente em Django.");
+//				System.out.println("[ALERT] SINGLE TABLE não possui equivalente em Django.");
 				break;
 				
 			case "table_per_concrete_class":

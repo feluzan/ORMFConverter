@@ -49,10 +49,8 @@ public class Table extends Item{
 		this.namedIndividualIRI = "table__" + this.classes.get(0).getTableName();
 	}
 	
-	
 	public void addClass(GenericClass c) {
 		classes.add(c);
 	}
-//	public void set
 
 }

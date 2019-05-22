@@ -96,7 +96,6 @@ public class OWL2Django {
 		return null;
 	}
 	
-	
 	public void processInheritance() {
 		for(Inheritance inh : inheritances.values()) {
 			GenericClass superclass = inh.getSuperclass();

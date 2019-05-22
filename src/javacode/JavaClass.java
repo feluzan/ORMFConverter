@@ -39,6 +39,7 @@ public class JavaClass extends GenericClass{
 	}
 	
 	public void setIsAbstract() {
+		this.isAbstract = false;
 		for(Modifier m : this.modifiers) {
 			if(m.getKeyword().asString().equals("abstract")) {
 				this.isAbstract = true;

@@ -68,8 +68,10 @@ public abstract class GenericClass extends Type{
 	}
 	
 	public boolean isMapped() {
+		
+		if(!this.isAbstract()) return true;
 //		System.out.println(this.isAbstract());
-//		System.out.println(this.inheritanceStrategy);
+//		System.out.println(this.getCodeName());
 		if(this.isAbstract() & this.inheritanceStrategy.equals("table_per_class")) return true;
 //		if()
 		return true;

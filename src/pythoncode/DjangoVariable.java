@@ -22,11 +22,6 @@ public class DjangoVariable extends GenericVariable {
 		this.codeName = name;
 	}
 
-	@Override
-	public boolean isMapped() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean isPk() {
@@ -55,7 +50,7 @@ public class DjangoVariable extends GenericVariable {
 	public String typeDeclaration(Type type) {
 		String ret = "";
 		String pk = "";
-		if(this.isPK) pk = "primary_key=True";
+		if(this.isPk()) pk = "primary_key=True";
 		
 		if(type instanceof GenericClass) {
 			ret = "models.ForeignKey('";
@@ -71,7 +66,6 @@ public class DjangoVariable extends GenericVariable {
 		       case "char":
 		    	   ret = "models.CharField";
 		    	   break;
-		       
 		       case "date":
 		    	   ret = "models.DateField";
 		    	   break;
@@ -86,18 +80,27 @@ public class DjangoVariable extends GenericVariable {
 		    	   break;
 		       
 		       default:
-		    	   System.out.println("[ERROR] Tipo " + type.getCodeName() + " está sem equivalente.");  
+		    	   ret = "models.IntegerField"; 
+		    	   System.out.println("[WARN] Tipo " + type.getCodeName() + " mapeado para Integer.");  
 		     }
 		}
 		ret += "(" + pk + ")";
 		
 		return ret;
 	}
+	
+
 	public String toString() {
 		String ret = "";
 		Type type=null;
 		ret += this.getCodeName() + " = " + this.typeDeclaration(this.getValueType().getType()) + "\n";
 		
 		return ret;
+	}
+
+	@Override
+	public String getAssociationTableName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -5,28 +5,31 @@ import owlcode.Item;
 
 public abstract class GenericVariable extends Item{
 	
-	protected ValueType valueType;
-	protected String codeValueType;
+	private ValueType valueType;
+	private String codeValueType;
+	private boolean isMapped;
 	
-	protected Column column;
-	protected GenericClass clazz;
 	
-	protected boolean isPK = false;
-	protected boolean isFK = false;
-	Property memberBelongsTo = new Property("member_belongs_to");
-	Property isTypeOf = new Property("is_type_of");
+	private Column column;
+	private GenericClass clazz;
 	
+	private boolean isPK = false;
+	private boolean isFK = false;
+	private Property memberBelongsTo = new Property("member_belongs_to");
+	private Property isTypeOf = new Property("is_type_of");
+	
+
+	public void setCodeValueType(String codeValueType) {
+		this.codeValueType = codeValueType;
+	}
 
 	public void setNamedIndividualIRI() {
 		this.namedIndividualIRI = "mapped_variable__" + this.codeName;
 	}
-	
-	public abstract boolean isMapped();
-	public abstract boolean isPk();
-	public abstract boolean isFk();
+
 	public abstract String getColumnCodeName();
 	public abstract String getRelationshipType();
-//	public abstract String getTypeAssertion();
+	public abstract String getAssociationTableName();
 	
 	@Override
 	public String getAssertion() {
@@ -36,6 +39,14 @@ public abstract class GenericVariable extends Item{
 		ret+= isTypeOf.getAssertion(this,this.getValueType());
 		return ret;
 		
+	}
+	
+	public void setIsMapped(boolean bool) {
+		this.isMapped = bool;
+	}
+	
+	public boolean isMapped() {
+		return this.isMapped();
 	}
 	
 	public void setIsPK(boolean ispk) {
@@ -84,5 +95,21 @@ public abstract class GenericVariable extends Item{
 
 	public void setClazz(GenericClass clazz) {
 		this.clazz = clazz;
+	}
+
+	public boolean isPk() {
+		return this.isPK;
+	}
+	
+	public boolean isFk() {
+		return this.isFK;
+	}
+	
+	public void setIsFk(boolean bool) {
+		this.isFK = bool;
+	}
+	
+	public void setIsPk(boolean bool) {
+		this.isPK = bool;
 	}
 }

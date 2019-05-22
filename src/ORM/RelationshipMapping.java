@@ -2,20 +2,24 @@ package ORM;
 
 import genericcode.GenericClass;
 import genericcode.GenericVariable;
+import genericcode.RelationshipAssociationTable;
+import genericcode.Table;
 import owlcode.Item;
 
 public class RelationshipMapping extends Item{
 	
-	GenericClass source;
-	GenericClass target;
-	GenericVariable variable;
-	String type;
+	private GenericClass source;
+	private GenericClass target;
+	private GenericVariable variable;
+	private String type;
 	
-	RelationshipMapping reverse;
+	private RelationshipMapping reverse = null;
+	private RelationshipAssociationTable relationshipAssociationTable=null;
 	
-	Property relationshipSourceMappedBy = new Property("relationship_source_mapped_by");
-	Property relationshipTargetMappedBy = new Property("relationship_target_mapped_by");
-	Property relationshipMappedTo = new Property("relationship_mapped_to");
+	private Property relationshipSourceMappedBy = new Property("relationship_source_mapped_by");
+	private Property relationshipTargetMappedBy = new Property("relationship_target_mapped_by");
+	private Property manyToManyAssociationMappedTo = new Property("many_to_many_association_mapped_to");
+	private Property oneToManyAssociationMappedTo = new Property("one_to_many_association_mapped_to");
 	
 	public RelationshipMapping (GenericClass source, GenericClass target, GenericVariable v) {
 		
@@ -27,19 +31,13 @@ public class RelationshipMapping extends Item{
 		this.setNamedIndividualIRI();
 		if(this.type.equals("o2o")) {
 			this.classIRI = "ORMF-O::One_To_One_Relationship_Mapping";
-//			relationshipMappedTo = new Property("one_to_one_mapped_to");
 		}else if(this.type.equals("o2m")) {
 			this.classIRI = "ORMF-O::One_To_Many_Relationship_Mapping";
-//			relationshipMappedTo = new Property("one_to_many_mapped_to");
 		}else if(this.type.equals("m2o")) {
 			this.classIRI = "ORMF-O::Many_To_One_Relationship_Mapping";
-//			relationshipMappedTo = new Property("many_to_one_mapped_to");
 		}else {
 			this.classIRI = "ORMF-O::Many_To_Many_Relationship_Mapping";
-//			relationshipMappedTo = new Property("many_to_many_mapped_to");
 		}		
-//		System.out.println("-----Relationship Mapping------");
-//		System.out.println(source.getCodeName() + " to " + range.getCodeName() + " -> " + this.type);
 		
 	}
 
@@ -52,10 +50,31 @@ public class RelationshipMapping extends Item{
 		String ret = "";
 		ret += this.relationshipSourceMappedBy.getAssertion(this.source,this);
 		ret += this.relationshipTargetMappedBy.getAssertion(this.target,this);
-		ret += this.relationshipMappedTo.getAssertion(this,this.target.getTable());
-		ret += this.relationshipMappedTo.getAssertion(this,this.source.getTable());
+		
 		if(this.type.equals("m2m")) {
-			//TODO incuir mapeamento com relationship association table
+			ret+=manyToManyAssociationMappedTo.getAssertion(this,this.relationshipAssociationTable);
+		}
+		if(this.type.equals("o2m") & this.reverse==null) {
+			ret += oneToManyAssociationMappedTo.getAssertion(this,this.relationshipAssociationTable);
+		}
+		return ret;
+	}
+	
+	public String getDeclaration() {
+		String ret="";
+		ret+=super.getDeclaration();
+		if(this.relationshipAssociationTable!=null) {
+			ret+=this.relationshipAssociationTable.getDeclaration();
+		}
+		return ret;
+		
+	}
+	
+	public String getAssertion() {
+		String ret = "";
+		ret+=super.getAssertion();
+		if(this.relationshipAssociationTable!=null) {
+			ret+=this.relationshipAssociationTable.getAssertion();
 		}
 		return ret;
 	}
@@ -64,6 +83,16 @@ public class RelationshipMapping extends Item{
 		this.reverse = reverse;
 	}
 	
+	public RelationshipMapping getReverse() {
+		return reverse;
+	}
+	public void setRelationshipAssociationTable(RelationshipAssociationTable t) {
+		this.relationshipAssociationTable = t;
+	}
+	
+	public RelationshipAssociationTable getRelationshipAssociationTable() {
+		return this.relationshipAssociationTable;
+	}
 	public GenericClass getSource() {
 		return source;
 	}
