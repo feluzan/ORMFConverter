@@ -52,11 +52,11 @@ public class DjangoClass extends GenericClass {
 			switch(this.getInheritanceMapping().getInheritanceStrategy()) {
 				
 			case "single_table":
-//				System.out.println("[ALERT] SINGLE TABLE não possui equivalente em Django.");
+				System.out.println("[WARN] Estratégia padrão do Django utilizada: Table per Class.");
 				break;
 				
 			case "table_per_concrete_class":
-//				System.out.println("single_table");
+				System.out.println("[WARN] Estratégia padrão do Django utilizada: Table per Class.");
 				break;
 				
 			case "table_per_class":
@@ -65,12 +65,12 @@ public class DjangoClass extends GenericClass {
 				
 			default:
 				System.out.println("Estrategia nao considerada: " + this.getInheritanceMapping().getInheritanceStrategy());
+				System.out.println("[WARN] Estratégia padrão do Django utilizada: Table per Class.");
 			}
 		}
 		ret += "class " + this.codeName + "(" + superclass + "):\n";
 		for(GenericVariable v : this.getVariables()) {
-			
-			ret += "\t" + ((DjangoVariable)v).toString();
+			if(v.isMapped()) ret += "\t" + ((DjangoVariable)v).toString();
 			
 		}
 		
@@ -78,8 +78,8 @@ public class DjangoClass extends GenericClass {
 		String tableName = this.getTable().getCodeName();
 		String metaClass = "";
 		metaClass+= "\n\tclass Meta:\n";
-		metaClass+= "\t\tdb_table = '" + tableName + "'";
-		metaClass+="\n";
+//		metaClass+= "\t\tdb_table = '" + tableName + "'\n";
+		metaClass+="\t\tpass\n";
 		
 		
 		ret += metaClass;

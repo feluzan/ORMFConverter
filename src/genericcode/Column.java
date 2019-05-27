@@ -1,12 +1,13 @@
 package genericcode;
 
-import owlcode.Item;
+import owlcode.OWLClass;
 
-public class Column extends Item {
+public class Column extends OWLClass {
 	
 	GenericVariable variable;
 	
 	public Column (GenericVariable v) {
+		this.variable = v;
 		if(v.isPk()) {
 			this.classIRI = "RDBS-O::Primary_Key_Column";
 		}else if(v.isFk()) {
@@ -15,8 +16,11 @@ public class Column extends Item {
 			this.classIRI = "RDBS-O::Column";
 		}
 		
+//		System.out.println(this.variable.getClazz().getTable().getCodeName());
+//		System.out.println(v.getColumnCodeName());
+		
 		this.codeName = this.variable.getClazz().getTable().getCodeName() + "." + v.getColumnCodeName();
-		this.variable = v;
+		
 		this.setNamedIndividualIRI();
 		v.setColumn(this);
 //		this.setIndividualName(f);

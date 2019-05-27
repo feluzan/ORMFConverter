@@ -32,9 +32,12 @@ public class JavaVariable extends GenericVariable{
 		this.setIsFK();
 		this.setIsMapped();
 		
+//		System.out.println("Is Mapped -------- " + this.isMapped() + " " + this.getCodeName());
+		
 		this.classIRI = "ORMF-O::Mapped_Variable";
 		if(this.isPk()) this.classIRI = "ORMF-O::Mapped_Primary_Key";
 		if(this.isFk()) this.classIRI = "ORMF-O::Mapped_Foreign_Key";
+		if(!this.isMapped()) this.classIRI = "OOC-O::Instance_Variable";
 
 		this.setNamedIndividualIRI();
 		clazz.addVariable(this);
@@ -68,10 +71,6 @@ public class JavaVariable extends GenericVariable{
 		return null;
 	}
 		
-	public boolean isMapped() {
-		return this.hasAnnotation("Transient");
-	}
-	
 	public void setIsPK() {
 		if(this.hasAnnotation("Id")) this.setIsPk(true);
 	}

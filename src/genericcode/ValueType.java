@@ -1,14 +1,14 @@
 package genericcode;
 
-import ORM.Property;
-import owlcode.Item;
+import owlcode.OWLClass;
+import owlcode.OWLProperty;
 
-public class ValueType extends Item {
+public class ValueType extends OWLClass {
 	
 	GenericVariable variable;
 	Type type;
 	
-	Property refersTo = new Property("refers_to");
+	OWLProperty refersTo = new OWLProperty("refers_to");
 	
 	public ValueType(GenericVariable v, Type type){
 		this.variable = v;

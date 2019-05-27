@@ -1,16 +1,17 @@
 package ORM;
 
 import genericcode.GenericClass;
-import owlcode.Item;
+import owlcode.OWLClass;
+import owlcode.OWLProperty;
 
-public class InheritanceMapping extends Item{
+public class InheritanceMapping extends OWLClass{
 	
 	GenericClass superclass;
 	GenericClass subclass;
 	
-	Property superclassMappedBy = new Property("superclass_mapped_by");
-	Property subclassMappedBy = new Property("subclass_mapped_by");
-	Property inheritanceMappedTo;
+	OWLProperty superclassMappedBy = new OWLProperty("superclass_mapped_by");
+	OWLProperty subclassMappedBy = new OWLProperty("subclass_mapped_by");
+	OWLProperty inheritanceMappedTo;
 	
 	String inheritanceStrategy;
 	
@@ -22,13 +23,13 @@ public class InheritanceMapping extends Item{
 		
 		if(inheritanceStrategy.contentEquals("single_table")){
 			this.classIRI = "ORMF-O::Single_Table_Inheritance_Mapping";
-			this.inheritanceMappedTo = new Property("single_table_inheritance_mapped_to");
+			this.inheritanceMappedTo = new OWLProperty("single_table_inheritance_mapped_to");
 		}else if (inheritanceStrategy.contentEquals("joined")){
 			this.classIRI = "ORMF-O::Table_per_Class_Inheritance_Mapping";
-			this.inheritanceMappedTo = new Property("table_per_class_inheritance_mapped_to");
+			this.inheritanceMappedTo = new OWLProperty("table_per_class_inheritance_mapped_to");
 		}else {
 			this.classIRI = "ORMF-O::Table_per_Concrete_Class_Inheritance_Mapping";
-			this.inheritanceMappedTo = new Property("table_per_concrete_class_inheritance_mapped_to");
+			this.inheritanceMappedTo = new OWLProperty("table_per_concrete_class_inheritance_mapped_to");
 		}
 		this.setNamedIndividualIRI();
 		

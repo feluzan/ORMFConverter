@@ -3,13 +3,14 @@ package ORM;
 
 import genericcode.GenericClass;
 import genericcode.Table;
-import owlcode.Item;
+import owlcode.OWLClass;
+import owlcode.OWLProperty;
 
-public class ClassMapping extends Item{
+public class ClassMapping extends OWLClass{
 	GenericClass clazz;
 	Table table;
-	Property entityClassMappedBy = new Property("entity_class_mapped_by");
-	Property classMappingTo = new Property("entity_class_mapped_to");
+	OWLProperty entityClassMappedBy = new OWLProperty("entity_class_mapped_by");
+	OWLProperty classMappingTo = new OWLProperty("entity_class_mapped_to");
 //	String name;
 	
 	public ClassMapping (GenericClass c, Table t) {

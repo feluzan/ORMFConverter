@@ -1,8 +1,8 @@
 package genericcode;
 
-import owlcode.Item;
+import owlcode.OWLClass;
 
-public abstract class Type extends Item {
+public abstract class Type extends OWLClass {
 
 
 }

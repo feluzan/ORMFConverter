@@ -2,7 +2,7 @@ package owlcode;
 
 
 
-public abstract class Item {
+public abstract class OWLClass {
 	
 	protected String classIRI;
 	

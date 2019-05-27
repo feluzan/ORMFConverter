@@ -1,15 +1,15 @@
 package genericcode;
 
-import ORM.Property;
-import owlcode.Item;
+import owlcode.OWLClass;
+import owlcode.OWLProperty;
 
-public class Inheritance extends Item {
+public class Inheritance extends OWLClass {
 	
 	GenericClass superclass;
 	GenericClass subclass;
 	
-	Property inheritedFrom = new Property("inherited_from");
-	Property inheritsFrom = new Property("inherits_from");
+	OWLProperty inheritedFrom = new OWLProperty("inherited_from");
+	OWLProperty inheritsFrom = new OWLProperty("inherits_from");
 
 	public Inheritance(GenericClass superclass, GenericClass subclass) {
 		this.classIRI = "OOC-O::Inheritance";

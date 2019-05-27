@@ -9,6 +9,7 @@ public abstract class GenericClass extends Type{
 	private GenericClass superclass = null;
 	private String inheritanceStrategy = null;
 	private InheritanceMapping inheritanceMapping = null;
+	
 	public InheritanceMapping getInheritanceMapping() {
 		return inheritanceMapping;
 	}

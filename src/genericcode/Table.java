@@ -2,15 +2,17 @@ package genericcode;
 
 import java.util.ArrayList;
 
-import owlcode.Item;
+import owlcode.OWLClass;
 
-public class Table extends Item{
+public class Table extends OWLClass{
 	
 	ArrayList<GenericClass> classes = new ArrayList<GenericClass>();
 	String type;
 	
 	
 	public Table(GenericClass c, String type) {
+		
+		this.type = type;
 		// Tipos de Table:
 		// Entity Table
 		// Entity Table > Multiple Entities Table
@@ -46,7 +48,7 @@ public class Table extends Item{
 
 	@Override
 	public void setNamedIndividualIRI() {
-		this.namedIndividualIRI = "table__" + this.classes.get(0).getTableName();
+		this.namedIndividualIRI = this.type + "__" + this.classes.get(0).getTableName();
 	}
 	
 	public void addClass(GenericClass c) {

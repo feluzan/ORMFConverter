@@ -154,9 +154,6 @@
         <ObjectProperty IRI="#entity_class_mapped_to"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#entity_class_relationship_mapped_by"/>
-    </Declaration>
-    <Declaration>
         <ObjectProperty IRI="#inherited_from"/>
     </Declaration>
     <Declaration>
@@ -184,16 +181,10 @@
         <ObjectProperty IRI="#refers_to"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#relationship_mapped_to"/>
-    </Declaration>
-    <Declaration>
         <ObjectProperty IRI="#relationship_reverse_of"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#relationship_source_mapped_by"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#relationship_target_mapped_by"/>
+        <ObjectProperty IRI="#represents_relationship"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#single_table_inheritance_mapped_to"/>
@@ -356,10 +347,6 @@
         <Class IRI="#ORMF-O::Class_Mapping"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#entity_class_relationship_mapped_by"/>
-        <Class IRI="#ORMF-O::Entity_Class"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
         <ObjectProperty IRI="#inherited_from"/>
         <Class IRI="#OOC-O::Superclass"/>
     </ObjectPropertyDomain>
@@ -396,20 +383,12 @@
         <Class IRI="#OOC-O::Value_Type"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#relationship_mapped_to"/>
-        <Class IRI="#ORMF-O::Relationship_Mapping"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
         <ObjectProperty IRI="#relationship_reverse_of"/>
         <Class IRI="#ORMF-O::Relationship_Mapping"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#relationship_source_mapped_by"/>
-        <Class IRI="#ORMF-O::Entity_Class"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#relationship_target_mapped_by"/>
-        <Class IRI="#ORMF-O::Entity_Class"/>
+        <ObjectProperty IRI="#represents_relationship"/>
+        <Class IRI="#OOC-O::Instance_Variable"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#single_table_inheritance_mapped_to"/>
@@ -448,10 +427,6 @@
         <Class IRI="#ORMF-O::Entity_Table"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#entity_class_relationship_mapped_by"/>
-        <Class IRI="#ORMF-O::Relationship_Mapping"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
         <ObjectProperty IRI="#inherited_from"/>
         <Class IRI="#OOC-O::Inheritance"/>
     </ObjectPropertyRange>
@@ -488,19 +463,11 @@
         <Class IRI="#OOC-O::Type"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#relationship_mapped_to"/>
-        <Class IRI="#ORMF-O::Entity_Table"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
         <ObjectProperty IRI="#relationship_reverse_of"/>
         <Class IRI="#ORMF-O::Relationship_Mapping"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#relationship_source_mapped_by"/>
-        <Class IRI="#ORMF-O::Relationship_Mapping"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#relationship_target_mapped_by"/>
+        <ObjectProperty IRI="#represents_relationship"/>
         <Class IRI="#ORMF-O::Relationship_Mapping"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>

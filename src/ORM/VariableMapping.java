@@ -2,15 +2,16 @@ package ORM;
 
 import genericcode.Column;
 import genericcode.GenericVariable;
-import owlcode.Item;
+import owlcode.OWLClass;
+import owlcode.OWLProperty;
 
-public class VariableMapping extends Item{
+public class VariableMapping extends OWLClass{
 
 		GenericVariable field;
 		Column column;
 		
-		Property variableMappedBy;//				new Property("variable_mapped_by");
-		Property variableMappingTo;// = new Property("variable_mapping_to");
+		OWLProperty variableMappedBy;//				new Property("variable_mapped_by");
+		OWLProperty variableMappingTo;// = new Property("variable_mapping_to");
 		
 		
 		
@@ -19,16 +20,16 @@ public class VariableMapping extends Item{
 			
 			if(f.isPk()) {
 				this.classIRI = "ORMF-O::Primary_Key_Mapping";
-				this.variableMappedBy = new Property("pk_mapped_by");
-				this.variableMappingTo = new Property("pk_mapped_to");
+				this.variableMappedBy = new OWLProperty("pk_mapped_by");
+				this.variableMappingTo = new OWLProperty("pk_mapped_to");
 			}else if(f.isFk()) {
 				this.classIRI = "ORMF-O::Foreign_Key_Mapping";
-				this.variableMappedBy = new Property("fk_mapped_by");
-				this.variableMappingTo = new Property("fk_mapped_to");
+				this.variableMappedBy = new OWLProperty("fk_mapped_by");
+				this.variableMappingTo = new OWLProperty("fk_mapped_to");
 			}else {
 				this.classIRI = "ORMF-O::Variable_Mapping";
-				this.variableMappedBy = new Property("variable_mapped_by");
-				this.variableMappingTo = new Property("variable_mapped_to");
+				this.variableMappedBy = new OWLProperty("variable_mapped_by");
+				this.variableMappingTo = new OWLProperty("variable_mapped_to");
 			}
 			
 			this.field = f;

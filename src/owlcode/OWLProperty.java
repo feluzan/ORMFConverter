@@ -1,21 +1,19 @@
-package ORM;
+package owlcode;
 
-import owlcode.Item;
-
-public class Property extends Item{
+public class OWLProperty extends OWLClass{
 //	private String name;
 //	private String iri;
 	
 //	Node domain;
 //	Node range;
 	
-	public Property (String iri) {
+	public OWLProperty (String iri) {
 		this.classIRI = iri;
 //		this.domain = domain;
 //		this.range = range;
 	}
 	
-	public String getAssertion(Item domain, Item range) {
+	public String getAssertion(OWLClass domain, OWLClass range) {
 	String ret =	"\t<ObjectPropertyAssertion>\n"
 				+		"\t\t<ObjectProperty IRI=\"#" + this.classIRI + "\" />\n"
 				+		"\t\t<NamedIndividual IRI=\"#" + domain.getNamedIndividualIRI() + "\"/>\n"

@@ -1,22 +1,25 @@
 package genericcode;
 
-import ORM.Property;
-import owlcode.Item;
+import ORM.RelationshipMapping;
+import owlcode.OWLClass;
+import owlcode.OWLProperty;
 
-public abstract class GenericVariable extends Item{
+public abstract class GenericVariable extends OWLClass{
 	
 	private ValueType valueType;
 	private String codeValueType;
-	private boolean isMapped;
 	
 	
 	private Column column;
 	private GenericClass clazz;
 	
+	private boolean isMapped;
 	private boolean isPK = false;
 	private boolean isFK = false;
-	private Property memberBelongsTo = new Property("member_belongs_to");
-	private Property isTypeOf = new Property("is_type_of");
+	
+	private RelationshipMapping relationshipMapping = null;
+	private OWLProperty memberBelongsTo = new OWLProperty("member_belongs_to");
+	private OWLProperty isTypeOf = new OWLProperty("is_type_of");
 	
 
 	public void setCodeValueType(String codeValueType) {
@@ -24,7 +27,19 @@ public abstract class GenericVariable extends Item{
 	}
 
 	public void setNamedIndividualIRI() {
-		this.namedIndividualIRI = "mapped_variable__" + this.codeName;
+		if(this.isMapped()) {
+			if(this.isPk()) {
+				this.namedIndividualIRI = "mapped_pk__" + this.codeName;
+				return;
+			}
+			if(this.isFk()) {
+				this.namedIndividualIRI = "mapped_fk__" + this.codeName;
+				return;
+			}
+			this.namedIndividualIRI = "mapped_variable__" + this.codeName;
+		}else {
+			this.namedIndividualIRI = "instance_variable__" + this.codeName;
+		}
 	}
 
 	public abstract String getColumnCodeName();
@@ -46,7 +61,7 @@ public abstract class GenericVariable extends Item{
 	}
 	
 	public boolean isMapped() {
-		return this.isMapped();
+		return this.isMapped;
 	}
 	
 	public void setIsPK(boolean ispk) {
@@ -112,4 +127,14 @@ public abstract class GenericVariable extends Item{
 	public void setIsPk(boolean bool) {
 		this.isPK = bool;
 	}
+
+	public RelationshipMapping getRelationshipMapping() {
+		return relationshipMapping;
+	}
+
+	public void setRelationshipMapping(RelationshipMapping relationshipMapping) {
+		this.relationshipMapping = relationshipMapping;
+	}
+
+	
 }

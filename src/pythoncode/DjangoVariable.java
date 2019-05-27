@@ -1,5 +1,9 @@
 package pythoncode;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import genericcode.GenericClass;
 import genericcode.GenericVariable;
 import genericcode.PrimitiveType;
@@ -22,19 +26,6 @@ public class DjangoVariable extends GenericVariable {
 		this.codeName = name;
 	}
 
-
-	@Override
-	public boolean isPk() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isFk() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	@Override
 	public String getColumnCodeName() {
 		// TODO Auto-generated method stub
@@ -49,42 +40,75 @@ public class DjangoVariable extends GenericVariable {
 
 	public String typeDeclaration(Type type) {
 		String ret = "";
-		String pk = "";
-		if(this.isPk()) pk = "primary_key=True";
+		ArrayList<String> parameters = new ArrayList<String>();
+//		Map<String,String> parameters = new HashMap<String,String>();
 		
-		if(type instanceof GenericClass) {
-			ret = "models.ForeignKey('";
-			ret += type.getCodeName();
-			ret += "', on_delete=models.CASCADE)";
-			return ret;
-		}else {
+		if(this.isPk()) {
+			parameters.add("primary_key=True");
+//			pk = "primary_key=True";
 			
-			switch (type.getCodeName()) {  
-		       case "int":
-		    	   ret = "models.IntegerField"; 
-		    	   break;
-		       case "char":
-		    	   ret = "models.CharField";
-		    	   break;
-		       case "date":
-		    	   ret = "models.DateField";
-		    	   break;
-		       case "datetime":
-		    	   ret = "models.DateTimeField";
-		    	   break;
-		       case "float":
-		    	   ret = "models.FloatField";
-		    	   break;
-		       case "String":
-		    	   ret = "models.CharField";
-		    	   break;
-		       
-		       default:
-		    	   ret = "models.IntegerField"; 
-		    	   System.out.println("[WARN] Tipo " + type.getCodeName() + " mapeado para Integer.");  
-		     }
 		}
-		ret += "(" + pk + ")";
+		
+				
+		switch (type.getCodeName()) {  
+	       case "int":
+	    	   ret = "models.IntegerField"; 
+	    	   break;
+	       case "char":
+	    	   ret = "models.CharField";
+	    	   break;
+	       case "date":
+	    	   ret = "models.DateField";
+	    	   break;
+	       case "datetime":
+	    	   ret = "models.DateTimeField";
+	    	   break;
+	       case "float":
+	    	   ret = "models.FloatField";
+	    	   break;
+	       case "String":
+	    	   ret = "models.CharField";
+	    	   parameters.add("max_length=255");
+	    	   break;
+	       
+	       default:
+	    	   
+	    	   if(type instanceof GenericClass) {
+	    		   String relationshipType = this.getRelationshipMapping().getType();
+	    		   
+	    		   switch(relationshipType){
+	    		   		case "o2o":
+	    		   			ret = "models.OneToOneField";
+	    		   			parameters.add("'" + type.getCodeName() + "'");
+	    		   			parameters.add("on_delete=models.CASCADE");
+	    		   			break;
+	    		   			
+	    		   		case "o2m":
+	    		   			ret = "models.IntegerField"; 
+	    		   			System.out.println("[WARN] Tipo " + type.getCodeName() + " mapeado para Integer."); 
+	    		   			break;
+	    		   			
+	    		   		case "m2o":
+	    		   			ret = "models.ForeignKey";
+	    		   			parameters.add("'" + type.getCodeName() + "'");
+	    		   			parameters.add("on_delete=models.CASCADE");
+	    		   			break;
+	    		   			
+	    		   		case "m2m":
+	    		   			ret = "models.ManyToManyField";
+	    		   			parameters.add("'" + type.getCodeName() + "'");
+	    		   			break;
+	    		   			
+	    		   		default:
+	    		   			System.out.println("[ERROR] Relationship Mapping incompatível!");
+	    		   }
+		   		}else {
+		    	   ret = "models.IntegerField"; 
+		    	   System.out.println("[WARN] Tipo " + type.getCodeName() + " mapeado para Integer."); 
+		   		}
+		}
+
+		ret += "(" + String.join(", ", parameters) + ")";
 		
 		return ret;
 	}

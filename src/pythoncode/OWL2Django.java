@@ -22,6 +22,7 @@ import genericcode.GenericClass;
 import genericcode.GenericVariable;
 import genericcode.Inheritance;
 import genericcode.PrimitiveType;
+import genericcode.RelationshipAssociationTable;
 import genericcode.Table;
 import genericcode.Type;
 import genericcode.ValueType;
@@ -29,7 +30,11 @@ import genericcode.ValueType;
 public class OWL2Django {
 	
 	private Map<String,GenericClass> classes = new HashMap<String,GenericClass>();
+	
 	private Map<String, Table> tables = new HashMap<String, Table>();
+	private Map<String, RelationshipAssociationTable> relationshipAssociationTables = new HashMap<String, RelationshipAssociationTable>();
+	
+	
 	private Map<String, ClassMapping> classMappings = new HashMap<String,ClassMapping>();
 	private Map<String, InheritanceMapping> inheritanceMappings = new HashMap<String,InheritanceMapping>();
 	private Map<String, RelationshipMapping> relationshipMappings = new HashMap<String,RelationshipMapping>();
@@ -74,8 +79,19 @@ public class OWL2Django {
 			fileWriter = new FileWriter(djangoFile);
 			PrintWriter printWriter = new PrintWriter(fileWriter);
 			
+			String importString = "from django.db import models\n\n";
+			printWriter.print(importString);
+			
+			
 			//imprimir todas as classes que não são subclasses
 			for(GenericClass c : classes.values()) {
+				if(c.isSubclass()) continue;
+				printWriter.print(c.toString());
+				
+			}
+			
+			for(GenericClass c : classes.values()) {
+				if(!c.isSubclass()) continue;
 				printWriter.print(c.toString());
 				
 			}
@@ -174,9 +190,9 @@ public class OWL2Django {
 				}
 				
 				if(class_iri.equals("ORMF-O::Relationship_Association_Table")) {
-					Table t = new Table(class_iri, iri);
-					t.setType("relationship_association_table");
-					tables.put(iri,t);
+					RelationshipAssociationTable rat = new RelationshipAssociationTable(class_iri, iri);
+//					t.setType("relationship_association_table");
+					relationshipAssociationTables.put(iri,rat);
 					continue;
 				}
 				
@@ -194,12 +210,31 @@ public class OWL2Django {
 					continue;
 				}
 				
-				if(class_iri.equals("ORMF-O::One_To_One_Relationship_Mapping") |
-						class_iri.equals("ORMF-O::One_To_Many_Relationship_Mapping") |
-						class_iri.equals("ORMF-O::Many_To_One_Relationship_Mapping") |
-						class_iri.equals("ORMF-O::Many_To_Many_Relationship_Mapping")) {
+				if(class_iri.equals("ORMF-O::One_To_One_Relationship_Mapping")) {
+					RelationshipMapping rm = new RelationshipMapping(class_iri, iri);
+					rm.setType("o2o");
+					relationshipMappings.put(iri, rm);
+					continue;
+				}
+				
+				if(class_iri.equals("ORMF-O::Many_To_One_Relationship_Mapping")) {
+					RelationshipMapping rm = new RelationshipMapping(class_iri, iri);
+					rm.setType("m2o");
+					relationshipMappings.put(iri, rm);
+					continue;
+				}
+				
+				if(class_iri.equals("ORMF-O::Many_To_Many_Relationship_Mapping")) {
+					RelationshipMapping rm = new RelationshipMapping(class_iri, iri);
+					rm.setType("m2m");
+					relationshipMappings.put(iri, rm);
+					continue;
+				}
+				
+				if(class_iri.equals("ORMF-O::One_To_Many_Relationship_Mapping")) {
 					RelationshipMapping rm = new RelationshipMapping(class_iri, iri);
 					relationshipMappings.put(iri, rm);
+					rm.setType("o2m");
 					continue;
 				}
 				
@@ -211,6 +246,7 @@ public class OWL2Django {
 				
 				if(class_iri.equals("ORMF-O::Mapped_Variable")) {
 					DjangoVariable v = new DjangoVariable(class_iri, iri);
+					v.setIsMapped(true);
 					variables.put(iri, v);
 					continue;
 				}
@@ -218,6 +254,7 @@ public class OWL2Django {
 				if(class_iri.equals("ORMF-O::Mapped_Primary_Key")) {
 					DjangoVariable v = new DjangoVariable(class_iri, iri);
 					v.setIsPK(true);
+					v.setIsMapped(true);
 					variables.put(iri, v);
 					continue;
 				}
@@ -225,6 +262,15 @@ public class OWL2Django {
 				if(class_iri.equals("ORMF-O::Mapped_Foreign_Key")) {
 					DjangoVariable v = new DjangoVariable(class_iri, iri);
 					v.setIsFK(true);
+					v.setIsMapped(true);
+					variables.put(iri, v);
+					continue;
+				}
+				
+				if(class_iri.equals("OOC-O::Instance_Variable")) {
+					DjangoVariable v = new DjangoVariable(class_iri, iri);
+					v.setIsFK(true);
+					v.setIsMapped(false);
 					variables.put(iri, v);
 					continue;
 				}
@@ -288,19 +334,19 @@ public class OWL2Django {
 					continue;
 				}
 				
-				if(property_iri.equals("relationship_source_mapped_by")){
-					GenericClass c = classes.get(domain_iri);
-					RelationshipMapping rm = relationshipMappings.get(range_iri);
-					rm.setSource(c);
-					continue;
-				}
+//				if(property_iri.equals("relationship_source_mapped_by")){
+//					GenericClass c = classes.get(domain_iri);
+//					RelationshipMapping rm = relationshipMappings.get(range_iri);
+//					rm.setSource(c);
+//					continue;
+//				}
 				
-				if(property_iri.equals("relationship_target_mapped_by")){
-					GenericClass c = classes.get(domain_iri);
-					RelationshipMapping rm = relationshipMappings.get(range_iri);
-					rm.setTarget(c);
-					continue;
-				}
+//				if(property_iri.equals("relationship_target_mapped_by")){
+//					GenericClass c = classes.get(domain_iri);
+//					RelationshipMapping rm = relationshipMappings.get(range_iri);
+//					rm.setTarget(c);
+//					continue;
+//				}
 				
 				if(property_iri.equals("relationship_reverse_of")){
 					RelationshipMapping rm1 = relationshipMappings.get(domain_iri);
@@ -344,8 +390,26 @@ public class OWL2Django {
 				if(property_iri.equals("inherited_from")){
 					GenericClass c = classes.get(domain_iri);
 					Inheritance inh = inheritances.get(range_iri);
-					
 					inh.setSuperclass(c);
+					continue;
+				}
+				
+				if(property_iri.equals("many_to_many_association_mapped_to") |
+						property_iri.equals("one_to_many_association_mapped_to") ){
+					RelationshipMapping rm = relationshipMappings.get(domain_iri);
+					RelationshipAssociationTable rat = relationshipAssociationTables.get(range_iri);
+					
+					rat.setRelationshipMapping(rm);
+					rm.setRelationshipAssociationTable(rat);
+					continue;
+				}
+				
+				if(property_iri.equals("represents_relationship")){
+					GenericVariable v = variables.get(domain_iri);
+					RelationshipMapping rm = relationshipMappings.get(range_iri);
+					
+					rm.setVariable(v);
+					v.setRelationshipMapping(rm);
 					continue;
 				}
 				

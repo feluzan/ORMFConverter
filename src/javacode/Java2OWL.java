@@ -244,15 +244,13 @@ public class Java2OWL {
 	
 	static void checkRelationshipReverses() {
 		
-		for(RelationshipMapping rm : relationshipMappings.values()) {
-//			GenericClass source = rm.getSource();
-			GenericClass target = rm.getTarget();
-			
+		for(RelationshipMapping rm : relationshipMappings.values()) {	
 			GenericVariable v = rm.getVariable();
 			if(v.isFk()) {
 				String mappedBy = ((JavaVariable)v).getMappedBy(rm.getType());
 				if(mappedBy==null) continue;
-				GenericVariable vreverse = variables.get(target.getCodeName()+"."+mappedBy);
+				System.out.println(rm.getNamedIndividualIRI());
+				GenericVariable vreverse = variables.get(rm.getVariable().getValueType().getType().getCodeName()+"."+mappedBy);
 				RelationshipMapping reverse = relationshipMappings.get(vreverse);
 				rm.setReverse(reverse);
 				reverse.setReverse(rm);
@@ -369,6 +367,7 @@ public class Java2OWL {
 	public static void processColumns() {
 		for(GenericVariable v : variables.values()) {
 			if(!v.isMapped()) continue;
+//			System.out.println("Coluna da variável: " + v.getCodeName());
 			Column c = new Column(v);
 			columns.put(v,c);
 		}
@@ -396,7 +395,8 @@ public class Java2OWL {
 			for(GenericVariable v : c.getVariables()) {
 				if(v.isFk()) {
 					GenericClass range = classes.get(typeFilter(v.getCodeValueType()));
-					RelationshipMapping rm = new RelationshipMapping(c,range, v);
+					RelationshipMapping rm = new RelationshipMapping(v);
+					v.setRelationshipMapping(rm);
 					relationshipMappings.put(v,rm);
 				}
 			}
