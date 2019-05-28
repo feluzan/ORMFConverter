@@ -26,21 +26,31 @@ public class Column extends OWLClass {
 //		this.setIndividualName(f);
 	}
 	
-//	private void setIndividualName(GenericField f) {
-//		this.individualName = this.codeName + "__column__" + f.getIndividualName();
-//		
-//	}
-
-	@Override
-	public void setNamedIndividualIRI() {
-		this.namedIndividualIRI = "column__" + this.codeName;
-		// TODO Auto-generated method stub
+	public Column(String classIri, String individualName) {
+		this.classIRI = classIri;
+		this.namedIndividualIRI = individualName;
+		this.setCodeName();
+	
 		
 	}
+
+	public void setCodeName() {
+		String temp = this.namedIndividualIRI.split("__")[1];
+		this.codeName = temp;
+	}
 	
-//	private String genIndividualName() {
-//		
-//	}
+	@Override
+	public void setNamedIndividualIRI() {
+		if(this.variable.isPk()) {
+			this.namedIndividualIRI = "primary_key_column__" + this.codeName;
+		}else if(this.variable.isFk()) {
+			this.namedIndividualIRI = "foreign_key_column__" + this.codeName;
+		}else {
+			this.namedIndividualIRI = "column__" + this.codeName;
+		}
+		
+	}
+
 	
 	
 }

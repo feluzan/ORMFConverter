@@ -1,6 +1,7 @@
 package genericcode;
 
 import ORM.RelationshipMapping;
+import ORM.VariableMapping;
 import owlcode.OWLClass;
 import owlcode.OWLProperty;
 
@@ -18,6 +19,7 @@ public abstract class GenericVariable extends OWLClass{
 	private boolean isFK = false;
 	
 	private RelationshipMapping relationshipMapping = null;
+	private VariableMapping variableMapping = null;
 	private OWLProperty memberBelongsTo = new OWLProperty("member_belongs_to");
 	private OWLProperty isTypeOf = new OWLProperty("is_type_of");
 	
@@ -134,6 +136,15 @@ public abstract class GenericVariable extends OWLClass{
 
 	public void setRelationshipMapping(RelationshipMapping relationshipMapping) {
 		this.relationshipMapping = relationshipMapping;
+	}
+
+	
+	public VariableMapping getVariableMapping() {
+		return variableMapping;
+	}
+
+	public void setVariableMapping(VariableMapping variableMapping) {
+		this.variableMapping = variableMapping;
 	}
 
 	

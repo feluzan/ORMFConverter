@@ -38,14 +38,11 @@ public class DjangoVariable extends GenericVariable {
 		return null;
 	}
 
-	public String typeDeclaration(Type type) {
+	public String typeDeclaration(Type type, ArrayList<String> parameters) {
 		String ret = "";
-		ArrayList<String> parameters = new ArrayList<String>();
-//		Map<String,String> parameters = new HashMap<String,String>();
 		
 		if(this.isPk()) {
 			parameters.add("primary_key=True");
-//			pk = "primary_key=True";
 			
 		}
 		
@@ -107,17 +104,30 @@ public class DjangoVariable extends GenericVariable {
 		    	   System.out.println("[WARN] Tipo " + type.getCodeName() + " mapeado para Integer."); 
 		   		}
 		}
-
-		ret += "(" + String.join(", ", parameters) + ")";
 		
 		return ret;
 	}
 	
-
+//	public void getColumnName
+	
 	public String toString() {
 		String ret = "";
-		Type type=null;
-		ret += this.getCodeName() + " = " + this.typeDeclaration(this.getValueType().getType()) + "\n";
+		Type type = this.getValueType().getType();
+		ArrayList<String> parameters = new ArrayList<String>();
+		String variableCodeName = this.getCodeName();
+		
+		ret += variableCodeName + " = ";
+		ret += this.typeDeclaration(type, parameters);
+		
+		String columnName = this.getVariableMapping().getColumn().getCodeName();
+		columnName = columnName.split("\\.")[1];
+		if(!variableCodeName.equals(columnName)){
+			parameters.add("db_column='" + columnName  +"'");
+		}
+		
+		ret += "(" + String.join(", ", parameters) + ")";
+		ret += "\n";
+		
 		
 		return ret;
 	}

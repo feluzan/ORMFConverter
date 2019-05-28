@@ -18,6 +18,8 @@ import org.xml.sax.SAXException;
 import ORM.ClassMapping;
 import ORM.InheritanceMapping;
 import ORM.RelationshipMapping;
+import ORM.VariableMapping;
+import genericcode.Column;
 import genericcode.GenericClass;
 import genericcode.GenericVariable;
 import genericcode.Inheritance;
@@ -40,6 +42,10 @@ public class OWL2Django {
 	private Map<String, RelationshipMapping> relationshipMappings = new HashMap<String,RelationshipMapping>();
 	private Map<String, ValueType> valueTypes = new HashMap<String, ValueType>();
 	private Map<String, GenericVariable> variables = new HashMap<String,GenericVariable>();
+	
+	private Map<String, Column> columns = new HashMap<String, Column>();
+	
+	public Map<String, VariableMapping> variableMappings = new HashMap<String, VariableMapping>();
 	
 	private Map<String, PrimitiveType> primitiveTypes = new HashMap<String,PrimitiveType>();
 	private Map<String, Inheritance> inheritances = new HashMap<String, Inheritance>();
@@ -166,7 +172,6 @@ public class OWL2Django {
 				if(class_iri.equals("ORMF-O::Entity_Subclass")) {
 					continue;
 				}
-						
 				
 				if(class_iri.equals("ORMF-O::Entity_Table")) {
 					Table t = new Table(class_iri, iri);
@@ -281,6 +286,22 @@ public class OWL2Django {
 					continue;
 				}
 				
+				if(class_iri.equals("RDBS-O::Column") |
+						class_iri.equals("RDBS-O::Primary_Key_Column") |
+						class_iri.equals("RDBS-O::Foreign_Key_Column")) {
+					Column c = new Column(class_iri, iri);
+					columns.put(iri,c);
+					continue;
+				}
+				
+				if(class_iri.equals("ORMF-O::Variable_Mapping") |
+						class_iri.equals("ORMF-O::Primary_Key_Mapping") |
+						class_iri.equals("ORMF-O::Foreign_Key_Mapping")) {
+					VariableMapping vm = new VariableMapping(class_iri, iri);
+					variableMappings.put(iri,vm);
+					continue;
+				}
+				
 				System.out.println("[!!ALERT!!] Classe OWL não convertida: " + class_iri + "\t(" + iri + ")");
 				
 			}
@@ -330,23 +351,8 @@ public class OWL2Django {
 					im.setSubclass(c);
 					c.setInheritanceStragegy(im.getInheritanceStrategy());
 					c.setInheritanceMapping(im);
-//					subclassesInheritanceMapping.put(c, im);
 					continue;
 				}
-				
-//				if(property_iri.equals("relationship_source_mapped_by")){
-//					GenericClass c = classes.get(domain_iri);
-//					RelationshipMapping rm = relationshipMappings.get(range_iri);
-//					rm.setSource(c);
-//					continue;
-//				}
-				
-//				if(property_iri.equals("relationship_target_mapped_by")){
-//					GenericClass c = classes.get(domain_iri);
-//					RelationshipMapping rm = relationshipMappings.get(range_iri);
-//					rm.setTarget(c);
-//					continue;
-//				}
 				
 				if(property_iri.equals("relationship_reverse_of")){
 					RelationshipMapping rm1 = relationshipMappings.get(domain_iri);
@@ -398,7 +404,6 @@ public class OWL2Django {
 						property_iri.equals("one_to_many_association_mapped_to") ){
 					RelationshipMapping rm = relationshipMappings.get(domain_iri);
 					RelationshipAssociationTable rat = relationshipAssociationTables.get(range_iri);
-					
 					rat.setRelationshipMapping(rm);
 					rm.setRelationshipAssociationTable(rat);
 					continue;
@@ -407,9 +412,28 @@ public class OWL2Django {
 				if(property_iri.equals("represents_relationship")){
 					GenericVariable v = variables.get(domain_iri);
 					RelationshipMapping rm = relationshipMappings.get(range_iri);
-					
 					rm.setVariable(v);
 					v.setRelationshipMapping(rm);
+					continue;
+				}
+				
+				if(property_iri.equals("variable_mapped_by") |
+						property_iri.equals("pk_mapped_by") |
+						property_iri.equals("fk_mapped_by")){
+					GenericVariable v = variables.get(domain_iri);
+					VariableMapping vm = variableMappings.get(range_iri);
+					vm.setVariable(v);
+					v.setVariableMapping(vm);
+					continue;
+				}
+				
+				if(property_iri.equals("variable_mapped_to") |
+						property_iri.equals("pk_mapped_to") |
+						property_iri.equals("fk_mapped_to")){
+					VariableMapping vm = variableMappings.get(domain_iri);
+					Column c = columns.get(range_iri);
+					vm.setColumn(c);
+//					v.setVariableMapping(vm);
 					continue;
 				}
 				

@@ -93,7 +93,7 @@ public class JavaVariable extends GenericVariable{
 			}
 			
 		}
-		return this.codeName;
+		return this.codeName.split("\\.")[1];
 	}
 
 	@Override

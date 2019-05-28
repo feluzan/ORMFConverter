@@ -120,6 +120,8 @@ public class Java2OWL {
 		    printWriter.print(this.getRelationshipMappings());
 		    
 		    printWriter.print(this.getVariables());
+		    printWriter.print(this.getColumns());
+		    printWriter.print(this.getVariableMappings());
 //		    System.out.println(this.getVariables());
 		    
 		    printWriter.print(owl.getOwlClosure());
@@ -249,7 +251,7 @@ public class Java2OWL {
 			if(v.isFk()) {
 				String mappedBy = ((JavaVariable)v).getMappedBy(rm.getType());
 				if(mappedBy==null) continue;
-				System.out.println(rm.getNamedIndividualIRI());
+//				System.out.println(rm.getNamedIndividualIRI());
 				GenericVariable vreverse = variables.get(rm.getVariable().getValueType().getType().getCodeName()+"."+mappedBy);
 				RelationshipMapping reverse = relationshipMappings.get(vreverse);
 				rm.setReverse(reverse);
@@ -357,6 +359,27 @@ public class Java2OWL {
 		return ret;
 	}
 
+	public String getVariableMappings() {
+		String ret = "";
+		
+		for(VariableMapping vm : variableMappings.values()) {
+			ret += vm.getDeclaration();
+			ret += vm.getAssertion();
+			ret += vm.getPropertiesAssertion();
+		}
+		return ret;
+	}
+	
+	public String getColumns() {
+		String ret = "";
+		
+		for(Column c : columns.values()) {
+			ret += c.getDeclaration();
+			ret += c.getAssertion();
+		}
+		return ret;
+	}
+	
 	static void processClassFields(Node node, GenericClass clazz) {
 		for(Node childNode : node.findAll(FieldDeclaration.class)) {
 			JavaVariable v = new JavaVariable(childNode,clazz);
