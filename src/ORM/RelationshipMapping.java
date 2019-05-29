@@ -16,6 +16,7 @@ public class RelationshipMapping extends OWLClass{
 	private OWLProperty representsRelationship = new OWLProperty("represents_relationship");
 	private OWLProperty manyToManyAssociationMappedTo = new OWLProperty("many_to_many_association_mapped_to");
 	private OWLProperty oneToManyAssociationMappedTo = new OWLProperty("one_to_many_association_mapped_to");
+	private OWLProperty relationshipReverseOf = new OWLProperty("relationship_reverse_of");
 	
 	public RelationshipMapping (GenericVariable v) {
 		this.variable = v;
@@ -49,6 +50,9 @@ public class RelationshipMapping extends OWLClass{
 		}
 		if(this.type.equals("o2m") & this.reverse==null) {
 			ret += oneToManyAssociationMappedTo.getAssertion(this,this.relationshipAssociationTable);
+		}
+		if(this.reverse!=null) {
+			ret += relationshipReverseOf.getAssertion(this,this.reverse);
 		}
 		return ret;
 	}
@@ -92,8 +96,6 @@ public class RelationshipMapping extends OWLClass{
 		return variable;
 	}
 
-	
-	
 	public void setVariable(GenericVariable variable) {
 		this.variable = variable;
 	}

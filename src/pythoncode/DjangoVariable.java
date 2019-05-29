@@ -114,6 +114,9 @@ public class DjangoVariable extends GenericVariable {
 	}
 	
 	public String toString() {
+		if(this.isFk()) {
+			if(this.getRelationshipMapping().getReverse()!=null) return "";
+		}
 		String ret = "";
 		Type type = this.getValueType().getType();
 		ArrayList<String> parameters = new ArrayList<String>();

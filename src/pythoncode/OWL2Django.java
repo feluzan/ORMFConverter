@@ -386,6 +386,12 @@ public class OWL2Django {
 					RelationshipMapping rm1 = relationshipMappings.get(domain_iri);
 					RelationshipMapping rm2 = relationshipMappings.get(range_iri);
 					rm1.setReverse(rm2);
+					//-----------------------------------------
+//					System.out.println("--------------------------");
+//					GenericVariable v1 = rm1.getVariable();
+//					System.out.println(v1.getCodeName());
+//					GenericVariable v2 = rm2.getVariable();
+//					System.out.println(v2.getCodeName());
 					continue;
 				}
 				

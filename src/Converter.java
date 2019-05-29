@@ -31,7 +31,7 @@ public static void main(String[] args){
 //	String folderPath = "D:\\Projetos\\DomainModelExample\\src\\model";
 //	String owlPath = "output.owl";
 //	String djangoPath = "outputDjango.py";
-	
+//	
 		
 
 	System.out.println("[INFO] Carregando pasta...");

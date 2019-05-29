@@ -250,11 +250,11 @@ public class Java2OWL {
 			if(v.isFk()) {
 				String mappedBy = ((JavaVariable)v).getMappedBy(rm.getType());
 				if(mappedBy==null) continue;
-//				System.out.println(rm.getNamedIndividualIRI());
+//				System.out.println("-----------" +rm.getNamedIndividualIRI());
 				GenericVariable vreverse = variables.get(rm.getVariable().getValueType().getType().getCodeName()+"."+mappedBy);
 				RelationshipMapping reverse = relationshipMappings.get(vreverse);
 				rm.setReverse(reverse);
-				reverse.setReverse(rm);
+//				reverse.setReverse(rm);
 			}
 			
 		}
