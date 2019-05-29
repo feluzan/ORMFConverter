@@ -467,12 +467,20 @@ public class OWL2Django {
 					VariableMapping vm = variableMappings.get(domain_iri);
 					Column c = columns.get(range_iri);
 					vm.setColumn(c);
-//					v.setVariableMapping(vm);
+
 					continue;
 				}
 				
 				
-				System.out.println("[!!ALERT!!] Propriedade OWL não convertida: " + property_iri);
+				//-----------------------------------------------------------------------
+				//Propriedades ignoradas por não serem compatíveis com Django
+				if(property_iri.equals("single_table_inheritance_mapped_to")) {
+					continue;
+					
+				}
+				
+				
+				System.out.println("[ALERT] Propriedade OWL não convertida: " + property_iri);
 			}
 		}
 	}

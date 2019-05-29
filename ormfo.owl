@@ -85,7 +85,7 @@
         <Class IRI="#ORMF-O::Mapped_Variable"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Multiple_Entity_Table"/>
+        <Class IRI="#ORMF-O::Multiple_Entities_Table"/>
     </Declaration>
     <Declaration>
         <Class IRI="#ORMF-O::Nullability"/>
@@ -279,7 +279,7 @@
         <Class IRI="#OOC-O::Instance_Variable"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ORMF-O::Multiple_Entity_Table"/>
+        <Class IRI="#ORMF-O::Multiple_Entities_Table"/>
         <Class IRI="#ORMF-O::Entity_Table"/>
     </SubClassOf>
     <SubClassOf>
@@ -472,7 +472,7 @@
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#single_table_inheritance_mapped_to"/>
-        <Class IRI="#ORMF-O::Multiple_Entity_Table"/>
+        <Class IRI="#ORMF-O::Multiple_Entities_Table"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#subclass_mapped_by"/>

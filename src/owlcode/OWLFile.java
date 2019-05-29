@@ -95,7 +95,7 @@ public class OWLFile {
 		owlHead += "\t\t<Class IRI=\"#ORMF-O::Mapped_Variable\"/>\n";
 		owlHead += "\t</Declaration>\n";
 		owlHead += "\t<Declaration>\n";
-		owlHead += "\t\t<Class IRI=\"#ORMF-O::Multiple_Entity_Table\"/>\n";
+		owlHead += "\t\t<Class IRI=\"#ORMF-O::Multiple_Entities_Table\"/>\n";
 		owlHead += "\t</Declaration>\n";
 		owlHead += "\t<Declaration>\n";
 		owlHead += "\t\t<Class IRI=\"#ORMF-O::Nullability\"/>\n";
@@ -289,7 +289,7 @@ public class OWLFile {
 		owlHead += "\t\t<Class IRI=\"#OOC-O::Instance_Variable\"/>\n";
 		owlHead += "\t</SubClassOf>\n";
 		owlHead += "\t<SubClassOf>\n";
-		owlHead += "\t\t<Class IRI=\"#ORMF-O::Multiple_Entity_Table\"/>\n";
+		owlHead += "\t\t<Class IRI=\"#ORMF-O::Multiple_Entities_Table\"/>\n";
 		owlHead += "\t\t<Class IRI=\"#ORMF-O::Entity_Table\"/>\n";
 		owlHead += "\t</SubClassOf>\n";
 		owlHead += "\t<SubClassOf>\n";
@@ -482,7 +482,7 @@ public class OWLFile {
 		owlHead += "\t</ObjectPropertyRange>\n";
 		owlHead += "\t<ObjectPropertyRange>\n";
 		owlHead += "\t\t<ObjectProperty IRI=\"#single_table_inheritance_mapped_to\"/>\n";
-		owlHead += "\t\t<Class IRI=\"#ORMF-O::Multiple_Entity_Table\"/>\n";
+		owlHead += "\t\t<Class IRI=\"#ORMF-O::Multiple_Entities_Table\"/>\n";
 		owlHead += "\t</ObjectPropertyRange>\n";
 		owlHead += "\t<ObjectPropertyRange>\n";
 		owlHead += "\t\t<ObjectProperty IRI=\"#subclass_mapped_by\"/>\n";
@@ -509,8 +509,7 @@ public class OWLFile {
 		owlHead += "\t\t<Class IRI=\"#RDBS-O::Column\"/>\n";
 		owlHead += "\t</ObjectPropertyRange>\n";
 
-		owlHead += "\n";
-		owlHead += "\n";
+
 
 
 	}

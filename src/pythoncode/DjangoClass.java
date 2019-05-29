@@ -46,41 +46,41 @@ public class DjangoClass extends GenericClass {
 		String ret = "";
 		
 		String superclass = "models.Model";
+		String metaClass = "";
+		metaClass+= "\n\tclass Meta:\n";
+		
 		if(this.isSubclass()) {
 			superclass = this.getSuperclass().getCodeName();
 			
 			switch(this.getInheritanceMapping().getInheritanceStrategy()) {
-				
-			case "single_table":
-				System.out.println("[WARN] Estratégia padrão do Django utilizada: Table per Class.");
-				break;
-				
-			case "table_per_concrete_class":
-				System.out.println("[WARN] Estratégia padrão do Django utilizada: Table per Class.");
-				break;
-				
-			case "table_per_class":
-//				System.out.println("single_table");
-				break;
-				
-			default:
-				System.out.println("Estrategia nao considerada: " + this.getInheritanceMapping().getInheritanceStrategy());
-				System.out.println("[WARN] Estratégia padrão do Django utilizada: Table per Class.");
+					
+				case "table_per_concrete_class":
+					String tableName = this.getTable().getCodeName();
+					if(!this.codeName.equals(tableName)) {
+						metaClass += "\t\tdb_table = '" + tableName + "'\n";	
+					}
+					break;
+	
+				default:
+					System.out.println("[WARN]\tEstrategia de herança " + this.getInheritanceMapping().getInheritanceStrategy() + " não suportada.");
+					System.out.println("\tPadrão do Django utilizada: Table per Concrete Class.");
+					metaClass += "\t\tdb_table = '" + this.codeName + "'\n";
 			}
+		}else {
+			String tableName = this.getTable().getCodeName();
+			
+			metaClass += "\t\tdb_table = '" + tableName + "'\n";	
+
 		}
+		
 		ret += "class " + this.codeName + "(" + superclass + "):\n";
 		for(GenericVariable v : this.getVariables()) {
 			if(v.isMapped()) ret += "\t" + ((DjangoVariable)v).toString();
 			
 		}
-		
-		
-		String tableName = this.getTable().getCodeName();
-		String metaClass = "";
-		metaClass+= "\n\tclass Meta:\n";
-//		metaClass+= "\t\tdb_table = '" + tableName + "'\n";
+
+
 		if(this.isAbstract()) {
-//			System.out.println("---------------------------" + this.isAbstract());
 			metaClass += "\t\tabstract = True\n";
 		}
 		metaClass+="\t\tpass\n";

@@ -39,7 +39,25 @@ public class Table extends OWLClass{
 	public Table(String classIRI, String namedIndividualIRI) {
 		this.classIRI = classIRI;
 		this.namedIndividualIRI = namedIndividualIRI;
-		this.codeName = namedIndividualIRI.replace("table__","");
+		
+		if (classIRI.equals("ORMF-O::Entity_Table")){
+			this.type = "entity_table";
+			this.codeName = namedIndividualIRI.replace("entity_table__","");
+		}else if(classIRI.equals("ORMF-O::Single_Entity_Table")) {
+			 this.type = "single_entity_table";
+			 this.codeName = namedIndividualIRI.replace("single_entity_table__","");
+		}else if (classIRI.equals("ORMF-O::Multiple_Entities_Table")){
+			this.type = "multiple_entities_table";
+			this.codeName = namedIndividualIRI.replace("multiple_entities_table__","");
+		}else if (classIRI.equals("ORMF-O::Relationship_Association_Table")){
+			this.type = "relationship_association_table";
+			this.codeName = namedIndividualIRI.replace("relationship_association_table__","");
+		}else {
+			System.out.println("[ERROR] Tipo de tabela incorreto!");
+		}
+		
+		
+//		this.codeName = namedIndividualIRI.replace("table__","");
 	}
 
 	public void setType(String type) {
