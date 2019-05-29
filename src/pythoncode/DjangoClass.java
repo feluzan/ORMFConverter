@@ -79,6 +79,10 @@ public class DjangoClass extends GenericClass {
 		String metaClass = "";
 		metaClass+= "\n\tclass Meta:\n";
 //		metaClass+= "\t\tdb_table = '" + tableName + "'\n";
+		if(this.isAbstract()) {
+//			System.out.println("---------------------------" + this.isAbstract());
+			metaClass += "\t\tabstract = True\n";
+		}
 		metaClass+="\t\tpass\n";
 		
 		

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,7 +51,9 @@ public class OWL2Django {
 	private Map<String, PrimitiveType> primitiveTypes = new HashMap<String,PrimitiveType>();
 	private Map<String, Inheritance> inheritances = new HashMap<String, Inheritance>();
 	
-	private Map<GenericClass, InheritanceMapping> subclassesInheritanceMapping = new HashMap<GenericClass, InheritanceMapping>();
+	private ArrayList<String> abstractClasses = new ArrayList<String>();
+	
+//	private Map<GenericClass, InheritanceMapping> subclassesInheritanceMapping = new HashMap<GenericClass, InheritanceMapping>();
 	
 	public OWL2Django(File file) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -71,6 +74,7 @@ public class OWL2Django {
 			
 			processInheritance();
 			processTables();
+			processAbstractClasses();
 			
 		 
 		
@@ -79,6 +83,17 @@ public class OWL2Django {
 		}
 	}
 
+	public void processManyToManyReverse() {
+		
+		for(RelationshipMapping rm : relationshipMappings.values()) {
+			if(rm.getType().equals("m2m")) {
+				RelationshipMapping reverse = rm.getReverse();
+				if(reverse==null) continue;
+				
+			}
+		}
+	}
+	
 	public void printFile(File djangoFile) {
 		FileWriter fileWriter;
 		try {
@@ -138,6 +153,13 @@ public class OWL2Django {
 		}
 	}
 	
+	public void processAbstractClasses() {
+		for(String iri : abstractClasses) {
+			GenericClass c = classes.get(iri);
+			c.setIsAbstract(true);
+		}
+	}
+	
 	public void processClassNodes(NodeList nodeList) {
 		
 		for (int i = 0; i < nodeList.getLength(); i++) {
@@ -170,6 +192,11 @@ public class OWL2Django {
 				}
 				
 				if(class_iri.equals("ORMF-O::Entity_Subclass")) {
+					continue;
+				}
+				
+				if(class_iri.equals("OOC-O::Abstract_Class")) {
+					abstractClasses.add(iri);
 					continue;
 				}
 				
@@ -301,6 +328,7 @@ public class OWL2Django {
 					variableMappings.put(iri,vm);
 					continue;
 				}
+				
 				
 				System.out.println("[!!ALERT!!] Classe OWL não convertida: " + class_iri + "\t(" + iri + ")");
 				

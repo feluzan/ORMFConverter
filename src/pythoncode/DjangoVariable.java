@@ -45,10 +45,15 @@ public class DjangoVariable extends GenericVariable {
 			parameters.add("primary_key=True");
 			
 		}
-		
 				
 		switch (type.getCodeName()) {  
 	       case "int":
+	    	   ret = "models.IntegerField"; 
+	    	   break;
+	       case "long":
+	    	   ret = "models.IntegerField"; 
+	    	   break;
+	       case "Long":
 	    	   ret = "models.IntegerField"; 
 	    	   break;
 	       case "char":
@@ -107,8 +112,6 @@ public class DjangoVariable extends GenericVariable {
 		
 		return ret;
 	}
-	
-//	public void getColumnName
 	
 	public String toString() {
 		String ret = "";

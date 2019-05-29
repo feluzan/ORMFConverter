@@ -98,7 +98,7 @@ public class Java2OWL {
 		primitiveTypes.put("float",new PrimitiveType("float"));
 		primitiveTypes.put("int",new PrimitiveType("int"));
 		primitiveTypes.put("long",new PrimitiveType("long"));
-		primitiveTypes.put("Long",new PrimitiveType("long"));
+		primitiveTypes.put("Long",new PrimitiveType("Long"));
 		primitiveTypes.put("short",new PrimitiveType("short"));
 		primitiveTypes.put("String",new PrimitiveType("String"));
 	}
@@ -128,7 +128,6 @@ public class Java2OWL {
 		        
 		    printWriter.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

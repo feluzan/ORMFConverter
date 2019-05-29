@@ -68,6 +68,10 @@ public abstract class GenericClass extends Type{
 		return this.isAbstract;
 	}
 	
+	public void setIsAbstract(boolean b) {
+		this.isAbstract = b;
+	}
+	
 	public boolean isMapped() {
 		
 		if(!this.isAbstract()) return true;
@@ -106,6 +110,9 @@ public abstract class GenericClass extends Type{
 		if(isSuperclass()) {
 			ret+=this.getSuperclassAssertion();
 		}
+		if(this.isAbstract()) {
+			ret+=this.getAbstractAssertion();
+		}
 		return ret;
 		
 	}
@@ -126,11 +133,15 @@ public abstract class GenericClass extends Type{
 		return ret;
 	}
 	
+	public String getAbstractAssertion() {
+		String ret = "\t<ClassAssertion>\n"
+				+	"\t\t<Class IRI=\"#OOC-O::Abstract_Class\"/>\n"
+				+		"\t\t<NamedIndividual IRI=\"#" + this.namedIndividualIRI + "\"/>\n"
+				+ "\t</ClassAssertion>\n";
+		return ret;
+	}
+	
 	public String getSuperclassAssertion() {
-//		if(this.superclassGettered) {
-//			this.superclassGettered = true;
-//			return "";
-//		}
 		String ret = "\t<ClassAssertion>\n"
 				+	"\t\t<Class IRI=\"#ORMF-O::Entity_Superclass\"/>\n"
 				+		"\t\t<NamedIndividual IRI=\"#entity_class__" + this.namedIndividualIRI + "\"/>\n"
