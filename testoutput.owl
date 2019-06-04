@@ -1,0 +1,1230 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/felixzanetti/ontologies/2019/3/ORMFO"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/felixzanetti/ontologies/2019/3/ORMFO"
+     versionIRI="http://www.semanticweb.org/felixzanetti/ontologies/2019/3/ORMFO">
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#OOC-O::Abstract_Class"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Class"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Extendable_Class"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Inheritance"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Member"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Member_Variable"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Primitive_Type"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Subclass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Superclass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Type"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Value_Type"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Variable"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Entity_Subclass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Entity_Superclass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Entity_Table"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Many_To_Many_Relationship_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Many_To_One_Relationship_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Mapped_Foreign_Key"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Mapped_Primary_Key"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Multiple_Entities_Table"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Nullability"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::One_To_Many_Relationship_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::One_To_One_Relationship_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Relationship_Association_Table"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Single_Entity_Table"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Single_Table_Inheritance_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Table_per_Class_Inheritance_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Column"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Column_Constraint"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Column_Type_Constraint"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Constraint"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Foreign_Key_Column"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Foreign_Key_Constraint"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Primary_Key_Column"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Primary_Key_Constraint"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Table"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#inherited_from"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#inherits_from"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#is_type_of"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#many_to_many_association_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#member_belongs_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#one_to_many_association_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#pk_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#pk_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#refers_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#relationship_reverse_of"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#represents_relationship"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#single_table_inheritance_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#subclass_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#superclass_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#table_per_class_inheritance_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#table_per_concrete_class_inheritance_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#variable_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#variable_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class__Address"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class__BusinessAddress"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class__Class"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class__Highschool"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class__Institution"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class__Person"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class__PersonalAddress"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class__Professor"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class__Studant"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class__Teste1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class__Teste2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class__University"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class_mapping__BusinessAddress"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class_mapping__Class"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class_mapping__Highschool"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class_mapping__Institution"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class_mapping__Person"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class_mapping__PersonalAddress"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class_mapping__Professor"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class_mapping__Studant"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class_mapping__Teste2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#class_mapping__University"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#inheritance_mapping__Address_BusinessAddress"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#inheritance_mapping__Address_PersonalAddress"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#inheritance_mapping__Institution_Highschool"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#inheritance_mapping__Institution_University"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#inheritance_mapping__Person_Professor"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#inheritance_mapping__Person_Studant"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#inheritance_mapping__Teste1_Teste2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#primitive_type__Long"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#primitive_type__String"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#primitive_type__boolean"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#primitive_type__byte"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#primitive_type__char"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#primitive_type__double"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#primitive_type__float"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#primitive_type__int"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#primitive_type__long"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#primitive_type__short"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#table__Address"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#table__Class"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#table__Highschool"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#table__Institution"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#table__Pessoa"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#table__Professor"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#table__Studant"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#table__Teste2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#table__University"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Single_Table_Inheritance_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#single_table_inheritance_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#superclass_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Entity_Subclass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Single_Entity_Table"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Class"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Entity_Table"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Multiple_Entities_Table"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#table_per_class_inheritance_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Primitive_Type"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Table_per_Class_Inheritance_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#subclass_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Abstract_Class"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#table_per_concrete_class_inheritance_mapped_to"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#OOC-O::Abstract_Class"/>
+        <Class IRI="#OOC-O::Class"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OOC-O::Abstract_Class"/>
+        <Class IRI="#OOC-O::Extendable_Class"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OOC-O::Class"/>
+        <Class IRI="#OOC-O::Type"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OOC-O::Extendable_Class"/>
+        <Class IRI="#OOC-O::Class"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <Class IRI="#OOC-O::Member_Variable"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OOC-O::Member_Variable"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#OOC-O::Member"/>
+            <Class IRI="#OOC-O::Variable"/>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OOC-O::Primitive_Type"/>
+        <Class IRI="#OOC-O::Type"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OOC-O::Subclass"/>
+        <Class IRI="#OOC-O::Class"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OOC-O::Superclass"/>
+        <Class IRI="#OOC-O::Extendable_Class"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+        <Class IRI="#OOC-O::Class"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Entity_Subclass"/>
+        <Class IRI="#OOC-O::Subclass"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Entity_Superclass"/>
+        <Class IRI="#OOC-O::Superclass"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Entity_Table"/>
+        <Class IRI="#RDBS-O::Table"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Many_To_Many_Relationship_Mapping"/>
+        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Many_To_One_Relationship_Mapping"/>
+        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Mapped_Foreign_Key"/>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Mapped_Primary_Key"/>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Multiple_Entities_Table"/>
+        <Class IRI="#ORMF-O::Entity_Table"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::One_To_Many_Relationship_Mapping"/>
+        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::One_To_One_Relationship_Mapping"/>
+        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Relationship_Association_Table"/>
+        <Class IRI="#RDBS-O::Table"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Single_Entity_Table"/>
+        <Class IRI="#ORMF-O::Entity_Table"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Single_Table_Inheritance_Mapping"/>
+        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Table_per_Class_Inheritance_Mapping"/>
+        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORMF-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
+        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RDBS-O::Column_Constraint"/>
+        <Class IRI="#RDBS-O::Constraint"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RDBS-O::Column_Type_Constraint"/>
+        <Class IRI="#RDBS-O::Column_Constraint"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RDBS-O::Foreign_Key_Column"/>
+        <Class IRI="#RDBS-O::Column"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RDBS-O::Foreign_Key_Constraint"/>
+        <Class IRI="#RDBS-O::Column_Constraint"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RDBS-O::Primary_Key_Column"/>
+        <Class IRI="#RDBS-O::Column"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RDBS-O::Primary_Key_Constraint"/>
+        <Class IRI="#RDBS-O::Column_Constraint"/>
+    </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Abstract_Class"/>
+        <NamedIndividual IRI="#class__Address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Class"/>
+        <NamedIndividual IRI="#class__Address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+        <NamedIndividual IRI="#class__Address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Class"/>
+        <NamedIndividual IRI="#class__BusinessAddress"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+        <NamedIndividual IRI="#class__BusinessAddress"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Subclass"/>
+        <NamedIndividual IRI="#class__BusinessAddress"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Class"/>
+        <NamedIndividual IRI="#class__Class"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+        <NamedIndividual IRI="#class__Class"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Class"/>
+        <NamedIndividual IRI="#class__Highschool"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+        <NamedIndividual IRI="#class__Highschool"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Subclass"/>
+        <NamedIndividual IRI="#class__Highschool"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Class"/>
+        <NamedIndividual IRI="#class__Institution"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+        <NamedIndividual IRI="#class__Institution"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Class"/>
+        <NamedIndividual IRI="#class__Person"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+        <NamedIndividual IRI="#class__Person"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Class"/>
+        <NamedIndividual IRI="#class__PersonalAddress"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+        <NamedIndividual IRI="#class__PersonalAddress"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Subclass"/>
+        <NamedIndividual IRI="#class__PersonalAddress"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Class"/>
+        <NamedIndividual IRI="#class__Professor"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+        <NamedIndividual IRI="#class__Professor"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Subclass"/>
+        <NamedIndividual IRI="#class__Professor"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Class"/>
+        <NamedIndividual IRI="#class__Studant"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+        <NamedIndividual IRI="#class__Studant"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Subclass"/>
+        <NamedIndividual IRI="#class__Studant"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Abstract_Class"/>
+        <NamedIndividual IRI="#class__Teste1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Class"/>
+        <NamedIndividual IRI="#class__Teste1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+        <NamedIndividual IRI="#class__Teste1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Class"/>
+        <NamedIndividual IRI="#class__Teste2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+        <NamedIndividual IRI="#class__Teste2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Subclass"/>
+        <NamedIndividual IRI="#class__Teste2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Class"/>
+        <NamedIndividual IRI="#class__University"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+        <NamedIndividual IRI="#class__University"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Subclass"/>
+        <NamedIndividual IRI="#class__University"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+        <NamedIndividual IRI="#class_mapping__BusinessAddress"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+        <NamedIndividual IRI="#class_mapping__Class"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+        <NamedIndividual IRI="#class_mapping__Highschool"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+        <NamedIndividual IRI="#class_mapping__Institution"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+        <NamedIndividual IRI="#class_mapping__Person"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+        <NamedIndividual IRI="#class_mapping__PersonalAddress"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+        <NamedIndividual IRI="#class_mapping__Professor"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+        <NamedIndividual IRI="#class_mapping__Studant"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+        <NamedIndividual IRI="#class_mapping__Teste2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+        <NamedIndividual IRI="#class_mapping__University"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Single_Table_Inheritance_Mapping"/>
+        <NamedIndividual IRI="#inheritance_mapping__Address_BusinessAddress"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Single_Table_Inheritance_Mapping"/>
+        <NamedIndividual IRI="#inheritance_mapping__Address_PersonalAddress"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
+        <NamedIndividual IRI="#inheritance_mapping__Institution_Highschool"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
+        <NamedIndividual IRI="#inheritance_mapping__Institution_University"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Table_per_Class_Inheritance_Mapping"/>
+        <NamedIndividual IRI="#inheritance_mapping__Person_Professor"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Table_per_Class_Inheritance_Mapping"/>
+        <NamedIndividual IRI="#inheritance_mapping__Person_Studant"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
+        <NamedIndividual IRI="#inheritance_mapping__Teste1_Teste2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Primitive_Type"/>
+        <NamedIndividual IRI="#primitive_type__Long"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Primitive_Type"/>
+        <NamedIndividual IRI="#primitive_type__String"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Primitive_Type"/>
+        <NamedIndividual IRI="#primitive_type__boolean"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Primitive_Type"/>
+        <NamedIndividual IRI="#primitive_type__byte"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Primitive_Type"/>
+        <NamedIndividual IRI="#primitive_type__char"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Primitive_Type"/>
+        <NamedIndividual IRI="#primitive_type__double"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Primitive_Type"/>
+        <NamedIndividual IRI="#primitive_type__float"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Primitive_Type"/>
+        <NamedIndividual IRI="#primitive_type__int"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Primitive_Type"/>
+        <NamedIndividual IRI="#primitive_type__long"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Primitive_Type"/>
+        <NamedIndividual IRI="#primitive_type__short"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Multiple_Entities_Table"/>
+        <NamedIndividual IRI="#table__Address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Entity_Table"/>
+        <NamedIndividual IRI="#table__Class"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Single_Entity_Table"/>
+        <NamedIndividual IRI="#table__Highschool"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Single_Entity_Table"/>
+        <NamedIndividual IRI="#table__Institution"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Single_Entity_Table"/>
+        <NamedIndividual IRI="#table__Pessoa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Single_Entity_Table"/>
+        <NamedIndividual IRI="#table__Professor"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Single_Entity_Table"/>
+        <NamedIndividual IRI="#table__Studant"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Single_Entity_Table"/>
+        <NamedIndividual IRI="#table__Teste2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Single_Entity_Table"/>
+        <NamedIndividual IRI="#table__University"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#superclass_mapped_by"/>
+        <NamedIndividual IRI="#class__Address"/>
+        <NamedIndividual IRI="#inheritance_mapping__Address_BusinessAddress"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#superclass_mapped_by"/>
+        <NamedIndividual IRI="#class__Address"/>
+        <NamedIndividual IRI="#inheritance_mapping__Address_PersonalAddress"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+        <NamedIndividual IRI="#class__BusinessAddress"/>
+        <NamedIndividual IRI="#class_mapping__BusinessAddress"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#subclass_mapped_by"/>
+        <NamedIndividual IRI="#class__BusinessAddress"/>
+        <NamedIndividual IRI="#inheritance_mapping__Address_BusinessAddress"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+        <NamedIndividual IRI="#class__Class"/>
+        <NamedIndividual IRI="#class_mapping__Class"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+        <NamedIndividual IRI="#class__Highschool"/>
+        <NamedIndividual IRI="#class_mapping__Highschool"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#subclass_mapped_by"/>
+        <NamedIndividual IRI="#class__Highschool"/>
+        <NamedIndividual IRI="#inheritance_mapping__Institution_Highschool"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+        <NamedIndividual IRI="#class__Institution"/>
+        <NamedIndividual IRI="#class_mapping__Institution"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#superclass_mapped_by"/>
+        <NamedIndividual IRI="#class__Institution"/>
+        <NamedIndividual IRI="#inheritance_mapping__Institution_Highschool"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#superclass_mapped_by"/>
+        <NamedIndividual IRI="#class__Institution"/>
+        <NamedIndividual IRI="#inheritance_mapping__Institution_University"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+        <NamedIndividual IRI="#class__Person"/>
+        <NamedIndividual IRI="#class_mapping__Person"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#superclass_mapped_by"/>
+        <NamedIndividual IRI="#class__Person"/>
+        <NamedIndividual IRI="#inheritance_mapping__Person_Professor"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#superclass_mapped_by"/>
+        <NamedIndividual IRI="#class__Person"/>
+        <NamedIndividual IRI="#inheritance_mapping__Person_Studant"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+        <NamedIndividual IRI="#class__PersonalAddress"/>
+        <NamedIndividual IRI="#class_mapping__PersonalAddress"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#subclass_mapped_by"/>
+        <NamedIndividual IRI="#class__PersonalAddress"/>
+        <NamedIndividual IRI="#inheritance_mapping__Address_PersonalAddress"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+        <NamedIndividual IRI="#class__Professor"/>
+        <NamedIndividual IRI="#class_mapping__Professor"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#subclass_mapped_by"/>
+        <NamedIndividual IRI="#class__Professor"/>
+        <NamedIndividual IRI="#inheritance_mapping__Person_Professor"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+        <NamedIndividual IRI="#class__Studant"/>
+        <NamedIndividual IRI="#class_mapping__Studant"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#subclass_mapped_by"/>
+        <NamedIndividual IRI="#class__Studant"/>
+        <NamedIndividual IRI="#inheritance_mapping__Person_Studant"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#superclass_mapped_by"/>
+        <NamedIndividual IRI="#class__Teste1"/>
+        <NamedIndividual IRI="#inheritance_mapping__Teste1_Teste2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+        <NamedIndividual IRI="#class__Teste2"/>
+        <NamedIndividual IRI="#class_mapping__Teste2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#subclass_mapped_by"/>
+        <NamedIndividual IRI="#class__Teste2"/>
+        <NamedIndividual IRI="#inheritance_mapping__Teste1_Teste2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+        <NamedIndividual IRI="#class__University"/>
+        <NamedIndividual IRI="#class_mapping__University"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#subclass_mapped_by"/>
+        <NamedIndividual IRI="#class__University"/>
+        <NamedIndividual IRI="#inheritance_mapping__Institution_University"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <NamedIndividual IRI="#class_mapping__BusinessAddress"/>
+        <NamedIndividual IRI="#table__Address"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <NamedIndividual IRI="#class_mapping__Class"/>
+        <NamedIndividual IRI="#table__Class"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <NamedIndividual IRI="#class_mapping__Highschool"/>
+        <NamedIndividual IRI="#table__Highschool"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <NamedIndividual IRI="#class_mapping__Highschool"/>
+        <NamedIndividual IRI="#table__Institution"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <NamedIndividual IRI="#class_mapping__Institution"/>
+        <NamedIndividual IRI="#table__Institution"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <NamedIndividual IRI="#class_mapping__Person"/>
+        <NamedIndividual IRI="#table__Pessoa"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <NamedIndividual IRI="#class_mapping__PersonalAddress"/>
+        <NamedIndividual IRI="#table__Address"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <NamedIndividual IRI="#class_mapping__Professor"/>
+        <NamedIndividual IRI="#table__Pessoa"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <NamedIndividual IRI="#class_mapping__Professor"/>
+        <NamedIndividual IRI="#table__Professor"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <NamedIndividual IRI="#class_mapping__Studant"/>
+        <NamedIndividual IRI="#table__Pessoa"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <NamedIndividual IRI="#class_mapping__Studant"/>
+        <NamedIndividual IRI="#table__Studant"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <NamedIndividual IRI="#class_mapping__Teste2"/>
+        <NamedIndividual IRI="#table__Teste2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <NamedIndividual IRI="#class_mapping__University"/>
+        <NamedIndividual IRI="#table__Institution"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <NamedIndividual IRI="#class_mapping__University"/>
+        <NamedIndividual IRI="#table__University"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#single_table_inheritance_mapped_to"/>
+        <NamedIndividual IRI="#inheritance_mapping__Address_BusinessAddress"/>
+        <NamedIndividual IRI="#table__Address"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#single_table_inheritance_mapped_to"/>
+        <NamedIndividual IRI="#inheritance_mapping__Address_PersonalAddress"/>
+        <NamedIndividual IRI="#table__Address"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#table_per_concrete_class_inheritance_mapped_to"/>
+        <NamedIndividual IRI="#inheritance_mapping__Institution_Highschool"/>
+        <NamedIndividual IRI="#table__Highschool"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#table_per_concrete_class_inheritance_mapped_to"/>
+        <NamedIndividual IRI="#inheritance_mapping__Institution_Highschool"/>
+        <NamedIndividual IRI="#table__Institution"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#table_per_concrete_class_inheritance_mapped_to"/>
+        <NamedIndividual IRI="#inheritance_mapping__Institution_University"/>
+        <NamedIndividual IRI="#table__Institution"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#table_per_concrete_class_inheritance_mapped_to"/>
+        <NamedIndividual IRI="#inheritance_mapping__Institution_University"/>
+        <NamedIndividual IRI="#table__University"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#table_per_class_inheritance_mapped_to"/>
+        <NamedIndividual IRI="#inheritance_mapping__Person_Professor"/>
+        <NamedIndividual IRI="#table__Pessoa"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#table_per_class_inheritance_mapped_to"/>
+        <NamedIndividual IRI="#inheritance_mapping__Person_Studant"/>
+        <NamedIndividual IRI="#table__Pessoa"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#table_per_concrete_class_inheritance_mapped_to"/>
+        <NamedIndividual IRI="#inheritance_mapping__Teste1_Teste2"/>
+        <NamedIndividual IRI="#table__Teste2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#inherited_from"/>
+        <Class IRI="#OOC-O::Superclass"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#inherits_from"/>
+        <Class IRI="#OOC-O::Subclass"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#is_type_of"/>
+        <Class IRI="#OOC-O::Variable"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#many_to_many_association_mapped_to"/>
+        <Class IRI="#ORMF-O::Many_To_Many_Relationship_Mapping"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#member_belongs_to"/>
+        <Class IRI="#OOC-O::Member"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#one_to_many_association_mapped_to"/>
+        <Class IRI="#ORMF-O::One_To_Many_Relationship_Mapping"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#pk_mapped_by"/>
+        <Class IRI="#ORMF-O::Mapped_Primary_Key"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#pk_mapped_to"/>
+        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#refers_to"/>
+        <Class IRI="#OOC-O::Value_Type"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#relationship_reverse_of"/>
+        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#represents_relationship"/>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#single_table_inheritance_mapped_to"/>
+        <Class IRI="#ORMF-O::Single_Table_Inheritance_Mapping"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#subclass_mapped_by"/>
+        <Class IRI="#ORMF-O::Entity_Subclass"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#superclass_mapped_by"/>
+        <Class IRI="#ORMF-O::Entity_Superclass"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#table_per_class_inheritance_mapped_to"/>
+        <Class IRI="#ORMF-O::Table_per_Class_Inheritance_Mapping"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#table_per_concrete_class_inheritance_mapped_to"/>
+        <Class IRI="#ORMF-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#variable_mapped_by"/>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#variable_mapped_to"/>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <Class IRI="#ORMF-O::Entity_Table"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#inherited_from"/>
+        <Class IRI="#OOC-O::Inheritance"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#inherits_from"/>
+        <Class IRI="#OOC-O::Inheritance"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#is_type_of"/>
+        <Class IRI="#OOC-O::Value_Type"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#many_to_many_association_mapped_to"/>
+        <Class IRI="#ORMF-O::Relationship_Association_Table"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#member_belongs_to"/>
+        <Class IRI="#OOC-O::Class"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#one_to_many_association_mapped_to"/>
+        <Class IRI="#ORMF-O::Relationship_Association_Table"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#pk_mapped_by"/>
+        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#pk_mapped_to"/>
+        <Class IRI="#RDBS-O::Primary_Key_Column"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#refers_to"/>
+        <Class IRI="#OOC-O::Type"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#relationship_reverse_of"/>
+        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#represents_relationship"/>
+        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#single_table_inheritance_mapped_to"/>
+        <Class IRI="#ORMF-O::Multiple_Entities_Table"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#subclass_mapped_by"/>
+        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#superclass_mapped_by"/>
+        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#table_per_class_inheritance_mapped_to"/>
+        <Class IRI="#ORMF-O::Single_Entity_Table"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#table_per_concrete_class_inheritance_mapped_to"/>
+        <Class IRI="#ORMF-O::Single_Entity_Table"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#variable_mapped_by"/>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#variable_mapped_to"/>
+        <Class IRI="#RDBS-O::Column"/>
+    </ObjectPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 5.0.0.20160228-2008) https://github.com/owlcs/owlapi/ -->
+
+
