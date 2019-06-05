@@ -27,10 +27,16 @@ import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 
 import ORM.ClassMapping;
 import ORM.InheritanceMapping;
+import ORM.RelationshipMapping;
+import ORM.VariableMapping;
+import database.Column;
 import database.Table;
 import database.TableType;
 import genericcode.GenericClass;
+import genericcode.GenericVariable;
 import genericcode.PrimitiveType;
+import genericcode.Type;
+import genericcode.ValueType;
 
 public class Java2OWL {
 	OWLOntology ormfo;
@@ -45,17 +51,9 @@ public class Java2OWL {
 	
 	public static Map<GenericClass, Table> tables = new HashMap<GenericClass, Table>();
 	
-//	public static Map<GenericClass, ClassMapping> classMappings = new HashMap<GenericClass, ClassMapping>();
-//	public static Map<GenericClass, InheritanceMapping> inheritanceMappings = new HashMap<GenericClass, InheritanceMapping>();
-//	public static Map<GenericClass, Inheritance> inheritances = new HashMap<GenericClass, Inheritance>();
-//	
-//	public static Map<String, GenericVariable> variables = new HashMap<String, GenericVariable>();
-//	public static Map<GenericVariable, Column> columns = new HashMap<GenericVariable, Column>();
-//	
-//	public static Map<GenericVariable, VariableMapping> variableMappings = new HashMap<GenericVariable, VariableMapping>();
-//	public static Map<GenericVariable, RelationshipMapping> relationshipMappings = new HashMap<GenericVariable, RelationshipMapping>();
-//	public static Map<RelationshipMapping, RelationshipAssociationTable> relationshipAssociationTables = new HashMap<RelationshipMapping, RelationshipAssociationTable>();
-	
+	public static Map<String, GenericVariable> variables = new HashMap<String, GenericVariable>();
+	public static Map<GenericVariable, VariableMapping> variableMappings = new HashMap<GenericVariable, VariableMapping>();
+	public static Map<GenericVariable, RelationshipMapping> relationshipMappings = new HashMap<GenericVariable, RelationshipMapping>();
 	
 	public Java2OWL(File folder, OWLOntology ormfo) {
 		this.ormfo = ormfo;
@@ -77,7 +75,7 @@ public class Java2OWL {
 
 			for (Node n : nodeList) {
 				if(n instanceof ClassOrInterfaceDeclaration) {
-					processClassNode(n);		
+					processClassNode(n);
 				}
 			}
 		}
@@ -86,8 +84,13 @@ public class Java2OWL {
 //		
 		processInheritance();
 		processClassMappings();
-		
 		processTables();
+		
+		processFields();
+		processVariableMappings();
+		processColumns();
+		
+		processRelationships();
 
 //		//---------------------
 //		processColumns();
@@ -107,21 +110,19 @@ public class Java2OWL {
 		classes.put(className, jc);
 		
 	}
-		
+	
 	public void printFile(String filePath) {
 		File outfile = new File("testoutput.owl");
 		try {
 			this.manager.saveOntology(this.ormfo, new OWLXMLDocumentFormat(),new FileOutputStream(outfile));
 		} catch (OWLOntologyStorageException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void processPrimitiveTypes() {
+	private void processPrimitiveTypes() {
 		primitiveTypes.put("boolean",new PrimitiveType(this.ormfo,"primitive_type__boolean"));
 		primitiveTypes.put("byte",new PrimitiveType(this.ormfo,"primitive_type__byte"));
 		primitiveTypes.put("char",new PrimitiveType(this.ormfo,"primitive_type__char"));
@@ -134,7 +135,7 @@ public class Java2OWL {
 		primitiveTypes.put("String",new PrimitiveType(this.ormfo,"primitive_type__String"));
 	}
 
-	public void processInheritance() {
+	private void processInheritance() {
 		for(GenericClass jc : classes.values()) {
 			String superclassName = ((JavaClass)jc).getSuperclassName();
 			if(superclassName!=null) {
@@ -148,7 +149,7 @@ public class Java2OWL {
 		}
 	}
 	
-	public void processClassMappings() {
+	private void processClassMappings() {
 		
 		for(GenericClass gc : classes.values()) {
 			if(gc.isEntity()) {
@@ -274,9 +275,80 @@ public class Java2OWL {
 		}
 	}
 		
+	private void processFields() {
+		
+		for(GenericClass gc : classes.values()) {
+			for(FieldDeclaration field : ((JavaClass)gc).getFields()) {
+				JavaVariable jv = new JavaVariable(this.ormfo,gc,field);
+				variables.put(jv.getCodeName(), jv);
+				
+				
+				//VALUE TYPE
+				String codeType = jv.getCodeType();
+				int i = codeType.indexOf("<");
+				if(i>0){
+					codeType = codeType.substring(codeType.indexOf("<")+1);
+					codeType = codeType.substring(0,codeType.indexOf(">"));
+				}
+				Type type = primitiveTypes.get(codeType);
+				if(type==null) {
+					type = classes.get(codeType);
+				}
+				if(type==null) {
+					System.out.println("[ERROR] Type não encontado. O programa será encerrado.");
+					System.exit(1);
+				}
+				ValueType vt = new ValueType(this.ormfo,jv,type);
+			}
+		}
+	}
 
+	private void processVariableMappings() {
+		
+		for(GenericVariable gv : variables.values()) {
+			if(gv.isMapped()) {
+				VariableMapping vm = new VariableMapping(this.ormfo, gv);
+				variableMappings.put(gv, vm);
+				
+				}
+		}
+	}
 	
-//	public void printFile(String filePath) {
+	private void processColumns() {
+		for(VariableMapping vm : variableMappings.values()) {
+			Column c = new Column(this.ormfo,vm);
+		}
+	}
+
+	private void processRelationships() {
+		
+		for(GenericVariable gv : variables.values()) {
+			if(gv.isFk()) {
+				RelationshipMapping rm = new RelationshipMapping(this.ormfo, gv);
+				relationshipMappings.put(gv, rm);
+			}
+		}
+		
+		for(RelationshipMapping rm : relationshipMappings.values()) {
+			GenericVariable gv = rm.getVariable();
+			String mappedBy = ((JavaVariable)gv).getMappedBy();
+			if(mappedBy==null) continue;
+
+			String targetClass = ((GenericClass)gv.getValueType().getType()).getCodeName();
+			GenericVariable rv = variables.get(targetClass + "." + mappedBy);
+			System.out.println(rv.getCodeName()  + " +++++++++++++");
+			RelationshipMapping reverse = relationshipMappings.get(rv);
+			rm.setReverse(reverse);
+//			GenericVariabel var = variables.get()
+//			System.out.println(variables.get( ((GenericClass)gv.getValueType().getType()).getCodeName()));
+//			System.out.println(mappedBy);
+		}
+	}
+	
+	
+	
+	
+	//	public void printFile(String filePath) {
 //		try {
 //			FileWriter fileWriter = new FileWriter(filePath);
 //		    PrintWriter printWriter = new PrintWriter(fileWriter);
@@ -407,100 +479,6 @@ public class Java2OWL {
 //				rm.setRelationshipAssociationTable(rm.getReverse().getRelationshipAssociationTable());
 //			}
 //		}
-//	}
-//	
-//	public String getPrimitiveTypes() {
-//		String ret = "";
-//		for(PrimitiveType pType : primitiveTypes.values()) {
-//			ret += pType.getDeclaration();
-//			ret+= pType.getAssertion();
-//		}
-//		
-//		return ret;
-//	}
-//	
-//	public String getClasses() {
-//		String ret = "";
-//		for(GenericClass c : classes.values()) {
-//			ret+=c.getDeclaration();
-//			ret+=c.getAssertion();
-//		}
-//		return ret;
-//	}
-//	
-//	public String getTables() {
-//		String ret = "";
-//		for(Table t : tables.values()) {
-//			ret+=t.getDeclaration();
-//			ret+=t.getAssertion();
-//		}
-//		return ret;
-//	}
-//	
-//	private String getInheritance() {
-//		String ret = "";
-//		for(Inheritance i : inheritances.values()) {
-//			ret+=i.getDeclaration();
-//			ret+=i.getAssertion();
-//			ret+=i.getPropertiesAssertion();
-//		}
-//		return ret;
-//	}
-//
-//	public String getInheritanceMappings() {
-//		String ret = "";
-//		for(InheritanceMapping im : inheritanceMappings.values()) {
-//			ret+=im.getDeclaration();
-//			ret+=im.getAssertion();
-//			ret+=im.getPropertiesAssertion();
-//		}
-//		return ret;
-//	}
-//	
-//	public String getClassMappings() {
-//		String ret = "";
-//		for(ClassMapping cm : classMappings.values()) {
-//			ret+=cm.getDeclaration();
-//			ret+=cm.getAssertion();
-//			
-//			ret+=cm.getPropertiesAssertion();
-//		}
-//		return ret;
-//
-//	}
-//	
-//	public String getVariables() {
-//		String ret = "";
-//		
-//		for(GenericVariable v : variables.values()) {
-//			ret += v.getDeclaration();
-//			ret += v.getAssertion();
-//			ret += v.getValueType().getDeclaration();
-//			ret += v.getValueType().getAssertion();
-//		}
-//		
-//		return ret;
-//	}
-//
-//	public String getVariableMappings() {
-//		String ret = "";
-//		
-//		for(VariableMapping vm : variableMappings.values()) {
-//			ret += vm.getDeclaration();
-//			ret += vm.getAssertion();
-//			ret += vm.getPropertiesAssertion();
-//		}
-//		return ret;
-//	}
-//	
-//	public String getColumns() {
-//		String ret = "";
-//		
-//		for(Column c : columns.values()) {
-//			ret += c.getDeclaration();
-//			ret += c.getAssertion();
-//		}
-//		return ret;
 //	}
 //	
 //	static void processClassFields(Node node, GenericClass clazz) {

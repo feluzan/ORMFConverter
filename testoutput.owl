@@ -157,6 +157,12 @@
         <ObjectProperty IRI="#entity_class_mapped_to"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#fk_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#fk_mapped_to"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#inherited_from"/>
     </Declaration>
     <Declaration>
@@ -277,6 +283,75 @@
         <NamedIndividual IRI="#class_mapping__University"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#column__Address.city"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Address.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Address.number"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Address.street"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__BusinessAddress.postalCode"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Class.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Class.institution"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Class.professors"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Class.studants"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Class.year"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Institution.address"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Institution.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Institution.institutionClasses"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Institution.name"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Person.address"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Person.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Person.name"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Professor.professorClasses"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Professor.salary"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Studant.registry"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Studant.studantClass"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Teste1.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#column__Teste1.teste1"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#inheritance_mapping__Address_BusinessAddress"/>
     </Declaration>
     <Declaration>
@@ -328,6 +403,30 @@
         <NamedIndividual IRI="#primitive_type__short"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#relationship_mapping__Class.institution__Institution"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#relationship_mapping__Class.professors__Professor"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#relationship_mapping__Class.studants__Studant"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#relationship_mapping__Institution.address__BusinessAddress"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#relationship_mapping__Institution.institutionClasses__Class"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#relationship_mapping__Person.address__PersonalAddress"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#relationship_mapping__Professor.professorClasses__Class"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#relationship_mapping__Studant.studantClass__Class"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#table__Address"/>
     </Declaration>
     <Declaration>
@@ -355,13 +454,217 @@
         <NamedIndividual IRI="#table__University"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#entity_class_mapped_to"/>
+        <NamedIndividual IRI="#value_type__Address.city"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Address.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Address.number"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Address.street"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__BusinessAddress.postalCode"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Class.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Class.institution"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Class.professors"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Class.studants"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Class.year"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Institution.address"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Institution.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Institution.institutionClasses"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Institution.name"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Person.address"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Person.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Person.name"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Professor.professorClasses"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Professor.salary"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Studant.registry"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Studant.studantClass"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Teste1.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#value_type__Teste1.teste1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Address.city"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Address.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Address.number"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Address.street"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__BusinessAddress.postalCode"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Class.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Class.institution"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Class.professors"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Class.studants"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Class.year"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Institution.address"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Institution.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Institution.institutionClasses"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Institution.name"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Person.address"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Person.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Person.name"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Professor.professorClasses"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Professor.salary"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Studant.registry"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Studant.studantClass"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Teste1.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable__Teste1.teste1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Address.city"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Address.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Address.number"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Address.street"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__BusinessAddress.postalCode"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Class.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Class.institution"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Class.professors"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Class.studants"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Class.year"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Institution.address"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Institution.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Institution.institutionClasses"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Institution.name"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Person.address"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Person.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Person.name"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Professor.professorClasses"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Professor.salary"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Studant.registry"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Studant.studantClass"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Teste1.id"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#variable_mapping__Teste1.teste1"/>
     </Declaration>
     <Declaration>
         <Class IRI="#ORMF-O::Single_Table_Inheritance_Mapping"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#single_table_inheritance_mapped_to"/>
+        <ObjectProperty IRI="#refers_to"/>
     </Declaration>
     <Declaration>
         <Class IRI="#ORMF-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
@@ -376,10 +679,19 @@
         <Class IRI="#ORMF-O::Single_Entity_Table"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Entity_Class"/>
+        <Class IRI="#ORMF-O::Many_to_One_Reltionship_Mapping"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Class_Mapping"/>
+        <ObjectProperty IRI="#variable_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#represents_relationship"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#pk_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#pk_mapped_to"/>
     </Declaration>
     <Declaration>
         <Class IRI="#OOC-O::Class"/>
@@ -388,19 +700,82 @@
         <Class IRI="#ORMF-O::Entity_Table"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#ORMF-O::One_to_One_Reltionship_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#variable_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Column"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Primitive_Type"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Mapped_Primary_Key"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#entity_class_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#entity_class_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#fk_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#single_table_inheritance_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#relationship_reverse_of"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Foreign_Key_Column"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Entity_Class"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RDBS-O::Primary_Key_Column"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::One_to_Many_Reltionship_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Class_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#ORMF-O::Multiple_Entities_Table"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#table_per_class_inheritance_mapped_to"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#OOC-O::Primitive_Type"/>
+        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
     </Declaration>
     <Declaration>
         <Class IRI="#ORMF-O::Table_per_Class_Inheritance_Mapping"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#entity_class_mapped_by"/>
+        <ObjectProperty IRI="#fk_mapped_by"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Mapped_Foreign_Key"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#is_type_of"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#subclass_mapped_by"/>
@@ -410,6 +785,9 @@
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#table_per_concrete_class_inheritance_mapped_to"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Many_to_Many_Reltionship_Mapping"/>
     </Declaration>
     <SubClassOf>
         <Class IRI="#OOC-O::Abstract_Class"/>
@@ -723,6 +1101,150 @@
         <NamedIndividual IRI="#class_mapping__University"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Address.city"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Address.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Primary_Key_Column"/>
+        <NamedIndividual IRI="#column__Address.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Address.number"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Address.street"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__BusinessAddress.postalCode"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Class.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Primary_Key_Column"/>
+        <NamedIndividual IRI="#column__Class.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Class.institution"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Foreign_Key_Column"/>
+        <NamedIndividual IRI="#column__Class.institution"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Class.professors"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Foreign_Key_Column"/>
+        <NamedIndividual IRI="#column__Class.professors"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Class.studants"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Foreign_Key_Column"/>
+        <NamedIndividual IRI="#column__Class.studants"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Class.year"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Institution.address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Foreign_Key_Column"/>
+        <NamedIndividual IRI="#column__Institution.address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Institution.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Primary_Key_Column"/>
+        <NamedIndividual IRI="#column__Institution.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Institution.institutionClasses"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Foreign_Key_Column"/>
+        <NamedIndividual IRI="#column__Institution.institutionClasses"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Institution.name"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Person.address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Foreign_Key_Column"/>
+        <NamedIndividual IRI="#column__Person.address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Person.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Primary_Key_Column"/>
+        <NamedIndividual IRI="#column__Person.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Person.name"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Professor.professorClasses"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Foreign_Key_Column"/>
+        <NamedIndividual IRI="#column__Professor.professorClasses"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Professor.salary"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Studant.registry"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Studant.studantClass"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Foreign_Key_Column"/>
+        <NamedIndividual IRI="#column__Studant.studantClass"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Teste1.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Primary_Key_Column"/>
+        <NamedIndividual IRI="#column__Teste1.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RDBS-O::Column"/>
+        <NamedIndividual IRI="#column__Teste1.teste1"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#ORMF-O::Single_Table_Inheritance_Mapping"/>
         <NamedIndividual IRI="#inheritance_mapping__Address_BusinessAddress"/>
     </ClassAssertion>
@@ -791,6 +1313,38 @@
         <NamedIndividual IRI="#primitive_type__short"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#ORMF-O::Many_to_One_Reltionship_Mapping"/>
+        <NamedIndividual IRI="#relationship_mapping__Class.institution__Institution"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Many_to_Many_Reltionship_Mapping"/>
+        <NamedIndividual IRI="#relationship_mapping__Class.professors__Professor"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::One_to_Many_Reltionship_Mapping"/>
+        <NamedIndividual IRI="#relationship_mapping__Class.studants__Studant"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::One_to_One_Reltionship_Mapping"/>
+        <NamedIndividual IRI="#relationship_mapping__Institution.address__BusinessAddress"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::One_to_Many_Reltionship_Mapping"/>
+        <NamedIndividual IRI="#relationship_mapping__Institution.institutionClasses__Class"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::One_to_One_Reltionship_Mapping"/>
+        <NamedIndividual IRI="#relationship_mapping__Person.address__PersonalAddress"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Many_to_Many_Reltionship_Mapping"/>
+        <NamedIndividual IRI="#relationship_mapping__Professor.professorClasses__Class"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Many_to_One_Reltionship_Mapping"/>
+        <NamedIndividual IRI="#relationship_mapping__Studant.studantClass__Class"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#ORMF-O::Multiple_Entities_Table"/>
         <NamedIndividual IRI="#table__Address"/>
     </ClassAssertion>
@@ -825,6 +1379,386 @@
     <ClassAssertion>
         <Class IRI="#ORMF-O::Single_Entity_Table"/>
         <NamedIndividual IRI="#table__University"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Address.city"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Address.city"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Address.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Primary_Key"/>
+        <NamedIndividual IRI="#variable__Address.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Address.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Address.number"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Address.number"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Address.street"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Address.street"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__BusinessAddress.postalCode"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__BusinessAddress.postalCode"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Class.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Primary_Key"/>
+        <NamedIndividual IRI="#variable__Class.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Class.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Class.institution"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Foreign_Key"/>
+        <NamedIndividual IRI="#variable__Class.institution"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Class.institution"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Class.professors"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Foreign_Key"/>
+        <NamedIndividual IRI="#variable__Class.professors"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Class.professors"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Class.studants"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Foreign_Key"/>
+        <NamedIndividual IRI="#variable__Class.studants"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Class.studants"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Class.year"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Class.year"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Institution.address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Foreign_Key"/>
+        <NamedIndividual IRI="#variable__Institution.address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Institution.address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Institution.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Primary_Key"/>
+        <NamedIndividual IRI="#variable__Institution.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Institution.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Institution.institutionClasses"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Foreign_Key"/>
+        <NamedIndividual IRI="#variable__Institution.institutionClasses"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Institution.institutionClasses"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Institution.name"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Institution.name"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Person.address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Foreign_Key"/>
+        <NamedIndividual IRI="#variable__Person.address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Person.address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Person.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Primary_Key"/>
+        <NamedIndividual IRI="#variable__Person.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Person.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Person.name"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Person.name"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Professor.professorClasses"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Foreign_Key"/>
+        <NamedIndividual IRI="#variable__Professor.professorClasses"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Professor.professorClasses"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Professor.salary"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Professor.salary"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Studant.registry"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Studant.registry"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Studant.studantClass"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Foreign_Key"/>
+        <NamedIndividual IRI="#variable__Studant.studantClass"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Studant.studantClass"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Teste1.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Primary_Key"/>
+        <NamedIndividual IRI="#variable__Teste1.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Teste1.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OOC-O::Instance_Variable"/>
+        <NamedIndividual IRI="#variable__Teste1.teste1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <NamedIndividual IRI="#variable__Teste1.teste1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Address.city"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Address.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Address.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Address.number"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Address.street"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__BusinessAddress.postalCode"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Class.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Class.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Class.institution"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Class.institution"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Class.professors"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Class.professors"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Class.studants"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Class.studants"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Class.year"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Institution.address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Institution.address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Institution.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Institution.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Institution.institutionClasses"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Institution.institutionClasses"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Institution.name"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Person.address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Person.address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Person.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Person.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Person.name"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Professor.professorClasses"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Professor.professorClasses"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Professor.salary"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Studant.registry"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Studant.studantClass"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Studant.studantClass"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Teste1.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Teste1.id"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <NamedIndividual IRI="#variable_mapping__Teste1.teste1"/>
     </ClassAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#superclass_mapped_by"/>
@@ -1061,6 +1995,521 @@
         <NamedIndividual IRI="#inheritance_mapping__Teste1_Teste2"/>
         <NamedIndividual IRI="#table__Teste2"/>
     </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relationship_reverse_of"/>
+        <NamedIndividual IRI="#relationship_mapping__Class.professors__Professor"/>
+        <NamedIndividual IRI="#relationship_mapping__Professor.professorClasses__Class"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relationship_reverse_of"/>
+        <NamedIndividual IRI="#relationship_mapping__Class.studants__Studant"/>
+        <NamedIndividual IRI="#relationship_mapping__Studant.studantClass__Class"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relationship_reverse_of"/>
+        <NamedIndividual IRI="#relationship_mapping__Institution.institutionClasses__Class"/>
+        <NamedIndividual IRI="#relationship_mapping__Class.institution__Institution"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Address.city"/>
+        <NamedIndividual IRI="#primitive_type__String"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Address.id"/>
+        <NamedIndividual IRI="#primitive_type__Long"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Address.number"/>
+        <NamedIndividual IRI="#primitive_type__int"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Address.street"/>
+        <NamedIndividual IRI="#primitive_type__String"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__BusinessAddress.postalCode"/>
+        <NamedIndividual IRI="#primitive_type__int"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Class.id"/>
+        <NamedIndividual IRI="#primitive_type__Long"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Class.institution"/>
+        <NamedIndividual IRI="#class__Institution"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Class.professors"/>
+        <NamedIndividual IRI="#class__Professor"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Class.studants"/>
+        <NamedIndividual IRI="#class__Studant"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Class.year"/>
+        <NamedIndividual IRI="#primitive_type__int"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Institution.address"/>
+        <NamedIndividual IRI="#class__BusinessAddress"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Institution.id"/>
+        <NamedIndividual IRI="#primitive_type__Long"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Institution.institutionClasses"/>
+        <NamedIndividual IRI="#class__Class"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Institution.name"/>
+        <NamedIndividual IRI="#primitive_type__String"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Person.address"/>
+        <NamedIndividual IRI="#class__PersonalAddress"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Person.id"/>
+        <NamedIndividual IRI="#primitive_type__Long"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Person.name"/>
+        <NamedIndividual IRI="#primitive_type__String"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Professor.professorClasses"/>
+        <NamedIndividual IRI="#class__Class"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Professor.salary"/>
+        <NamedIndividual IRI="#primitive_type__float"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Studant.registry"/>
+        <NamedIndividual IRI="#primitive_type__int"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Studant.studantClass"/>
+        <NamedIndividual IRI="#class__Class"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Teste1.id"/>
+        <NamedIndividual IRI="#primitive_type__long"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#refers_to"/>
+        <NamedIndividual IRI="#value_type__Teste1.teste1"/>
+        <NamedIndividual IRI="#primitive_type__String"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Address.city"/>
+        <NamedIndividual IRI="#value_type__Address.city"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_by"/>
+        <NamedIndividual IRI="#variable__Address.city"/>
+        <NamedIndividual IRI="#variable_mapping__Address.city"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Address.id"/>
+        <NamedIndividual IRI="#value_type__Address.id"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#pk_mapped_by"/>
+        <NamedIndividual IRI="#variable__Address.id"/>
+        <NamedIndividual IRI="#variable_mapping__Address.id"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Address.number"/>
+        <NamedIndividual IRI="#value_type__Address.number"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_by"/>
+        <NamedIndividual IRI="#variable__Address.number"/>
+        <NamedIndividual IRI="#variable_mapping__Address.number"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Address.street"/>
+        <NamedIndividual IRI="#value_type__Address.street"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_by"/>
+        <NamedIndividual IRI="#variable__Address.street"/>
+        <NamedIndividual IRI="#variable_mapping__Address.street"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__BusinessAddress.postalCode"/>
+        <NamedIndividual IRI="#value_type__BusinessAddress.postalCode"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_by"/>
+        <NamedIndividual IRI="#variable__BusinessAddress.postalCode"/>
+        <NamedIndividual IRI="#variable_mapping__BusinessAddress.postalCode"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Class.id"/>
+        <NamedIndividual IRI="#value_type__Class.id"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#pk_mapped_by"/>
+        <NamedIndividual IRI="#variable__Class.id"/>
+        <NamedIndividual IRI="#variable_mapping__Class.id"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#fk_mapped_by"/>
+        <NamedIndividual IRI="#variable__Class.institution"/>
+        <NamedIndividual IRI="#variable_mapping__Class.institution"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Class.institution"/>
+        <NamedIndividual IRI="#value_type__Class.institution"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#represents_relationship"/>
+        <NamedIndividual IRI="#variable__Class.institution"/>
+        <NamedIndividual IRI="#relationship_mapping__Class.institution__Institution"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#fk_mapped_by"/>
+        <NamedIndividual IRI="#variable__Class.professors"/>
+        <NamedIndividual IRI="#variable_mapping__Class.professors"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Class.professors"/>
+        <NamedIndividual IRI="#value_type__Class.professors"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#represents_relationship"/>
+        <NamedIndividual IRI="#variable__Class.professors"/>
+        <NamedIndividual IRI="#relationship_mapping__Class.professors__Professor"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#fk_mapped_by"/>
+        <NamedIndividual IRI="#variable__Class.studants"/>
+        <NamedIndividual IRI="#variable_mapping__Class.studants"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Class.studants"/>
+        <NamedIndividual IRI="#value_type__Class.studants"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#represents_relationship"/>
+        <NamedIndividual IRI="#variable__Class.studants"/>
+        <NamedIndividual IRI="#relationship_mapping__Class.studants__Studant"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Class.year"/>
+        <NamedIndividual IRI="#value_type__Class.year"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_by"/>
+        <NamedIndividual IRI="#variable__Class.year"/>
+        <NamedIndividual IRI="#variable_mapping__Class.year"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#fk_mapped_by"/>
+        <NamedIndividual IRI="#variable__Institution.address"/>
+        <NamedIndividual IRI="#variable_mapping__Institution.address"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Institution.address"/>
+        <NamedIndividual IRI="#value_type__Institution.address"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#represents_relationship"/>
+        <NamedIndividual IRI="#variable__Institution.address"/>
+        <NamedIndividual IRI="#relationship_mapping__Institution.address__BusinessAddress"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Institution.id"/>
+        <NamedIndividual IRI="#value_type__Institution.id"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#pk_mapped_by"/>
+        <NamedIndividual IRI="#variable__Institution.id"/>
+        <NamedIndividual IRI="#variable_mapping__Institution.id"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#fk_mapped_by"/>
+        <NamedIndividual IRI="#variable__Institution.institutionClasses"/>
+        <NamedIndividual IRI="#variable_mapping__Institution.institutionClasses"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Institution.institutionClasses"/>
+        <NamedIndividual IRI="#value_type__Institution.institutionClasses"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#represents_relationship"/>
+        <NamedIndividual IRI="#variable__Institution.institutionClasses"/>
+        <NamedIndividual IRI="#relationship_mapping__Institution.institutionClasses__Class"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Institution.name"/>
+        <NamedIndividual IRI="#value_type__Institution.name"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_by"/>
+        <NamedIndividual IRI="#variable__Institution.name"/>
+        <NamedIndividual IRI="#variable_mapping__Institution.name"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#fk_mapped_by"/>
+        <NamedIndividual IRI="#variable__Person.address"/>
+        <NamedIndividual IRI="#variable_mapping__Person.address"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Person.address"/>
+        <NamedIndividual IRI="#value_type__Person.address"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#represents_relationship"/>
+        <NamedIndividual IRI="#variable__Person.address"/>
+        <NamedIndividual IRI="#relationship_mapping__Person.address__PersonalAddress"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Person.id"/>
+        <NamedIndividual IRI="#value_type__Person.id"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#pk_mapped_by"/>
+        <NamedIndividual IRI="#variable__Person.id"/>
+        <NamedIndividual IRI="#variable_mapping__Person.id"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Person.name"/>
+        <NamedIndividual IRI="#value_type__Person.name"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_by"/>
+        <NamedIndividual IRI="#variable__Person.name"/>
+        <NamedIndividual IRI="#variable_mapping__Person.name"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#fk_mapped_by"/>
+        <NamedIndividual IRI="#variable__Professor.professorClasses"/>
+        <NamedIndividual IRI="#variable_mapping__Professor.professorClasses"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Professor.professorClasses"/>
+        <NamedIndividual IRI="#value_type__Professor.professorClasses"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#represents_relationship"/>
+        <NamedIndividual IRI="#variable__Professor.professorClasses"/>
+        <NamedIndividual IRI="#relationship_mapping__Professor.professorClasses__Class"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Professor.salary"/>
+        <NamedIndividual IRI="#value_type__Professor.salary"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_by"/>
+        <NamedIndividual IRI="#variable__Professor.salary"/>
+        <NamedIndividual IRI="#variable_mapping__Professor.salary"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Studant.registry"/>
+        <NamedIndividual IRI="#value_type__Studant.registry"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_by"/>
+        <NamedIndividual IRI="#variable__Studant.registry"/>
+        <NamedIndividual IRI="#variable_mapping__Studant.registry"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#fk_mapped_by"/>
+        <NamedIndividual IRI="#variable__Studant.studantClass"/>
+        <NamedIndividual IRI="#variable_mapping__Studant.studantClass"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Studant.studantClass"/>
+        <NamedIndividual IRI="#value_type__Studant.studantClass"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#represents_relationship"/>
+        <NamedIndividual IRI="#variable__Studant.studantClass"/>
+        <NamedIndividual IRI="#relationship_mapping__Studant.studantClass__Class"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Teste1.id"/>
+        <NamedIndividual IRI="#value_type__Teste1.id"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#pk_mapped_by"/>
+        <NamedIndividual IRI="#variable__Teste1.id"/>
+        <NamedIndividual IRI="#variable_mapping__Teste1.id"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_type_of"/>
+        <NamedIndividual IRI="#variable__Teste1.teste1"/>
+        <NamedIndividual IRI="#value_type__Teste1.teste1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_by"/>
+        <NamedIndividual IRI="#variable__Teste1.teste1"/>
+        <NamedIndividual IRI="#variable_mapping__Teste1.teste1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Address.city"/>
+        <NamedIndividual IRI="#column__Address.city"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#pk_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Address.id"/>
+        <NamedIndividual IRI="#column__Address.id"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Address.number"/>
+        <NamedIndividual IRI="#column__Address.number"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Address.street"/>
+        <NamedIndividual IRI="#column__Address.street"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__BusinessAddress.postalCode"/>
+        <NamedIndividual IRI="#column__BusinessAddress.postalCode"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#pk_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Class.id"/>
+        <NamedIndividual IRI="#column__Class.id"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#fk_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Class.institution"/>
+        <NamedIndividual IRI="#column__Class.institution"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#fk_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Class.professors"/>
+        <NamedIndividual IRI="#column__Class.professors"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#fk_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Class.studants"/>
+        <NamedIndividual IRI="#column__Class.studants"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Class.year"/>
+        <NamedIndividual IRI="#column__Class.year"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#fk_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Institution.address"/>
+        <NamedIndividual IRI="#column__Institution.address"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#pk_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Institution.id"/>
+        <NamedIndividual IRI="#column__Institution.id"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#fk_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Institution.institutionClasses"/>
+        <NamedIndividual IRI="#column__Institution.institutionClasses"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Institution.name"/>
+        <NamedIndividual IRI="#column__Institution.name"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#fk_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Person.address"/>
+        <NamedIndividual IRI="#column__Person.address"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#pk_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Person.id"/>
+        <NamedIndividual IRI="#column__Person.id"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Person.name"/>
+        <NamedIndividual IRI="#column__Person.name"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#fk_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Professor.professorClasses"/>
+        <NamedIndividual IRI="#column__Professor.professorClasses"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Professor.salary"/>
+        <NamedIndividual IRI="#column__Professor.salary"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Studant.registry"/>
+        <NamedIndividual IRI="#column__Studant.registry"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#fk_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Studant.studantClass"/>
+        <NamedIndividual IRI="#column__Studant.studantClass"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#pk_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Teste1.id"/>
+        <NamedIndividual IRI="#column__Teste1.id"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#variable_mapped_to"/>
+        <NamedIndividual IRI="#variable_mapping__Teste1.teste1"/>
+        <NamedIndividual IRI="#column__Teste1.teste1"/>
+    </ObjectPropertyAssertion>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#entity_class_mapped_by"/>
         <Class IRI="#ORMF-O::Entity_Class"/>
@@ -1068,6 +2517,14 @@
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#entity_class_mapped_to"/>
         <Class IRI="#ORMF-O::Class_Mapping"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#fk_mapped_by"/>
+        <Class IRI="#ORMF-O::Mapped_Foreign_Key"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#fk_mapped_to"/>
+        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#inherited_from"/>
@@ -1148,6 +2605,14 @@
     <ObjectPropertyRange>
         <ObjectProperty IRI="#entity_class_mapped_to"/>
         <Class IRI="#ORMF-O::Entity_Table"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#fk_mapped_by"/>
+        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#fk_mapped_to"/>
+        <Class IRI="#RDBS-O::Foreign_Key_Column"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#inherited_from"/>

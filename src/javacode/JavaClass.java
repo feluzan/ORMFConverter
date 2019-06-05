@@ -53,6 +53,10 @@ public class JavaClass extends GenericClass{
 		
 	}
 	
+	public List<FieldDeclaration> getFields(){
+		return this.fields;
+	}
+	
 	public void setIsEntity() {
 		this.setEntity(false);
 		for (AnnotationExpr ann : this.annotations) {
