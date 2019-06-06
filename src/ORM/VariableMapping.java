@@ -2,7 +2,9 @@ package ORM;
 
 import org.semanticweb.owlapi.model.OWLOntology;
 
+import OWL.ClassIRI;
 import OWL.Individual;
+import OWL.PropertyIRI;
 import database.Column;
 import genericcode.GenericVariable;
 
@@ -16,9 +18,9 @@ public class VariableMapping extends Individual {
 		
 		this.variable = gv;
 		gv.setVariableMapping(this);
-		this.classAssertion("#ORMF-O::Variable_Mapping");
-		if(gv.isPk()) this.classAssertion("#ORMF-O::Primary_Key_Mapping");
-		if(gv.isFk()) this.classAssertion("#ORMF-O::Foreign_Key_Mapping");
+		this.classAssertion(ClassIRI.VARIABLE_MAPPING);
+		if(gv.isPk()) this.classAssertion(ClassIRI.PRIMARY_KEY_MAPPING);
+		if(gv.isFk()) this.classAssertion(ClassIRI.FOREIGN_KEY_MAPPING);
 	}
 
 	public GenericVariable getVariable() {
@@ -34,11 +36,11 @@ public class VariableMapping extends Individual {
 	public void setColumn(Column column) {
 		this.column = column;
 		if(this.variable.isPk()) {
-			this.setProperty("#pk_mapped_to", column);
+			this.setProperty(PropertyIRI.PK_MAPPED_TO, column);
 		}else if(this.variable.isFk()) {
-			this.setProperty("#fk_mapped_to", column);
+			this.setProperty(PropertyIRI.FK_MAPPED_TO, column);
 		}else {
-			this.setProperty("#variable_mapped_to", column);
+			this.setProperty(PropertyIRI.VARIABLE_MAPPED_TO, column);
 		}
 	}
 	

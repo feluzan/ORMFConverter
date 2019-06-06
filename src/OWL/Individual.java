@@ -31,18 +31,18 @@ public class Individual {
 		this.ontology.add(ca);
 	}
 	
-	public void classAssertion(String classIRI) {
+	public void classAssertion(ClassIRI classIRI) {
 //		System.out.println("Class Assertion: " + classIRI);
 		OWLDataFactory df = this.ontology.getOWLOntologyManager().getOWLDataFactory();
-		OWLClass c = df.getOWLClass(classIRI);
+		OWLClass c = df.getOWLClass(classIRI.toString());
 		OWLClassAssertionAxiom ca = df.getOWLClassAssertionAxiom(c, this.individual);
 		this.ontology.add(ca);
 //		System.out.println(ca.toString());
 	}
 	
-	public void setProperty(String propertyIRI, Individual range) {
+	public void setProperty(PropertyIRI propertyIRI, Individual range) {
 		OWLDataFactory df = this.ontology.getOWLOntologyManager().getOWLDataFactory();
-		OWLObjectProperty property = df.getOWLObjectProperty(propertyIRI);
+		OWLObjectProperty property = df.getOWLObjectProperty(propertyIRI.toString());
 		OWLObjectPropertyAssertionAxiom pa = df.getOWLObjectPropertyAssertionAxiom(property, this.individual, range.getIndividual());
 		this.ontology.add(pa);
 	}

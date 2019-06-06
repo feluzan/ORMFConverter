@@ -3,6 +3,7 @@ package genericcode;
 import org.semanticweb.owlapi.model.OWLOntology;
 
 import OWL.Individual;
+import OWL.PropertyIRI;
 
 public class ValueType extends Individual {
 	
@@ -23,7 +24,7 @@ public class ValueType extends Individual {
 	}
 	public void setType(Type type) {
 		this.type = type;
-		this.setProperty("#refers_to", type);
+		this.setProperty(PropertyIRI.REFERS_TO, type);
 	}
 
 	public GenericVariable getVariable() {

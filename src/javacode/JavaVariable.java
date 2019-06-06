@@ -12,6 +12,7 @@ import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.expr.MemberValuePair;
 
 import ORM.RelationshipType;
+import OWL.ClassIRI;
 import genericcode.GenericClass;
 import genericcode.GenericVariable;
 
@@ -33,18 +34,19 @@ public class JavaVariable extends GenericVariable {
 		this.setIsMapped();
 		this.setIsPk();
 		this.setIsFk();
-		this.classAssertion("#OOC-O::Instance_Variable");
+		this.classAssertion(ClassIRI.INSTANCE_VARIABLE);
 		if(this.isMapped()) {
-			this.classAssertion("#ORMF-O::Mapped_Variable");
+			this.classAssertion(ClassIRI.MAPPED_VARIABLE);
 		}
 		if(this.isPk()) {
-			this.classAssertion("#ORMF-O::Mapped_Primary_Key");
+			this.classAssertion(ClassIRI.MAPPED_PRIMARY_KEY);
 		}
 		if(this.isFk()) {
-			this.classAssertion("#ORMF-O::Mapped_Foreign_Key");
+			this.classAssertion(ClassIRI.MAPPED_FOREIGN_KEY);
 		}
 		
 		this.codeType = variable.getTypeAsString();
+		this.set_class(c);
 
 	}
 	

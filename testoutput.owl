@@ -433,6 +433,9 @@
         <NamedIndividual IRI="#table__Class"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#table__Class_Professor"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#table__Highschool"/>
     </Declaration>
     <Declaration>
@@ -443,6 +446,9 @@
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#table__Professor"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#table__Professor_Class"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#table__Studant"/>
@@ -730,6 +736,9 @@
         <ObjectProperty IRI="#single_table_inheritance_mapped_to"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#many_to_many_association_mapped_to"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#relationship_reverse_of"/>
     </Declaration>
     <Declaration>
@@ -749,6 +758,9 @@
     </Declaration>
     <Declaration>
         <Class IRI="#ORMF-O::Class_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORMF-O::Relationship_Association_Table"/>
     </Declaration>
     <Declaration>
         <Class IRI="#ORMF-O::Mapped_Variable"/>
@@ -1353,6 +1365,10 @@
         <NamedIndividual IRI="#table__Class"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#ORMF-O::Relationship_Association_Table"/>
+        <NamedIndividual IRI="#table__Class_Professor"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#ORMF-O::Single_Entity_Table"/>
         <NamedIndividual IRI="#table__Highschool"/>
     </ClassAssertion>
@@ -1367,6 +1383,10 @@
     <ClassAssertion>
         <Class IRI="#ORMF-O::Single_Entity_Table"/>
         <NamedIndividual IRI="#table__Professor"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ORMF-O::Relationship_Association_Table"/>
+        <NamedIndividual IRI="#table__Professor_Class"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#ORMF-O::Single_Entity_Table"/>
@@ -1996,6 +2016,11 @@
         <NamedIndividual IRI="#table__Teste2"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#many_to_many_association_mapped_to"/>
+        <NamedIndividual IRI="#relationship_mapping__Class.professors__Professor"/>
+        <NamedIndividual IRI="#table__Professor_Class"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#relationship_reverse_of"/>
         <NamedIndividual IRI="#relationship_mapping__Class.professors__Professor"/>
         <NamedIndividual IRI="#relationship_mapping__Professor.professorClasses__Class"/>
@@ -2009,6 +2034,11 @@
         <ObjectProperty IRI="#relationship_reverse_of"/>
         <NamedIndividual IRI="#relationship_mapping__Institution.institutionClasses__Class"/>
         <NamedIndividual IRI="#relationship_mapping__Class.institution__Institution"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#many_to_many_association_mapped_to"/>
+        <NamedIndividual IRI="#relationship_mapping__Professor.professorClasses__Class"/>
+        <NamedIndividual IRI="#table__Class_Professor"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#refers_to"/>

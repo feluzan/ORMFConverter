@@ -5,6 +5,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import ORM.RelationshipType;
 import ORM.VariableMapping;
 import OWL.Individual;
+import OWL.PropertyIRI;
 
 public class GenericVariable extends Individual{
 	
@@ -64,11 +65,11 @@ public class GenericVariable extends Individual{
 	public void setVariableMapping(VariableMapping variableMapping) {
 		this.variableMapping = variableMapping;
 		if(this.isPk()) {
-			this.setProperty("#pk_mapped_by", variableMapping);
+			this.setProperty(PropertyIRI.PK_MAPPED_BY, variableMapping);
 		}else if(this.isFk()) {
-			this.setProperty("#fk_mapped_by", variableMapping);
+			this.setProperty(PropertyIRI.FK_MAPPED_BY, variableMapping);
 		}else {
-			this.setProperty("#variable_mapped_by", variableMapping);
+			this.setProperty(PropertyIRI.VARIABLE_MAPPED_BY, variableMapping);
 		}
 		
 	}
@@ -78,7 +79,7 @@ public class GenericVariable extends Individual{
 	}
 	public void setValueType(ValueType valueType) {
 		this.valueType = valueType;
-		this.setProperty("#is_type_of", valueType);
+		this.setProperty(PropertyIRI.IS_TYPE_OF, valueType);
 	}
 
 	public RelationshipType getRelationshipType() {

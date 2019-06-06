@@ -19,6 +19,7 @@ import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 
 import ORM.InheritanceStrategy;
+import OWL.ClassIRI;
 import genericcode.GenericClass;
 
 public class JavaClass extends GenericClass{
@@ -42,12 +43,12 @@ public class JavaClass extends GenericClass{
 		this.setIsAbstract();
 		this.setIsEntity();
 		
-		this.classAssertion("#OOC-O::Class");
+		this.classAssertion(ClassIRI.CLASS);
 		if(this.is_abstract()) {
-			this.classAssertion("#OOC-O::Abstract_Class");
+			this.classAssertion(ClassIRI.ABSTRACT_CLASS);
 		}
 		if(this.isEntity()) {
-			this.classAssertion("#ORMF-O::Entity_Class");
+			this.classAssertion(ClassIRI.ENTITY_CLASS);
 		}
 
 		

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import org.semanticweb.owlapi.model.OWLOntology;
 
+import OWL.ClassIRI;
 import OWL.Individual;
+import OWL.PropertyIRI;
 import database.Table;
 import genericcode.GenericClass;
 
@@ -19,12 +21,12 @@ public class ClassMapping extends Individual{
 		
 		this._class = gc;
 		gc.setClassMapping(this);
-		this.classAssertion("#ORMF-O::Class_Mapping");
+		this.classAssertion(ClassIRI.CLASS_MAPPING);
 	}
 	
 	public void addTable(Table t) {
 		this.tables.add(t);
-		this.setProperty("#entity_class_mapped_to", t);
+		this.setProperty(PropertyIRI.ENTITY_CLASS_MAPPED_TO, t);
 	}
 
 }

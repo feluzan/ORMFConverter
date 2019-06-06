@@ -10,6 +10,8 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import ORM.ClassMapping;
 import ORM.InheritanceMapping;
 import ORM.InheritanceStrategy;
+import OWL.ClassIRI;
+import OWL.PropertyIRI;
 
 //import ORM.InheritanceMapping;
 
@@ -60,9 +62,9 @@ public abstract class GenericClass extends Type{
 	public void setSuperclass(GenericClass superclass) {
 		this.superclass = superclass;
 		if(this.isEntity()) {
-			this.classAssertion("#ORMF-O::Entity_Subclass");
+			this.classAssertion(ClassIRI.ENTITY_SUBCLASS);
 		}else {
-			this.classAssertion("#OOC-O::Subclass");
+			this.classAssertion(ClassIRI.SUBCLASS);
 		}
 	}
 	public boolean isSubclass() {
@@ -90,7 +92,7 @@ public abstract class GenericClass extends Type{
 	
 	public void setClassMapping(ClassMapping cm) {
 		this.classMapping = cm;
-		this.setProperty("#entity_class_mapped_by", cm);
+		this.setProperty(PropertyIRI.ENTITY_CLASS_MAPPED_BY, cm);
 	}
 	public ClassMapping getClassMapping() {
 		return this.classMapping;

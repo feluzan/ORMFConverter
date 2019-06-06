@@ -28,8 +28,10 @@ import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import ORM.ClassMapping;
 import ORM.InheritanceMapping;
 import ORM.RelationshipMapping;
+import ORM.RelationshipType;
 import ORM.VariableMapping;
 import database.Column;
+import database.RelationshipAssociationTable;
 import database.Table;
 import database.TableType;
 import genericcode.GenericClass;
@@ -92,14 +94,6 @@ public class Java2OWL {
 		
 		processRelationships();
 
-//		//---------------------
-//		processColumns();
-//		processVariableMappings();
-//		//---------------------
-//		processRelationships();
-//		//---------------------
-//		checkRelationshipReverses();
-//		//---------------------
 //		processRelationshipAssociationTables();
 		
 	}
@@ -336,12 +330,15 @@ public class Java2OWL {
 
 			String targetClass = ((GenericClass)gv.getValueType().getType()).getCodeName();
 			GenericVariable rv = variables.get(targetClass + "." + mappedBy);
-			System.out.println(rv.getCodeName()  + " +++++++++++++");
 			RelationshipMapping reverse = relationshipMappings.get(rv);
 			rm.setReverse(reverse);
-//			GenericVariabel var = variables.get()
-//			System.out.println(variables.get( ((GenericClass)gv.getValueType().getType()).getCodeName()));
-//			System.out.println(mappedBy);
+		}
+		
+		for (RelationshipMapping rm : relationshipMappings.values()) {
+			RelationshipType rt = rm.getRelationshipType();
+			if(rt == RelationshipType.MANY_TO_MANY) {
+				RelationshipAssociationTable rat = new RelationshipAssociationTable(this.ormfo,rm);
+			}
 		}
 	}
 	

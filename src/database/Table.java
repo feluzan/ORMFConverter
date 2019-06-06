@@ -2,21 +2,21 @@ package database;
 
 import org.semanticweb.owlapi.model.OWLOntology;
 
+import OWL.ClassIRI;
 import OWL.Individual;
 import genericcode.GenericClass;
 public class Table extends Individual{
 	
 	private String tableName;
-//	private ArrayList<GenericClass> classes;
 	private TableType tableType;
 
 	public Table(OWLOntology o, GenericClass gc, TableType tableType) {
 		super(o, "table__" + gc.getCodeTableName());
 		if(!gc.is_abstract()) gc.getClassMapping().addTable(this);
 		this.setTableType(tableType);
-//		this.setTableName(gc.getCodeTableName());
 		
-//		this.classes = new ArrayList<GenericClass>();
+		this.tableName = gc.getCodeTableName();
+
 	}
 
 	public String getTableName() {
@@ -47,13 +47,13 @@ public class Table extends Individual{
 		this.tableType=tableType;
 		switch (tableType){
 		case SINGLE_ENTITY_TABLE:
-			this.classAssertion("#ORMF-O::Single_Entity_Table");
+			this.classAssertion(ClassIRI.SINGLE_ENTITY_TABLE);
 			break;
 		case MULTIPLE_ENTITIES_TABLE:
-			this.classAssertion("#ORMF-O::Multiple_Entities_Table");
+			this.classAssertion(ClassIRI.MULTIPLE_ENTITY_TABLE);
 			break;
 		case ENTITY_TABLE:
-			this.classAssertion("#ORMF-O::Entity_Table");
+			this.classAssertion(ClassIRI.ENTITY_TABLE);
 			break;
 		default:
 			System.out.println("[ERROR]");
