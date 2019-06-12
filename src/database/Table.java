@@ -1,5 +1,6 @@
 package database;
 
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 
 import OWL.ClassIRI;
@@ -19,6 +20,11 @@ public class Table extends Individual{
 
 	}
 
+	public Table(OWLOntology o,OWLNamedIndividual i) {
+		super(o, i);
+		this.setTableNameFromIndividual();
+	}
+	
 	public String getTableName() {
 		return tableName;
 	}
@@ -27,6 +33,13 @@ public class Table extends Individual{
 		this.tableName = tableName;
 	}
 
+	public void setTableNameFromIndividual() {
+		String name = this.getIndividual().getIRI().toString();
+//		System.out.println(name);
+		name = name.split("__")[1];
+		this.setTableName(name);
+	}
+	
 //	public ArrayList<GenericClass> getClasses() {
 //		return classes;
 //	}

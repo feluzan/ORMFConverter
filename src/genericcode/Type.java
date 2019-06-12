@@ -25,6 +25,10 @@ public abstract class Type extends Individual{
 		super(o,iri);
 
 	}
+	
+	public Type(OWLOntology o,OWLNamedIndividual i) {
+		super(o, i);
+	}
 
 
 }

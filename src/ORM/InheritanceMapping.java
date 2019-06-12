@@ -1,8 +1,16 @@
 package ORM;
 
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
+import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
+import org.semanticweb.owlapi.model.OWLClass;
 
 import OWL.ClassIRI;
 import OWL.Individual;
@@ -48,6 +56,10 @@ public class InheritanceMapping extends Individual{
 		subclass.getSuperclass().setProperty(PropertyIRI.SUPERCLASS_MAPPED_BY, this);
 	}
 	
+	public InheritanceMapping(OWLOntology o,OWLNamedIndividual i) {
+		super(o, i);
+		this.setInheritanceStrategyFromIndividual();
+	}
 
 	public InheritanceStrategy getInheritanceStrategy() {
 		return inheritanceStrategy;
@@ -93,5 +105,21 @@ public class InheritanceMapping extends Individual{
 
 	public ArrayList<Table> getTables() {
 		return this.tables;
+	}
+
+	private void setInheritanceStrategyFromIndividual() {
+		OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
+		OWLReasoner reasoner = reasonerFactory.createReasoner(this.getOntology());
+		Stream<OWLClass> allClassesStream = reasoner.getTypes(this.getIndividual()).entities();
+		Set<OWLClass> allClasses = allClassesStream.collect(Collectors.toSet());
+		if(allClasses.contains(ClassIRI.TABLE_PER_CLASS_INHERITANCE_MAPPING.getOWLClass(this.getOntology()))) {
+			this.setInheritanceStrategy(InheritanceStrategy.TABLE_PER_CLASS);
+		}
+		if(allClasses.contains(ClassIRI.TABLE_PER_CONCRETE_CLASS_INHERITANCE_MAPPING.getOWLClass(this.getOntology()))) {
+			this.setInheritanceStrategy(InheritanceStrategy.TABLE_PER_CONCRETE_CLASS);
+		}
+		if(allClasses.contains(ClassIRI.SINGLE_TABLE_INHERITANCE_MAPPING.getOWLClass(this.getOntology()))) {
+			this.setInheritanceStrategy(InheritanceStrategy.SINGLE_TABLE);
+		}
 	}
 }

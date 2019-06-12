@@ -37,7 +37,7 @@ public class RelationshipAssociationTable extends Individual {
 		GenericVariable gv = rm.getVariable();
 		ret += ((GenericClass)gv.getValueType().getType()).getCodeName();
 		ret +="_";
-		System.out.println(gv.get_class());
+//		System.out.println(gv.get_class());
 		ret += gv.get_class().getCodeName();
 		return ret;
 	}

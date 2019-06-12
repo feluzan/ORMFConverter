@@ -21,6 +21,11 @@ public class Individual {
 //		this.assertion = df.getOWLClassAssertionAxiom(c, this.individual);
 	}
 	
+	public Individual(OWLOntology o, OWLNamedIndividual i) {
+		this.ontology = o;
+		this.individual = i;
+	}
+	
 	public OWLNamedIndividual getIndividual() {
 		return this.individual;
 	}
@@ -47,6 +52,8 @@ public class Individual {
 		this.ontology.add(pa);
 	}
 
-
+	public OWLOntology getOntology() {
+		return ontology;
+	}
 
 }

@@ -8,6 +8,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
+import django.OWL2Django;
 import javacode.Java2OWL;
 
 
@@ -27,8 +28,6 @@ public class Converter {
 		OWLDataFactory factory = manager.getOWLDataFactory();
 		try {
 			ormfo = manager.loadOntologyFromOntologyDocument(ORMFOFile);
-	//		System.out.println(o);
-	//		System.out.println("Axioms: "+o.getAxiomCount()+", Format: "+man.getOntologyFormat(o));
 		} catch (OWLOntologyCreationException e) {
 			System.out.println("[ERROR] Houve algum problema ao carregar a ontologia.");
 			System.out.println("\tO programa será encerrado.");
@@ -72,10 +71,10 @@ public class Converter {
 		scanner.close();
 		System.out.println("[INFO] Escrita no arquivo " + owlPath + " concluída.");
 		
-	//	System.out.println("\n[INFO] Iniciando Etapa OWL -> Python");
+		System.out.println("\n[INFO] Iniciando Etapa OWL -> Python");
 	//	
 	//	File owlfile = new File(owlPath);
-	//	OWL2Django owl2Django = new OWL2Django(owlfile);
+		OWL2Django owl2Django = new OWL2Django(owlPath);
 	//	
 	//	File djangoFile = new File(djangoPath);
 	//	

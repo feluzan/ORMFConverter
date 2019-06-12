@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLIndividual;
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 
@@ -30,6 +31,13 @@ public abstract class GenericClass extends Type{
 	public GenericClass(OWLOntology o, String iri) {
 		super(o, iri);
 		this.subclasses = new ArrayList<GenericClass>();
+	}
+	
+	public GenericClass(OWLOntology o,OWLNamedIndividual i) {
+		super(o, i);
+		this._abstract = false;
+		this.entity = false;
+		this.setCodeNameFromIndividual();
 	}
 	
 	public String getCodeName() {
@@ -97,25 +105,13 @@ public abstract class GenericClass extends Type{
 	public ClassMapping getClassMapping() {
 		return this.classMapping;
 	}
-//	public void setSuperclass(boolean isSuperclass) {
-//		this.isSuperclass = isSuperclass;
-//		if(isSuperclass){
-//			
-//			if(this.isEntity()) {
-//				this.classAssertion("#ORMF-O::Entity_Superclass");
-//			}else {
-//				this.classAssertion("#OOC-O::Superclass");
-//			}
-//			
-//		}
-//	}
-	
-	
-//	public GenericClass(String codeName) {
-//		this.codeName = codeName;
-//	}
-	
 
+	private void setCodeNameFromIndividual() {
+		String name = this.getIndividual().getIRI().toString();
+//		System.out.println(name);
+		name = name.split("__")[1];
+		this.setCodeName(name);
+	}
 	
 	
 	

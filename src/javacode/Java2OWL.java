@@ -106,7 +106,7 @@ public class Java2OWL {
 	}
 	
 	public void printFile(String filePath) {
-		File outfile = new File("testoutput.owl");
+		File outfile = new File(filePath);
 		try {
 			this.manager.saveOntology(this.ormfo, new OWLXMLDocumentFormat(),new FileOutputStream(outfile));
 		} catch (OWLOntologyStorageException e) {

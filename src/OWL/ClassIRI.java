@@ -1,5 +1,9 @@
 package OWL;
 
+import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLOntology;
+
 public enum ClassIRI {
 	
 	ABSTRACT_CLASS{
@@ -18,6 +22,7 @@ public enum ClassIRI {
 		public String toString() {
 			return "#OOC-O::Class";
 		}
+		
 	},
 	
 	ENTITY_CLASS{
@@ -186,6 +191,11 @@ public enum ClassIRI {
 		public String toString() {
 			return "#ORMF-O::Relationship_Association_Table";
 		}
-	},
+	};
+	
+	public OWLClass getOWLClass(OWLOntology o) {
+		IRI oIRI = o.getOntologyID().getOntologyIRI().get();
+		return o.getOWLOntologyManager().getOWLDataFactory().getOWLClass(oIRI + this.toString());
+	}
 	
 }

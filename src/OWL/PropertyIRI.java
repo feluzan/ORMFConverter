@@ -1,5 +1,12 @@
 package OWL;
 
+import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLDataProperty;
+import org.semanticweb.owlapi.model.OWLObjectProperty;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLProperty;
+
 public enum PropertyIRI {
 	
 	ENTITY_CLASS_MAPPED_TO{
@@ -114,6 +121,13 @@ public enum PropertyIRI {
 		public String toString() {
 			return "#one_to_many_association_mapped_to";
 		}
+	};
+	
+	public OWLObjectProperty getOWLProperty(OWLOntology o) {
+		IRI oIRI = o.getOntologyID().getOntologyIRI().get();
+//		System.out.println(o.getOWLOntologyManager().getOWLDataFactory().getOWLDataProperty(oIRI + this.toString()));
+		return o.getOWLOntologyManager().getOWLDataFactory().getOWLObjectProperty(oIRI + this.toString());
 	}
+	
 	
 }
