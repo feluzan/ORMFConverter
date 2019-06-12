@@ -28,11 +28,14 @@ import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
 import ORM.ClassMapping;
 import ORM.InheritanceMapping;
 import ORM.InheritanceStrategy;
+import ORM.VariableMapping;
 import OWL.ClassIRI;
 import OWL.PropertyIRI;
+import database.Column;
 import database.Table;
 import database.TableType;
 import genericcode.GenericClass;
+import genericcode.GenericVariable;
 
 public class OWL2Django {
 	OWLOntology o;
@@ -43,8 +46,14 @@ public class OWL2Django {
 	OWLReasoner reasoner;
 	
 	private Map<OWLIndividual, Table> tables = new HashMap<OWLIndividual, Table>();
+	private Map<OWLIndividual, Column> columns = new HashMap<OWLIndividual, Column>();
+	
 	private Map<OWLIndividual, GenericClass> classes = new HashMap<OWLIndividual, GenericClass>();
 	private Map<OWLIndividual, InheritanceMapping> inheritanceMappings = new HashMap<OWLIndividual,InheritanceMapping>();
+	private Map<OWLIndividual, GenericVariable> variables = new HashMap<OWLIndividual,GenericVariable>();
+	private Map<OWLIndividual, VariableMapping> variableMappings = new HashMap<OWLIndividual,VariableMapping>();
+	
+	
 	
 	public OWL2Django(String OWLPath) {
 		
@@ -67,8 +76,12 @@ public class OWL2Django {
 		this.reasoner = reasonerFactory.createReasoner(this.o);
 
 		this.retrieveTables();
+		this.retrieveColumns();
 		this.retrieveClasses();
 		this.retrieveSuperclasses();
+		
+		this.retrieveFields();
+		
 	}
 	
 	private void retrieveTables() {
@@ -99,6 +112,34 @@ public class OWL2Django {
 
 		}
 		
+	}
+	
+	private void retrieveColumns() {
+		OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
+		OWLReasoner reasoner = reasonerFactory.createReasoner(this.o);
+
+		OWLClass c = ClassIRI.COLUMN.getOWLClass(o);
+		NodeSet<OWLNamedIndividual> individualsNodeSet = reasoner.getInstances(c,false);
+		Stream<OWLNamedIndividual> individuals = individualsNodeSet.entities();
+
+		Iterator<OWLNamedIndividual> individualsAsIterator = individuals.iterator();
+
+		while(individualsAsIterator.hasNext()) {
+			OWLNamedIndividual i = individualsAsIterator.next();
+			Column col = new Column(this.o, i);
+			columns.put(i, col);
+			
+//			Stream<OWLClass> allClassesStream = reasoner.getTypes(i).entities();
+//			Set<OWLClass> allClasses = allClassesStream.collect(Collectors.toSet());
+			
+//			if(allClasses.contains(ClassIRI.MULTIPLE_ENTITY_TABLE.getOWLClass(o))) {
+//				t.setTableType(TableType.MULTIPLE_ENTITIES_TABLE);
+//			}
+//			if(allClasses.contains(ClassIRI.SINGLE_ENTITY_TABLE.getOWLClass(o))) {
+//				t.setTableType(TableType.SINGLE_ENTITY_TABLE);
+//			}
+
+		}
 	}
 	
 	private void retrieveClassMappings(GenericClass gc) {
@@ -203,6 +244,7 @@ public class OWL2Django {
 			
 			
 			if(allClasses.contains(ClassIRI.ENTITY_CLASS.getOWLClass(o))) {
+				dc.setEntity(true);
 				this.retrieveClassMappings(dc);
 			}
 			
@@ -214,6 +256,55 @@ public class OWL2Django {
 		}
 	}
 	
+	private void retrieveVariableMappings(GenericVariable gv) {
+		Stream<OWLNamedIndividual> rangesStream;
+		Set<OWLNamedIndividual> rangesSet;
+		rangesStream = reasoner.getObjectPropertyValues(gv.getIndividual(), PropertyIRI.VARIABLE_MAPPED_BY.getOWLProperty(this.o)).entities();
+		rangesSet = rangesStream.collect(Collectors.toSet());
+		
+		if(rangesSet.size()>0) {
+			VariableMapping vm = new VariableMapping(this.o, rangesSet.iterator().next());
+			vm.setVariable(gv);
+			variableMappings.put(vm.getIndividual(), vm);
+			gv.setVariableMapping(vm);
+			
+			rangesStream = reasoner.getObjectPropertyValues(vm.getIndividual(), PropertyIRI.VARIABLE_MAPPED_TO.getOWLProperty(this.o)).entities();
+			rangesSet = rangesStream.collect(Collectors.toSet());
+			Column col = columns.get(rangesSet.iterator().next());
+			col.setVariableMapping(vm);
+			vm.setColumn(col);
+		}
+	}
+	
+	private void retrieveFields() {
+		OWLClass c = ClassIRI.INSTANCE_VARIABLE.getOWLClass(o);
+
+		NodeSet<OWLNamedIndividual> individualsNodeSet = reasoner.getInstances(c,false);
+		Stream<OWLNamedIndividual> individuals = individualsNodeSet.entities();
+
+		Iterator<OWLNamedIndividual> individualsAsIterator = individuals.iterator();
+
+		while(individualsAsIterator.hasNext()) {
+			OWLNamedIndividual i = individualsAsIterator.next();
+			DjangoVariable dv = new DjangoVariable(this.o, i);
+			variables.put(i, dv);
+			
+			Stream<OWLClass> allClassesStream = reasoner.getTypes(i).entities();
+			Set<OWLClass> allClasses = allClassesStream.collect(Collectors.toSet());
+			
+			if(allClasses.contains(ClassIRI.MAPPED_VARIABLE.getOWLClass(o))) {
+				dv.setMapped(true);
+			}
+			if(allClasses.contains(ClassIRI.MAPPED_PRIMARY_KEY.getOWLClass(o))) {
+				dv.setPk(true);
+			}
+			if(allClasses.contains(ClassIRI.MAPPED_FOREIGN_KEY.getOWLClass(o))) {
+				dv.setFk(true);
+			}
+			this.retrieveVariableMappings(dv);
+		}
+		
+	}
 	
 	
 	

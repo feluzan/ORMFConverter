@@ -1,5 +1,6 @@
 package genericcode;
 
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 
 import ORM.RelationshipType;
@@ -24,6 +25,13 @@ public class GenericVariable extends Individual{
 
 	}
 	
+	public GenericVariable(OWLOntology o,OWLNamedIndividual i) {
+		super(o, i);
+		this.setMapped(false);
+		this.setPk(false);
+		this.setFk(false);
+		// TODO Auto-generated constructor stub
+	}
 	public boolean isPk() {
 		return pk;
 	}

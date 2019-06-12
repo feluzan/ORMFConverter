@@ -1,5 +1,6 @@
 package database;
 
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 
 import ORM.VariableMapping;
@@ -22,6 +23,11 @@ public class Column extends Individual {
 		if(vm.getVariable().isFk()) this.classAssertion(ClassIRI.FOREIGN_KEY_COLUMN);
 	}
 
+	public Column(OWLOntology o,OWLNamedIndividual i) {
+		super(o, i);
+		this.setCodeNameFromIndividual();
+	}
+	
 	public String getCodeName() {
 		return codeName;
 	}
@@ -36,5 +42,11 @@ public class Column extends Individual {
 		this.variableMapping = variableMapping;
 	}
 
+	public void setCodeNameFromIndividual() {
+		String name = this.getIndividual().getIRI().toString();
+//		System.out.println(name);
+		name = name.split("__")[1];
+		this.setCodeName(name);
+	}
 	
 }

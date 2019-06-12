@@ -1,5 +1,6 @@
 package ORM;
 
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 
 import OWL.ClassIRI;
@@ -23,6 +24,10 @@ public class VariableMapping extends Individual {
 		if(gv.isFk()) this.classAssertion(ClassIRI.FOREIGN_KEY_MAPPING);
 	}
 
+	public VariableMapping(OWLOntology o,OWLNamedIndividual i) {
+		super(o,i);
+	}
+	
 	public GenericVariable getVariable() {
 		return variable;
 	}
@@ -35,12 +40,12 @@ public class VariableMapping extends Individual {
 	}
 	public void setColumn(Column column) {
 		this.column = column;
+		this.setProperty(PropertyIRI.VARIABLE_MAPPED_TO, column);
 		if(this.variable.isPk()) {
 			this.setProperty(PropertyIRI.PK_MAPPED_TO, column);
-		}else if(this.variable.isFk()) {
+		}
+		if(this.variable.isFk()) {
 			this.setProperty(PropertyIRI.FK_MAPPED_TO, column);
-		}else {
-			this.setProperty(PropertyIRI.VARIABLE_MAPPED_TO, column);
 		}
 	}
 	
