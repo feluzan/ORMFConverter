@@ -1,5 +1,4 @@
 //import java.io.BufferedReader;
-import java.Java2OWL;
 import java.io.File;
 import java.util.Scanner;
 
@@ -10,6 +9,7 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import django.OWL2Django;
+import jpa.Java2OWL;
 
 
 
