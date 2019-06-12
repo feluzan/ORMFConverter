@@ -1,4 +1,4 @@
-package javacode;
+package java;
 
 import java.util.List;
 
