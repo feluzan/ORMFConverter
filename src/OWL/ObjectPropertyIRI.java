@@ -4,7 +4,7 @@ import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 
-public enum PropertyIRI {
+public enum ObjectPropertyIRI {
 	
 	ENTITY_CLASS_MAPPED_TO{
 		public String toString() {
@@ -32,19 +32,19 @@ public enum PropertyIRI {
 	
 	SINGLE_TABLE_INHERITANCE_MAPPED_TO{
 		public String toString() {
-			return "single_table_inheritance_mapped_to";
+			return "#single_table_inheritance_mapped_to";
 		}
 	},
 	
 	TABLE_PER_CLASS_INHERITANCE_MAPPED_TO{
 		public String toString() {
-			return "table_per_class_inheritance_mapped_to";
+			return "#table_per_class_inheritance_mapped_to";
 		}
 	},
 	
 	TABLE_PER_CONCRETE_CLASS_INHERITANCE_MAPPED_TO{
 		public String toString() {
-			return "table_per_concrete_class_inheritance_mapped_to";
+			return "#table_per_concrete_class_inheritance_mapped_to";
 		}
 	},
 	
@@ -119,12 +119,14 @@ public enum PropertyIRI {
 			return "#one_to_many_association_mapped_to";
 		}
 	},
+	
 	BELONGS_TO{
 		public String toString() {
 			return "#belongs_to";
 		}
 	};
-	public OWLObjectProperty getOWLProperty(OWLOntology o) {
+	
+	public OWLObjectProperty getOWLObjectProperty(OWLOntology o) {
 		IRI oIRI = o.getOntologyID().getOntologyIRI().get();
 //		System.out.println(o.getOWLOntologyManager().getOWLDataFactory().getOWLDataProperty(oIRI + this.toString()));
 		return o.getOWLOntologyManager().getOWLDataFactory().getOWLObjectProperty(oIRI + this.toString());

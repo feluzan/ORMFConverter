@@ -4,6 +4,8 @@ import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLDataFactory;
+import org.semanticweb.owlapi.model.OWLDataProperty;
+import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
@@ -45,10 +47,17 @@ public class Individual {
 //		System.out.println(ca.toString());
 	}
 	
-	public void setProperty(PropertyIRI propertyIRI, Individual range) {
+	public void setObjectProperty(ObjectPropertyIRI propertyIRI, Individual range) {
 		OWLDataFactory df = this.ontology.getOWLOntologyManager().getOWLDataFactory();
 		OWLObjectProperty property = df.getOWLObjectProperty(propertyIRI.toString());
 		OWLObjectPropertyAssertionAxiom pa = df.getOWLObjectPropertyAssertionAxiom(property, this.individual, range.getIndividual());
+		this.ontology.add(pa);
+	}
+	
+	public void setDataProperty(DataPropertyIRI dataPropertyIRI, String value) {
+		OWLDataFactory df = this.ontology.getOWLOntologyManager().getOWLDataFactory();
+		OWLDataProperty property = df.getOWLDataProperty(dataPropertyIRI.toString());
+		OWLDataPropertyAssertionAxiom pa = df.getOWLDataPropertyAssertionAxiom(property, this.individual, value);
 		this.ontology.add(pa);
 	}
 

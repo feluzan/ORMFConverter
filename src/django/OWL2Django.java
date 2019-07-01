@@ -1,6 +1,8 @@
 package django;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -30,7 +32,7 @@ import ORM.InheritanceMapping;
 import ORM.InheritanceStrategy;
 import ORM.VariableMapping;
 import OWL.ClassIRI;
-import OWL.PropertyIRI;
+import OWL.ObjectPropertyIRI;
 import database.Column;
 import database.Table;
 import database.TableType;
@@ -82,6 +84,41 @@ public class OWL2Django {
 		
 		this.retrieveFields();
 		
+	}
+	
+	public void printFile(String filePath) {
+		File outfile = new File(filePath);
+		
+		FileWriter fileWriter;
+		
+		try {
+			fileWriter = new FileWriter(outfile);
+			PrintWriter printWriter = new PrintWriter(fileWriter);
+			
+			String importString = "from django.db import models\n\n";
+			printWriter.print(importString);
+			
+			//imprimir todas as classes que não são subclasses
+			for(GenericClass c : classes.values()) {
+				if(c.isSubclass()) continue;
+				printWriter.print(c.toCode());
+				
+			}
+			
+			for(GenericClass c : classes.values()) {
+				if(!c.isSubclass()) continue;
+				printWriter.print(c.toCode());
+				
+			}
+			
+			printWriter.close();
+			
+			
+		} catch (Exception e) {
+			System.out.println("[ERROR] Erro ao imprimir no arquivo " + filePath);
+			System.out.println("\tO programa será encerrado.");
+			System.exit(1);
+		}
 	}
 	
 	private void retrieveTables() {
@@ -145,19 +182,21 @@ public class OWL2Django {
 	private void retrieveClassMappings(GenericClass gc) {
 		Stream<OWLNamedIndividual> rangesStream;
 		Set<OWLNamedIndividual> rangesSet;
-		rangesStream = reasoner.getObjectPropertyValues(gc.getIndividual(), PropertyIRI.ENTITY_CLASS_MAPPED_BY.getOWLProperty(this.o)).entities();
+		
+		rangesStream = reasoner.getObjectPropertyValues(gc.getIndividual(), ObjectPropertyIRI.ENTITY_CLASS_MAPPED_BY.getOWLObjectProperty(this.o)).entities();
 		rangesSet = rangesStream.collect(Collectors.toSet());
 		
 		if(rangesSet.size()>0) {
 			ClassMapping cm = new ClassMapping(this.o, rangesSet.iterator().next());
 			gc.setClassMapping(cm);
 			cm.set_class(gc);
-			rangesStream = reasoner.getObjectPropertyValues(cm.getIndividual(), PropertyIRI.ENTITY_CLASS_MAPPED_TO.getOWLProperty(this.o)).entities();
+			rangesStream = reasoner.getObjectPropertyValues(cm.getIndividual(), ObjectPropertyIRI.ENTITY_CLASS_MAPPED_TO.getOWLObjectProperty(this.o)).entities();
 			rangesSet = rangesStream.collect(Collectors.toSet());
 			Iterator<OWLNamedIndividual> tableIterator = rangesSet.iterator();
 			while(tableIterator.hasNext()) {
 				Table t = tables.get(tableIterator.next());
-				System.out.println(t.getTableName());
+				cm.setTable(t);
+//				System.out.println(t.getTableName());
 			}
 		}
 		
@@ -167,7 +206,7 @@ public class OWL2Django {
 		Stream<OWLNamedIndividual> rangesStream;
 		Set<OWLNamedIndividual> rangesSet;
 		
-		rangesStream = reasoner.getObjectPropertyValues(subclass.getIndividual(), PropertyIRI.SUBCLASS_MAPPED_BY.getOWLProperty(this.o)).entities();
+		rangesStream = reasoner.getObjectPropertyValues(subclass.getIndividual(), ObjectPropertyIRI.SUBCLASS_MAPPED_BY.getOWLObjectProperty(this.o)).entities();
 		rangesSet = rangesStream.collect(Collectors.toSet());
 
 		InheritanceMapping im = new InheritanceMapping(this.o, rangesSet.iterator().next());
@@ -203,7 +242,7 @@ public class OWL2Django {
 		while(individualsAsIterator.hasNext()) {
 			OWLNamedIndividual i = individualsAsIterator.next();
 			GenericClass superclass = classes.get(i);
-			rangesStream = reasoner.getObjectPropertyValues(superclass.getIndividual(), PropertyIRI.SUPERCLASS_MAPPED_BY.getOWLProperty(this.o)).entities();
+			rangesStream = reasoner.getObjectPropertyValues(superclass.getIndividual(), ObjectPropertyIRI.SUPERCLASS_MAPPED_BY.getOWLObjectProperty(this.o)).entities();
 			rangesSet = rangesStream.collect(Collectors.toSet());
 			
 			Iterator<OWLNamedIndividual> rangesSetIterator = rangesSet.iterator();
@@ -259,7 +298,7 @@ public class OWL2Django {
 	private void retrieveVariableMappings(GenericVariable gv) {
 		Stream<OWLNamedIndividual> rangesStream;
 		Set<OWLNamedIndividual> rangesSet;
-		rangesStream = reasoner.getObjectPropertyValues(gv.getIndividual(), PropertyIRI.VARIABLE_MAPPED_BY.getOWLProperty(this.o)).entities();
+		rangesStream = reasoner.getObjectPropertyValues(gv.getIndividual(), ObjectPropertyIRI.VARIABLE_MAPPED_BY.getOWLObjectProperty(this.o)).entities();
 		rangesSet = rangesStream.collect(Collectors.toSet());
 		
 		if(rangesSet.size()>0) {
@@ -268,7 +307,7 @@ public class OWL2Django {
 			variableMappings.put(vm.getIndividual(), vm);
 			gv.setVariableMapping(vm);
 			
-			rangesStream = reasoner.getObjectPropertyValues(vm.getIndividual(), PropertyIRI.VARIABLE_MAPPED_TO.getOWLProperty(this.o)).entities();
+			rangesStream = reasoner.getObjectPropertyValues(vm.getIndividual(), ObjectPropertyIRI.VARIABLE_MAPPED_TO.getOWLObjectProperty(this.o)).entities();
 			rangesSet = rangesStream.collect(Collectors.toSet());
 			Column col = columns.get(rangesSet.iterator().next());
 			col.setVariableMapping(vm);
@@ -281,8 +320,13 @@ public class OWL2Django {
 
 		NodeSet<OWLNamedIndividual> individualsNodeSet = reasoner.getInstances(c,false);
 		Stream<OWLNamedIndividual> individuals = individualsNodeSet.entities();
-
 		Iterator<OWLNamedIndividual> individualsAsIterator = individuals.iterator();
+		
+		Stream<OWLNamedIndividual> rangesStream;
+		Set<OWLNamedIndividual> rangesSet;
+		Iterator<OWLNamedIndividual> rangesSetIterator;
+
+		
 
 		while(individualsAsIterator.hasNext()) {
 			OWLNamedIndividual i = individualsAsIterator.next();
@@ -302,6 +346,19 @@ public class OWL2Django {
 				dv.setFk(true);
 			}
 			this.retrieveVariableMappings(dv);
+			
+			rangesStream = reasoner.getObjectPropertyValues(dv.getIndividual(), ObjectPropertyIRI.BELONGS_TO.getOWLObjectProperty(this.o)).entities();
+			rangesSet = rangesStream.collect(Collectors.toSet());
+			rangesSetIterator = rangesSet.iterator();
+			if(rangesSetIterator.hasNext()) {
+				GenericClass gc = classes.get(rangesSetIterator.next());
+				gc.addVariable(dv);
+				dv.set_class(gc);
+			}else {
+				System.out.println("[ERROR] Classe no qual a variável pertence não foi identificada.");
+				System.out.println("\tO programa será encerrado.");
+				System.exit(1);
+			}
 		}
 		
 	}

@@ -4,6 +4,7 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 
 import OWL.ClassIRI;
+import OWL.DataPropertyIRI;
 import OWL.Individual;
 import genericcode.GenericClass;
 public class Table extends Individual{
@@ -13,8 +14,10 @@ public class Table extends Individual{
 
 	public Table(OWLOntology o, GenericClass gc, TableType tableType) {
 		super(o, "table__" + gc.getCodeTableName());
+		this.setDataProperty(DataPropertyIRI.TABLE_NAME, gc.getCodeTableName());
 		if(!gc.is_abstract()) gc.getClassMapping().addTable(this);
 		this.setTableType(tableType);
+		gc.getClassMapping().setTable(this);
 		
 		this.tableName = gc.getCodeTableName();
 

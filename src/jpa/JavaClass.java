@@ -20,6 +20,7 @@ import com.github.javaparser.ast.type.ClassOrInterfaceType;
 
 import ORM.InheritanceStrategy;
 import OWL.ClassIRI;
+import OWL.DataPropertyIRI;
 import genericcode.GenericClass;
 
 public class JavaClass extends GenericClass{
@@ -33,7 +34,8 @@ public class JavaClass extends GenericClass{
 	public JavaClass(OWLOntology o, ClassOrInterfaceDeclaration node) {
 		super(o, "class__" + node.getNameAsString());
 		this.setCodeName(node.getNameAsString());
-
+		this.setDataProperty(DataPropertyIRI.TYPE_NAME, node.getNameAsString());
+		
 //		super(((NodeWithSimpleName<ClassOrInterfaceDeclaration>) node).getNameAsString());
 		
 		this.annotations = ((BodyDeclaration<ClassOrInterfaceDeclaration>) node).getAnnotations();	
@@ -135,6 +137,12 @@ public class JavaClass extends GenericClass{
 			}
 		}
 		return this.getCodeName();
+	}
+
+	@Override
+	public String toCode() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

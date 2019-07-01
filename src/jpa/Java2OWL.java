@@ -27,9 +27,11 @@ import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 
 import ORM.ClassMapping;
 import ORM.InheritanceMapping;
+import ORM.InheritanceStrategy;
 import ORM.RelationshipMapping;
 import ORM.RelationshipType;
 import ORM.VariableMapping;
+import OWL.DataPropertyIRI;
 import database.Column;
 import database.RelationshipAssociationTable;
 import database.Table;
@@ -67,7 +69,7 @@ public class Java2OWL {
 		for (File f : folder.listFiles()) {
 			if(!f.isFile()) continue;
 			try {
-				System.out.println("[INFO] Iniciando leitura do arquivo " + f.getName());
+				System.out.println("\t[+] " + f.getName());
 				compilationUnit = JavaParser.parse(f);
 			} catch (FileNotFoundException e) {
 				System.out.println("[ERROR] Arquivo " + f.getName() + " não encontrado.");
@@ -106,6 +108,7 @@ public class Java2OWL {
 	}
 	
 	public void printFile(String filePath) {
+		System.out.print("[INFO] Iniciando escrita no arquivo " + filePath + "...");
 		File outfile = new File(filePath);
 		try {
 			this.manager.saveOntology(this.ormfo, new OWLXMLDocumentFormat(),new FileOutputStream(outfile));
@@ -114,19 +117,16 @@ public class Java2OWL {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		System.out.println("OK!");
 	}
 	
 	private void processPrimitiveTypes() {
-		primitiveTypes.put("boolean",new PrimitiveType(this.ormfo,"primitive_type__boolean"));
-		primitiveTypes.put("byte",new PrimitiveType(this.ormfo,"primitive_type__byte"));
-		primitiveTypes.put("char",new PrimitiveType(this.ormfo,"primitive_type__char"));
-		primitiveTypes.put("double",new PrimitiveType(this.ormfo,"primitive_type__double"));
-		primitiveTypes.put("float",new PrimitiveType(this.ormfo,"primitive_type__float"));
-		primitiveTypes.put("int",new PrimitiveType(this.ormfo,"primitive_type__int"));
-		primitiveTypes.put("long",new PrimitiveType(this.ormfo,"primitive_type__long"));
-		primitiveTypes.put("Long",new PrimitiveType(this.ormfo,"primitive_type__Long"));
-		primitiveTypes.put("short",new PrimitiveType(this.ormfo,"primitive_type__short"));
-		primitiveTypes.put("String",new PrimitiveType(this.ormfo,"primitive_type__String"));
+		PrimitiveType pt;
+		for(JavaPrimitiveType jpt : JavaPrimitiveType.values()) {
+			pt = new PrimitiveType(this.ormfo, jpt.toIRI());
+			pt.setDataProperty(DataPropertyIRI.TYPE_NAME, jpt.toString());
+			primitiveTypes.put(jpt.toString(),pt);
+		}
 	}
 
 	private void processInheritance() {
@@ -144,14 +144,14 @@ public class Java2OWL {
 	}
 	
 	private void processClassMappings() {
-		
+		//Somente uma EntityClass abstrata cujo a herança seja do tipo TABLE PER CONCRETE CLASS não está ssociada a um Class Mapping
 		for(GenericClass gc : classes.values()) {
 			if(gc.isEntity()) {
-				if(!gc.is_abstract()) {
-					ClassMapping cm = new ClassMapping(this.ormfo,gc);
-					classMappings.put(gc, cm);
+				if(gc.is_abstract() && (gc.getCodeInheritanceStrategy()==InheritanceStrategy.TABLE_PER_CONCRETE_CLASS)) {
+					continue;
 				}
-				
+				ClassMapping cm = new ClassMapping(this.ormfo,gc);
+				classMappings.put(gc, cm);
 			}
 		}
 	}
@@ -169,20 +169,22 @@ public class Java2OWL {
 			}
 			t = tables.get(rootclass);
 			im.addTable(t);
-			gc.getClassMapping().addTable(t);
+//			gc.getClassMapping().addTable(t);
+//			gc.getClassMapping().setTable(t);
 			break;
 			
 		case TABLE_PER_CLASS:
 			t = new Table(this.ormfo, gc, TableType.SINGLE_ENTITY_TABLE);
 			tables.put(gc, t);
 			if(gc.is_abstract()) break;
-			gc.getClassMapping().addTable(t);
+//			gc.getClassMapping().addTable(t);
 			superclass = gc.getSuperclass();
-			gc.getClassMapping().addTable(tables.get(superclass));
+//			gc.getClassMapping().addTable(tables.get(superclass));
 			im.addTable(tables.get(superclass));
 			while(superclass.isSubclass()) {
 				superclass = superclass.getSuperclass();
-				gc.getClassMapping().addTable(tables.get(superclass));
+//				gc.getClassMapping().addTable(tables.get(superclass));
+//				gc.getClassMapping().setTable(tables.get(superclass));
 				im.addTable(tables.get(superclass));
 			}
 			break;
@@ -191,17 +193,18 @@ public class Java2OWL {
 			if(gc.is_abstract()) break;
 			t = new Table(this.ormfo, gc, TableType.SINGLE_ENTITY_TABLE);
 			tables.put(gc, t);
-			gc.getClassMapping().addTable(t);
+//			gc.getClassMapping().addTable(t);
 			im.addTable(t);
 			superclass = gc.getSuperclass();
 			if(!superclass.is_abstract()) {
-				gc.getClassMapping().addTable(tables.get(superclass));
+//				gc.getClassMapping().addTable(tables.get(superclass));
 				im.addTable(tables.get(superclass));
 			}
 			while(superclass.isSubclass()) {
 				superclass = superclass.getSuperclass();
 				if(!superclass.is_abstract()) {
-					gc.getClassMapping().addTable(tables.get(superclass));
+//					gc.getClassMapping().addTable(tables.get(superclass));
+//					gc.getClassMapping().setTable(tables.get(superclass));
 					im.addTable(tables.get(superclass));
 				}
 			}
@@ -231,21 +234,24 @@ public class Java2OWL {
 						t = new Table(this.ormfo, gc, TableType.MULTIPLE_ENTITIES_TABLE);
 						tables.put(gc, t);
 						if(gc.is_abstract()) break;
-						gc.getClassMapping().addTable(t);
+//						gc.getClassMapping().addTable(t);
+//						gc.getClassMapping().setTable(t);
 						break;
 						
 					case TABLE_PER_CLASS:
 						t = new Table(this.ormfo, gc, TableType.SINGLE_ENTITY_TABLE);
 						tables.put(gc, t);
-						if(gc.is_abstract()) break;
-						gc.getClassMapping().addTable(t);
+//						if(gc.is_abstract()) break;
+//						gc.getClassMapping().addTable(t);
+//						gc.getClassMapping().setTable(t);
 						break;
 						
 					case TABLE_PER_CONCRETE_CLASS:
 						if(gc.is_abstract()) break;
 						t = new Table(this.ormfo, gc, TableType.SINGLE_ENTITY_TABLE);
 						tables.put(gc, t);
-						gc.getClassMapping().addTable(t);
+//						gc.getClassMapping().addTable(t);
+//						gc.getClassMapping().setTable(t);
 						break;
 						
 					default:
@@ -255,7 +261,7 @@ public class Java2OWL {
 					}
 				}else {
 					Table t = new Table(this.ormfo, gc, TableType.ENTITY_TABLE);
-					gc.getClassMapping().addTable(t);
+//					gc.getClassMapping().addTable(t);
 					tables.put(gc, t);
 				}
 				
@@ -274,6 +280,7 @@ public class Java2OWL {
 		for(GenericClass gc : classes.values()) {
 			for(FieldDeclaration field : ((JavaClass)gc).getFields()) {
 				JavaVariable jv = new JavaVariable(this.ormfo,gc,field);
+				jv.setDataProperty(DataPropertyIRI.VARIABLE_NAME, jv.getCodeName());
 				variables.put(jv.getCodeName(), jv);
 				
 				
@@ -284,9 +291,9 @@ public class Java2OWL {
 					codeType = codeType.substring(codeType.indexOf("<")+1);
 					codeType = codeType.substring(0,codeType.indexOf(">"));
 				}
-				Type type = primitiveTypes.get(codeType);
+				Type type = classes.get(codeType);
 				if(type==null) {
-					type = classes.get(codeType);
+					type = primitiveTypes.get(JavaPrimitiveType.getJavaPrimitiveType(codeType).toString());
 				}
 				if(type==null) {
 					System.out.println("[ERROR] Type não encontado. O programa será encerrado.");

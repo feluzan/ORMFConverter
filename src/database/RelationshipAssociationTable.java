@@ -6,7 +6,7 @@ import ORM.RelationshipMapping;
 import ORM.RelationshipType;
 import OWL.ClassIRI;
 import OWL.Individual;
-import OWL.PropertyIRI;
+import OWL.ObjectPropertyIRI;
 import genericcode.GenericVariable;
 import genericcode.GenericClass;
 
@@ -23,10 +23,10 @@ public class RelationshipAssociationTable extends Individual {
 		this.classAssertion(ClassIRI.RELATIONSHIP_ASSOCIATION_ENTITY_TABLE);
 		
 		if(rm.getRelationshipType() == RelationshipType.MANY_TO_MANY) {
-			rm.setProperty(PropertyIRI.MANY_TO_MANY_ASSOCIATION_MAPPED_TO, this);
+			rm.setObjectProperty(ObjectPropertyIRI.MANY_TO_MANY_ASSOCIATION_MAPPED_TO, this);
 		}
 		if(rm.getRelationshipType() == RelationshipType.ONE_TO_MANY) {
-			rm.setProperty(PropertyIRI.ONE_TO_MANY_ASSOCIATION_MAPPED_TO, this);
+			rm.setObjectProperty(ObjectPropertyIRI.ONE_TO_MANY_ASSOCIATION_MAPPED_TO, this);
 		}
 		
 		

@@ -12,5 +12,9 @@ public class PrimitiveType extends Type {
 		this.classAssertion(ClassIRI.PRIMITIVE_TYPE);
 		// TODO Auto-generated constructor stub
 	}
+	
+//	public String java2Django() {
+//		
+//	}
 
 }

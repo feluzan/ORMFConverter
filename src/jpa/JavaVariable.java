@@ -13,7 +13,7 @@ import com.github.javaparser.ast.expr.MemberValuePair;
 
 import ORM.RelationshipType;
 import OWL.ClassIRI;
-import OWL.PropertyIRI;
+import OWL.ObjectPropertyIRI;
 import genericcode.GenericClass;
 import genericcode.GenericVariable;
 
@@ -48,7 +48,7 @@ public class JavaVariable extends GenericVariable {
 		
 		this.codeType = variable.getTypeAsString();
 		this.set_class(c);
-		this.setProperty(PropertyIRI.BELONGS_TO, c);
+		this.setObjectProperty(ObjectPropertyIRI.BELONGS_TO, c);
 
 	}
 	

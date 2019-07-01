@@ -4,7 +4,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 
 import OWL.ClassIRI;
 import OWL.Individual;
-import OWL.PropertyIRI;
+import OWL.ObjectPropertyIRI;
 import genericcode.GenericVariable;
 import genericcode.GenericClass;
 
@@ -42,7 +42,7 @@ public class RelationshipMapping extends Individual {
 		}
 		
 		this.variable = gv;
-		gv.setProperty(PropertyIRI.REPRESENTS_RELATIONSHIP, this);
+		gv.setObjectProperty(ObjectPropertyIRI.REPRESENTS_RELATIONSHIP, this);
 	}
 
 	public RelationshipMapping getReverse() {
@@ -50,7 +50,7 @@ public class RelationshipMapping extends Individual {
 	}
 	public void setReverse(RelationshipMapping reverse) {
 		this.reverse = reverse;
-		this.setProperty(PropertyIRI.RELATIONSHIP_REVERSE_OF, reverse);
+		this.setObjectProperty(ObjectPropertyIRI.RELATIONSHIP_REVERSE_OF, reverse);
 	}
 
 	public GenericVariable getVariable() {

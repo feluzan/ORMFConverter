@@ -5,6 +5,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 
 import ORM.VariableMapping;
 import OWL.ClassIRI;
+import OWL.DataPropertyIRI;
 import OWL.Individual;
 
 public class Column extends Individual {
@@ -14,7 +15,7 @@ public class Column extends Individual {
 
 	public Column(OWLOntology o, VariableMapping vm) {
 		super(o, "column__" + vm.getVariable().getCodeName());
-		
+		this.setDataProperty(DataPropertyIRI.COLUMN_NAME, vm.getVariable().getCodeName());
 		this.variableMapping = vm;
 		vm.setColumn(this);
 		

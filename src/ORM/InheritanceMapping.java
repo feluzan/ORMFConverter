@@ -14,7 +14,7 @@ import org.semanticweb.owlapi.model.OWLClass;
 
 import OWL.ClassIRI;
 import OWL.Individual;
-import OWL.PropertyIRI;
+import OWL.ObjectPropertyIRI;
 import genericcode.GenericClass;
 import database.Table;
 
@@ -52,8 +52,8 @@ public class InheritanceMapping extends Individual{
 			System.out.println("[ERROR] InheritanceMapping");
 		}
 		
-		subclass.setProperty(PropertyIRI.SUBCLASS_MAPPED_BY, this);
-		subclass.getSuperclass().setProperty(PropertyIRI.SUPERCLASS_MAPPED_BY, this);
+		subclass.setObjectProperty(ObjectPropertyIRI.SUBCLASS_MAPPED_BY, this);
+		subclass.getSuperclass().setObjectProperty(ObjectPropertyIRI.SUPERCLASS_MAPPED_BY, this);
 	}
 	
 	public InheritanceMapping(OWLOntology o,OWLNamedIndividual i) {
@@ -84,23 +84,23 @@ public class InheritanceMapping extends Individual{
 	
 	public void addTable(Table t) {
 		this.tables.add(t);
-		PropertyIRI pIRI = null;
+		ObjectPropertyIRI pIRI = null;
 		String iri = "#";
 		switch(this.inheritanceStrategy) {
 		case SINGLE_TABLE:
-			pIRI = PropertyIRI.SINGLE_TABLE_INHERITANCE_MAPPED_TO;
+			pIRI = ObjectPropertyIRI.SINGLE_TABLE_INHERITANCE_MAPPED_TO;
 			break;
 		case TABLE_PER_CLASS:
-			pIRI = PropertyIRI.TABLE_PER_CLASS_INHERITANCE_MAPPED_TO;
+			pIRI = ObjectPropertyIRI.TABLE_PER_CLASS_INHERITANCE_MAPPED_TO;
 			break;
 		case TABLE_PER_CONCRETE_CLASS:
-			pIRI = PropertyIRI.TABLE_PER_CONCRETE_CLASS_INHERITANCE_MAPPED_TO;
+			pIRI = ObjectPropertyIRI.TABLE_PER_CONCRETE_CLASS_INHERITANCE_MAPPED_TO;
 			break;
 		default:
 			break;
 		
 		}
-		this.setProperty(pIRI, t);
+		this.setObjectProperty(pIRI, t);
 	}
 
 	public ArrayList<Table> getTables() {

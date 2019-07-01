@@ -21,7 +21,7 @@ public class Converter {
 	//	File folder = new File(folderPath);
 		
 		String ORMFOPath = "ormfo.owl";
-		System.out.println("[INFO] Iniciando leitura da ORMF-O...");
+		System.out.print("[INFO] Iniciando leitura da ORMF-O...");
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		File ORMFOFile = new File(ORMFOPath);
 		OWLOntology ormfo=null;
@@ -34,6 +34,7 @@ public class Converter {
 			e.printStackTrace();
 			System.exit(1);
 		}
+		System.out.println(" OK!");
 		
 		
 		
@@ -69,17 +70,19 @@ public class Converter {
 		
 		java2owl.printFile(owlPath);
 		scanner.close();
-		System.out.println("[INFO] Escrita no arquivo " + owlPath + " concluída.");
+//		
 		
 		System.out.println("\n[INFO] Iniciando Etapa OWL -> Python");
 	//	
-	//	File owlfile = new File(owlPath);
+//		File owlfile = new File(owlPath);
 		OWL2Django owl2Django = new OWL2Django(owlPath);
+		System.out.print("\n[INFO] Iniciando escrita no arquivo " + djangoPath + "...");
+		owl2Django.printFile(djangoPath);
 	//	
 	//	File djangoFile = new File(djangoPath);
 	//	
 	//	owl2Django.printFile(djangoFile);
-	//	System.out.println("[INFO] Escrita no arquivo " + djangoFile + " concluída.");
+		System.out.println(" OK!");
 		
 		
 		

@@ -217,6 +217,18 @@
     <Declaration>
         <ObjectProperty IRI="#variable_mapped_to"/>
     </Declaration>
+    <Declaration>
+        <DataProperty IRI="#column_name"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#table_name"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#type_name"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#variable_name"/>
+    </Declaration>
     <SubClassOf>
         <Class IRI="#OOC-O::Abstract_Class"/>
         <Class IRI="#OOC-O::Class"/>
@@ -532,6 +544,38 @@
         <ObjectProperty IRI="#variable_mapped_to"/>
         <Class IRI="#RDBS-O::Column"/>
     </ObjectPropertyRange>
+    <DataPropertyDomain>
+        <DataProperty IRI="#column_name"/>
+        <Class IRI="#RDBS-O::Column"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#table_name"/>
+        <Class IRI="#RDBS-O::Table"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#type_name"/>
+        <Class IRI="#OOC-O::Type"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#variable_name"/>
+        <Class IRI="#OOC-O::Variable"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#column_name"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#table_name"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#type_name"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#variable_name"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
 </Ontology>
 
 

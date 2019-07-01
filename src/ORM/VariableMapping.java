@@ -5,7 +5,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 
 import OWL.ClassIRI;
 import OWL.Individual;
-import OWL.PropertyIRI;
+import OWL.ObjectPropertyIRI;
 import database.Column;
 import genericcode.GenericVariable;
 
@@ -40,12 +40,12 @@ public class VariableMapping extends Individual {
 	}
 	public void setColumn(Column column) {
 		this.column = column;
-		this.setProperty(PropertyIRI.VARIABLE_MAPPED_TO, column);
+		this.setObjectProperty(ObjectPropertyIRI.VARIABLE_MAPPED_TO, column);
 		if(this.variable.isPk()) {
-			this.setProperty(PropertyIRI.PK_MAPPED_TO, column);
+			this.setObjectProperty(ObjectPropertyIRI.PK_MAPPED_TO, column);
 		}
 		if(this.variable.isFk()) {
-			this.setProperty(PropertyIRI.FK_MAPPED_TO, column);
+			this.setObjectProperty(ObjectPropertyIRI.FK_MAPPED_TO, column);
 		}
 	}
 	

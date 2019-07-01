@@ -12,7 +12,8 @@ import ORM.ClassMapping;
 import ORM.InheritanceMapping;
 import ORM.InheritanceStrategy;
 import OWL.ClassIRI;
-import OWL.PropertyIRI;
+import OWL.DataPropertyIRI;
+import OWL.ObjectPropertyIRI;
 
 //import ORM.InheritanceMapping;
 
@@ -26,11 +27,14 @@ public abstract class GenericClass extends Type{
 	private GenericClass superclass;
 	private ArrayList<GenericClass> subclasses;
 	private ClassMapping classMapping;
-//	private OWLObjectProperty classMappedBy;
+	private ArrayList<GenericVariable> variables;
+	
+	public abstract String toCode();
 
 	public GenericClass(OWLOntology o, String iri) {
 		super(o, iri);
 		this.subclasses = new ArrayList<GenericClass>();
+		this.variables = new ArrayList<GenericVariable>();
 	}
 	
 	public GenericClass(OWLOntology o,OWLNamedIndividual i) {
@@ -38,6 +42,8 @@ public abstract class GenericClass extends Type{
 		this._abstract = false;
 		this.entity = false;
 		this.setCodeNameFromIndividual();
+		this.subclasses = new ArrayList<GenericClass>();
+		this.variables = new ArrayList<GenericVariable>();
 	}
 	
 	public String getCodeName() {
@@ -45,6 +51,7 @@ public abstract class GenericClass extends Type{
 	}
 	public void setCodeName(String codeName) {
 		this.codeName = codeName;
+		
 	}
 	
 	
@@ -100,12 +107,19 @@ public abstract class GenericClass extends Type{
 	
 	public void setClassMapping(ClassMapping cm) {
 		this.classMapping = cm;
-		this.setProperty(PropertyIRI.ENTITY_CLASS_MAPPED_BY, cm);
+		this.setObjectProperty(ObjectPropertyIRI.ENTITY_CLASS_MAPPED_BY, cm);
 	}
 	public ClassMapping getClassMapping() {
 		return this.classMapping;
 	}
 
+	public void addVariable(GenericVariable gv) {
+		variables.add(gv);
+	}
+	public ArrayList<GenericVariable> getVariables(){
+		return this.variables;
+	}
+	
 	private void setCodeNameFromIndividual() {
 		String name = this.getIndividual().getIRI().toString();
 //		System.out.println(name);
@@ -113,159 +127,5 @@ public abstract class GenericClass extends Type{
 		this.setCodeName(name);
 	}
 	
-	
-	
-	
-//	private GenericClass superclass = null;
-//	private String inheritanceStrategy = null;
-//	private InheritanceMapping inheritanceMapping = null;protected boolean isAbstract;
-//	boolean isSuperclas = false;
-//	boolean isSubclass = false;
-//	public Table table=null;
-//	ArrayList<GenericVariable> variables = new ArrayList<GenericVariable>();
-	
-	
-	
-//	public GenericClass() {
-////		this.classIRI = "ORMF-O::Entity_Class";
-//	}
-	
-//	public void setNamedIndividualIRI() {
-//		OWL
-//		this.
-		
-//		this.namedIndividualIRI = "entity_class__" + this.codeName;
-//	}
-	
-	
-//	public InheritanceMapping getInheritanceMapping() {
-//		return inheritanceMapping;
-//	}
-//
-//	public void setInheritanceMapping(InheritanceMapping inheritanceMapping) {
-//		this.inheritanceMapping = inheritanceMapping;
-//	}
-//
-//	
-//	
-//	
-//	public abstract String getTableName();
-
-//	public abstract String getCodeInheritanceStrategy();
-//	public abstract void setInheritanceStrategy(GenericClass supremeMother);
-//
-//	public void addVariable(GenericVariable f) {
-//		this.variables.add(f);
-//	}
-//	
-//	public ArrayList<GenericVariable> getVariables(){
-//		return this.variables;
-//	}
-//	
-//	public GenericVariable getVariable(int i) {
-//		return this.variables.get(i);
-//	}
-//	
-//	public void setSuperclass(GenericClass superclass) {
-//		this.superclass = superclass;
-//		this.isSubclass = true;
-//		superclass.setIsSuperclass(true);
-//	}
-//	
-//	public void setIsSuperclass(boolean b) {
-//		this.isSuperclas=b;
-//	}
-//	
-//	public void setIsSubclass(boolean b) {
-//		this.isSubclass = b;
-//	}
-//	
-//	public GenericClass getSuperclass() {
-//		return this.superclass;
-//	}
-//	
-//	public boolean isAbstract() {
-//		return this.isAbstract;
-//	}
-//	
-//	public void setIsAbstract(boolean b) {
-//		this.isAbstract = b;
-//	}
-//	
-//	public boolean isMapped() {
-//		
-//		if(!this.isAbstract()) return true;
-////		System.out.println(this.isAbstract());
-////		System.out.println(this.getCodeName());
-//		if(this.isAbstract() & this.inheritanceStrategy.equals("table_per_class")) return true;
-////		if()
-//		return true;
-//	}
-//	
-//	public void setTable(Table t) {
-//		this.table=t;
-//	}
-//	
-//	public Table getTable() {
-//		return this.table;
-//	}
-//	
-
-//
-//	public void setInheritanceStragegy(String strategy) {
-//		this.inheritanceStrategy = strategy;
-//	}
-//	
-//	public String getInheritanceStrategy() {
-//		return this.inheritanceStrategy;
-//	}
-//	
-//	public String getAssertion() {
-//		String ret = super.getAssertion();
-//		if(this.isSubclass()){
-//			ret += this.getSubclassAssertion();
-//		}
-//		if(isSuperclass()) {
-//			ret+=this.getSuperclassAssertion();
-//		}
-//		if(this.isAbstract()) {
-//			ret+=this.getAbstractAssertion();
-//		}
-//		return ret;
-//		
-//	}
-//	
-//	public boolean isSubclass() {
-//		return this.isSubclass;
-//	}
-//	
-//	public boolean isSuperclass() {
-//		return this.isSuperclas;
-//	}
-//
-//	public String getSubclassAssertion() {
-//		String ret = "\t<ClassAssertion>\n"
-//				+	"\t\t<Class IRI=\"#ORMF-O::Entity_Subclass\"/>\n"
-//				+		"\t\t<NamedIndividual IRI=\"#" + this.namedIndividualIRI + "\"/>\n"
-//				+ "\t</ClassAssertion>\n";
-//		return ret;
-//	}
-//	
-//	public String getAbstractAssertion() {
-//		String ret = "\t<ClassAssertion>\n"
-//				+	"\t\t<Class IRI=\"#OOC-O::Abstract_Class\"/>\n"
-//				+		"\t\t<NamedIndividual IRI=\"#" + this.namedIndividualIRI + "\"/>\n"
-//				+ "\t</ClassAssertion>\n";
-//		return ret;
-//	}
-//	
-//	public String getSuperclassAssertion() {
-//		String ret = "\t<ClassAssertion>\n"
-//				+	"\t\t<Class IRI=\"#ORMF-O::Entity_Superclass\"/>\n"
-//				+		"\t\t<NamedIndividual IRI=\"#entity_class__" + this.namedIndividualIRI + "\"/>\n"
-//				+ "\t</ClassAssertion>\n";
-//		return ret;
-//	}
-//	
 
 }
