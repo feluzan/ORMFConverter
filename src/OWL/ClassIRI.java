@@ -191,6 +191,12 @@ public enum ClassIRI {
 		public String toString() {
 			return "#ORM-O::Relationship_Association_Table";
 		}
+	},
+	
+	VALUE_TYPE{
+		public String toString() {
+			return "#OOC-O::Value_Type";
+		}
 	};
 	
 	public OWLClass getOWLClass(OWLOntology o) {

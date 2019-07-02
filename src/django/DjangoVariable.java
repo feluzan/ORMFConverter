@@ -7,6 +7,7 @@ import genericcode.GenericClass;
 import genericcode.GenericVariable;
 import genericcode.PrimitiveType;
 import genericcode.Type;
+import jpa.JavaPrimitiveType;
 
 public class DjangoVariable extends GenericVariable {
 
@@ -21,26 +22,32 @@ public class DjangoVariable extends GenericVariable {
 	}
 
 	public String toCode() {
+
+		System.out.println("Gerando código de variável...");
 		String ret = "";
 		
 		Type type = this.getValueType().getType();
 		
 		
-//		if(type instanceof PrimitiveType) {
-//			
-//			ret+="Tipo primitivo!\n";
-//			
-//		}else {
-//			if(type instanceof GenericClass) {
-//				
-//				ret+="É uma classe...";
-//				
-//			}else {
-//				System.out.println("[ERROR] Problema ao identificar o tipo da variável.");
-//				System.out.println("\tO programa será encerrado.");
-//				System.exit(1);
-//			}
-//		}
+		if(type instanceof PrimitiveType) {
+			
+			ret+=this.getCodeName() + " = ";
+			
+			ret+=(JavaPrimitiveType.getJavaPrimitiveType(((PrimitiveType)type).getTypeName())).toDjango();
+			
+			ret+="\n";
+			
+		}else {
+			if(type instanceof GenericClass) {
+				
+				ret+="É uma classe...\n";
+				
+			}else {
+				System.out.println("[ERROR] Problema ao identificar o tipo da variável.");
+				System.out.println("\tO programa será encerrado.");
+				System.exit(1);
+			}
+		}
 		
 		
 		return ret;

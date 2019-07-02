@@ -16,6 +16,9 @@ public enum JavaPrimitiveType {
 		public String toIRI() {
 			return "primitive_type__long";
 		}
+		public String toDjango() {
+			return "models.BigIntegerField";
+		}
 	},
 	STRING{
 		public String toString(){
@@ -23,6 +26,9 @@ public enum JavaPrimitiveType {
 		}
 		public String toIRI() {
 			return "primitive_type__string";
+		}
+		public String toDjango() {
+			return "models.CharField";
 		}
 	},
 	SHORT{
@@ -32,6 +38,9 @@ public enum JavaPrimitiveType {
 		public String toIRI() {
 			return "primitive_type__short";
 		}
+		public String toDjango() {
+			return "models.SmallIntegerField";
+		}
 	},
 	BYTE{
 		public String toString(){
@@ -39,6 +48,9 @@ public enum JavaPrimitiveType {
 		}
 		public String toIRI() {
 			return "primitive_type__byte";
+		}
+		public String toDjango() {
+			return "models.integerField";
 		}
 	},
 	CHAR{
@@ -48,6 +60,9 @@ public enum JavaPrimitiveType {
 		public String toIRI() {
 			return "primitive_type__char";
 		}
+		public String toDjango() {
+			return "models.CharField";
+		}
 	},
 	DOUBLE{
 		public String toString(){
@@ -55,6 +70,9 @@ public enum JavaPrimitiveType {
 		}
 		public String toIRI() {
 			return "primitive_type__double";
+		}
+		public String toDjango() {
+			return "models.FloatField";
 		}
 	},
 	FLOAT{
@@ -64,6 +82,9 @@ public enum JavaPrimitiveType {
 		public String toIRI() {
 			return "primitive_type__float";
 		}
+		public String toDjango() {
+			return "models.FloatField";
+		}
 	},
 	INT{
 		public String toString(){
@@ -71,6 +92,9 @@ public enum JavaPrimitiveType {
 		}
 		public String toIRI() {
 			return "primitive_type__int";
+		}
+		public String toDjango() {
+			return "models.IntegerField";
 		}
 	},
 	BOOL{
@@ -80,10 +104,12 @@ public enum JavaPrimitiveType {
 		public String toIRI() {
 			return "primitive_type__boolean";
 		}
-		
+		public String toDjango() {
+			return "models.BooleanField";
+		}
 	};
 	
-	static JavaPrimitiveType getJavaPrimitiveType(String codeType) {
+	public static JavaPrimitiveType getJavaPrimitiveType(String codeType) {
 		switch(codeType) {
 			case "boolean":
 				return BOOL;
@@ -110,6 +136,10 @@ public enum JavaPrimitiveType {
 		}
 		return null;
 		
+	}
+	
+	public String toDjango() {
+		return this.toDjango();
 	}
 
 	public String toIRI() {

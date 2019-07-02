@@ -127,6 +127,7 @@ public class Java2OWL {
 		for(JavaPrimitiveType jpt : JavaPrimitiveType.values()) {
 			pt = new PrimitiveType(this.ormfo, jpt.toIRI());
 			pt.setDataProperty(DataPropertyIRI.TYPE_NAME, jpt.toString());
+			pt.setTypeName(jpt.toString());
 			primitiveTypes.put(jpt.toString(),pt);
 		}
 	}
@@ -286,7 +287,7 @@ public class Java2OWL {
 			for(FieldDeclaration field : ((JavaClass)gc).getFields()) {
 				JavaVariable jv = new JavaVariable(this.ormfo,gc,field);
 				jv.setDataProperty(DataPropertyIRI.VARIABLE_NAME, jv.getCodeName());
-				variables.put(jv.getCodeName(), jv);
+				variables.put(jv.get_class().getCodeName() + "." + jv.getCodeName(), jv);
 				
 				
 				//VALUE TYPE

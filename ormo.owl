@@ -65,7 +65,19 @@
         <Class IRI="#ORM-O::Entity_Superclass"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#ORM-O::Entity_Table"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORM-O::Foreign_Key_Mapping"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#ORM-O::Inheritance_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORM-O::Many_To_Many_Relationship_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORM-O::Many_To_One_Relationship_Mapping"/>
     </Declaration>
     <Declaration>
         <Class IRI="#ORM-O::Mapped_Foreign_Key"/>
@@ -75,27 +87,6 @@
     </Declaration>
     <Declaration>
         <Class IRI="#ORM-O::Mapped_Variable"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ORM-O::Single_Table_Inheritance_Mapping"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ORM-O::Table_per_Class_Inheritance_Mapping"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ORM-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ORM-O::Entity_Table"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ORM-O::Foreign_Key_Mapping"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ORM-O::Many_To_Many_Relationship_Mapping"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ORM-O::Many_To_One_Relationship_Mapping"/>
     </Declaration>
     <Declaration>
         <Class IRI="#ORM-O::Multiple_Entities_Table"/>
@@ -120,6 +111,15 @@
     </Declaration>
     <Declaration>
         <Class IRI="#ORM-O::Single_Entity_Table"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORM-O::Single_Table_Inheritance_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORM-O::Table_per_Class_Inheritance_Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ORM-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
     </Declaration>
     <Declaration>
         <Class IRI="#ORM-O::Variable_Mapping"/>
@@ -168,6 +168,9 @@
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#inherits_from"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#is_nullable"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#is_type_of"/>
@@ -281,30 +284,6 @@
         <Class IRI="#OOC-O::Superclass"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ORM-O::Mapped_Foreign_Key"/>
-        <Class IRI="#ORM-O::Mapped_Variable"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ORM-O::Mapped_Primary_Key"/>
-        <Class IRI="#ORM-O::Mapped_Variable"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ORM-O::Mapped_Variable"/>
-        <Class IRI="#OOC-O::Instance_Variable"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ORM-O::Single_Table_Inheritance_Mapping"/>
-        <Class IRI="#ORM-O::Inheritance_Mapping"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ORM-O::Table_per_Class_Inheritance_Mapping"/>
-        <Class IRI="#ORM-O::Inheritance_Mapping"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ORM-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
-        <Class IRI="#ORM-O::Inheritance_Mapping"/>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="#ORM-O::Entity_Table"/>
         <Class IRI="#RDBS-O::Table"/>
     </SubClassOf>
@@ -319,6 +298,18 @@
     <SubClassOf>
         <Class IRI="#ORM-O::Many_To_One_Relationship_Mapping"/>
         <Class IRI="#ORM-O::Relationship_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORM-O::Mapped_Foreign_Key"/>
+        <Class IRI="#ORM-O::Mapped_Variable"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORM-O::Mapped_Primary_Key"/>
+        <Class IRI="#ORM-O::Mapped_Variable"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORM-O::Mapped_Variable"/>
+        <Class IRI="#OOC-O::Instance_Variable"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ORM-O::Multiple_Entities_Table"/>
@@ -343,6 +334,18 @@
     <SubClassOf>
         <Class IRI="#ORM-O::Single_Entity_Table"/>
         <Class IRI="#ORM-O::Entity_Table"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORM-O::Single_Table_Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Inheritance_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORM-O::Table_per_Class_Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Inheritance_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORM-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Inheritance_Mapping"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#RDBS-O::Column_Constraint"/>
@@ -391,6 +394,10 @@
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#inherits_from"/>
         <Class IRI="#OOC-O::Subclass"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#is_nullable"/>
+        <Class IRI="#ORM-O::Mapped_Variable"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#is_type_of"/>
@@ -479,6 +486,10 @@
     <ObjectPropertyRange>
         <ObjectProperty IRI="#inherits_from"/>
         <Class IRI="#OOC-O::Inheritance"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#is_nullable"/>
+        <Class IRI="#ORM-O::Nullability"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#is_type_of"/>

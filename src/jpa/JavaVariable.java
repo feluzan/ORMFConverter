@@ -28,7 +28,7 @@ public class JavaVariable extends GenericVariable {
 		super(o, "variable__" + c.getCodeName() + "." + getFieldNodeStringName(node));
 		
 		VariableDeclarator variable = ((FieldDeclaration) node).getVariables().get(0);
-		this.setCodeName(c.getCodeName() + "." + variable.getNameAsString());
+		this.setCodeName(variable.getNameAsString());
 		
 		this.annotations = ((BodyDeclaration<FieldDeclaration>) node).getAnnotations();
 		

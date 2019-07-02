@@ -14,7 +14,9 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
+import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLIndividual;
+import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
@@ -32,12 +34,16 @@ import ORM.InheritanceMapping;
 import ORM.InheritanceStrategy;
 import ORM.VariableMapping;
 import OWL.ClassIRI;
+import OWL.DataPropertyIRI;
 import OWL.ObjectPropertyIRI;
 import database.Column;
 import database.Table;
 import database.TableType;
 import genericcode.GenericClass;
 import genericcode.GenericVariable;
+import genericcode.PrimitiveType;
+import genericcode.Type;
+import genericcode.ValueType;
 
 public class OWL2Django {
 	OWLOntology o;
@@ -54,7 +60,9 @@ public class OWL2Django {
 	private Map<OWLIndividual, InheritanceMapping> inheritanceMappings = new HashMap<OWLIndividual,InheritanceMapping>();
 	private Map<OWLIndividual, GenericVariable> variables = new HashMap<OWLIndividual,GenericVariable>();
 	private Map<OWLIndividual, VariableMapping> variableMappings = new HashMap<OWLIndividual,VariableMapping>();
+	private Map<OWLIndividual, ValueType> valueTypes = new HashMap<OWLIndividual, ValueType>();
 	
+	private Map<OWLIndividual, PrimitiveType> primitiveTypes = new HashMap<OWLIndividual, PrimitiveType>();
 	
 	
 	public OWL2Django(String OWLPath) {
@@ -77,15 +85,19 @@ public class OWL2Django {
 		this.reasonerFactory = new StructuralReasonerFactory();
 		this.reasoner = reasonerFactory.createReasoner(this.o);
 
+		this.retrievePrimitiveTypes();
 		this.retrieveTables();
 		this.retrieveColumns();
 		this.retrieveClasses();
 		this.retrieveSuperclasses();
 		
+		this.retrieveValueTypes();
+		
 		this.retrieveFields();
 		
 	}
-	
+
+
 	public void printFile(String filePath) {
 		File outfile = new File(filePath);
 		
@@ -151,6 +163,76 @@ public class OWL2Django {
 				t.setTableType(TableType.SINGLE_ENTITY_TABLE);
 			}
 
+		}
+		
+	}
+	
+	private void retrievePrimitiveTypes() {
+		OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
+		OWLReasoner reasoner = reasonerFactory.createReasoner(this.o);
+
+		OWLClass c = ClassIRI.PRIMITIVE_TYPE.getOWLClass(o);
+		NodeSet<OWLNamedIndividual> individualsNodeSet = reasoner.getInstances(c,false);
+		Stream<OWLNamedIndividual> individuals = individualsNodeSet.entities();
+
+		Iterator<OWLNamedIndividual> individualsAsIterator = individuals.iterator();
+		while(individualsAsIterator.hasNext()) {
+			OWLNamedIndividual i = individualsAsIterator.next();
+			PrimitiveType pt = new PrimitiveType(this.o, i);
+			primitiveTypes.put(i, pt);
+			
+			Set<OWLLiteral> dataPropertySet;
+			Iterator<OWLLiteral> dataPropertyIterator;
+//			Iterator<OWLNamedIndividual> rangesSetIterator;
+			dataPropertySet = reasoner.getDataPropertyValues(pt.getIndividual(), DataPropertyIRI.TYPE_NAME.getOWLDataProperty(this.o));
+			dataPropertyIterator = dataPropertySet.iterator();
+//					reasoner.getDataPropertyValues(dv.getIndividual(), DataPropertyIRI.VARIABLE_NAME.getOWLDataProperty(this.o));
+//			rangesSet = rangesStream.collect(Collectors.toSet());
+//			rangesSetIterator = rangesSet.iterator();
+			if(dataPropertyIterator.hasNext()) {
+				String name =dataPropertyIterator.next().getLiteral();
+				pt.setTypeName(name);
+			}else {
+				System.out.println("[ERROR] Erro ao identificar o nome do tipo primitivo.");
+				System.out.println("\tO programa será encerrado.");
+				System.exit(1);
+			}
+		}
+	}
+	
+	private void retrieveValueTypes() {
+		OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
+		OWLReasoner reasoner = reasonerFactory.createReasoner(this.o);
+
+		OWLClass c = ClassIRI.VALUE_TYPE.getOWLClass(o);
+		NodeSet<OWLNamedIndividual> individualsNodeSet = reasoner.getInstances(c,false);
+		Stream<OWLNamedIndividual> individuals = individualsNodeSet.entities();
+
+		Iterator<OWLNamedIndividual> individualsAsIterator = individuals.iterator();
+		
+		Stream<OWLNamedIndividual> rangesStream;
+		Set<OWLNamedIndividual> rangesSet;
+
+		while(individualsAsIterator.hasNext()) {
+			OWLNamedIndividual i = individualsAsIterator.next();
+			ValueType vt = new ValueType(this.o, i);
+			valueTypes.put(i, vt);
+			
+			rangesStream = reasoner.getObjectPropertyValues(vt.getIndividual(), ObjectPropertyIRI.REFERS_TO.getOWLObjectProperty(this.o)).entities();
+			rangesSet = rangesStream.collect(Collectors.toSet());
+			
+			Type t;
+			OWLNamedIndividual typeI = rangesSet.iterator().next();
+			t = primitiveTypes.get(typeI);
+			if(t==null) {
+				t = classes.get(typeI);
+			}
+			if(t==null) {
+				System.out.println("[ERROR] Problema na identificação de Type.");
+				System.out.println("\tO programa será encerrado.");
+				System.exit(1);
+			}
+			vt.setType(t);
 		}
 		
 	}
@@ -353,6 +435,26 @@ public class OWL2Django {
 			}
 			this.retrieveVariableMappings(dv);
 			
+			
+//			Stream<OWLLiteral> dataPropertyStream;
+			Set<OWLLiteral> dataPropertySet;
+			Iterator<OWLLiteral> dataPropertyIterator;
+//			Iterator<OWLNamedIndividual> rangesSetIterator;
+			dataPropertySet = reasoner.getDataPropertyValues(dv.getIndividual(), DataPropertyIRI.VARIABLE_NAME.getOWLDataProperty(this.o));
+			dataPropertyIterator = dataPropertySet.iterator();
+//					reasoner.getDataPropertyValues(dv.getIndividual(), DataPropertyIRI.VARIABLE_NAME.getOWLDataProperty(this.o));
+//			rangesSet = rangesStream.collect(Collectors.toSet());
+//			rangesSetIterator = rangesSet.iterator();
+			if(dataPropertyIterator.hasNext()) {
+				String name =dataPropertyIterator.next().getLiteral();
+				dv.setCodeName(name);
+//				System.out.println("NOMEEEEEEEEEEEEEEEE: " + name);
+			}else {
+				System.out.println("[ERROR] Erro ao identificar o nome da variavel.");
+				System.out.println("\tO programa será encerrado.");
+				System.exit(1);
+			}
+//			
 			rangesStream = reasoner.getObjectPropertyValues(dv.getIndividual(), ObjectPropertyIRI.BELONGS_TO.getOWLObjectProperty(this.o)).entities();
 			rangesSet = rangesStream.collect(Collectors.toSet());
 			rangesSetIterator = rangesSet.iterator();
@@ -362,6 +464,18 @@ public class OWL2Django {
 				dv.set_class(gc);
 			}else {
 				System.out.println("[ERROR] Classe no qual a variável pertence não foi identificada.");
+				System.out.println("\tO programa será encerrado.");
+				System.exit(1);
+			}
+			
+			rangesStream = reasoner.getObjectPropertyValues(dv.getIndividual(), ObjectPropertyIRI.IS_TYPE_OF.getOWLObjectProperty(this.o)).entities();
+			rangesSet = rangesStream.collect(Collectors.toSet());
+			rangesSetIterator = rangesSet.iterator();
+			if(rangesSetIterator.hasNext()) {
+				ValueType vt = valueTypes.get(rangesSetIterator.next());
+				dv.setValueType(vt);
+			}else {
+				System.out.println("[ERROR] O ValueType da variável não foi identificado.");
 				System.out.println("\tO programa será encerrado.");
 				System.exit(1);
 			}

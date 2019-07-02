@@ -1,7 +1,10 @@
 package genericcode;
 
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 
+import OWL.ClassIRI;
+import OWL.DataPropertyIRI;
 import OWL.Individual;
 import OWL.ObjectPropertyIRI;
 
@@ -15,8 +18,17 @@ public class ValueType extends Individual {
 
 		gv.setValueType(this);
 		this.variable = gv;
+		this.classAssertion(ClassIRI.VALUE_TYPE);
 		
 		this.setType(t);
+		this.setObjectProperty(ObjectPropertyIRI.REFERS_TO, t);
+		
+		
+	}
+
+	public ValueType(OWLOntology o, OWLNamedIndividual i) {
+		super(o,i);
+		// TODO Auto-generated constructor stub
 	}
 
 	public Type getType() {
