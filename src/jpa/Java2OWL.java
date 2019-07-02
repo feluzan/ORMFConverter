@@ -31,7 +31,9 @@ import ORM.InheritanceStrategy;
 import ORM.RelationshipMapping;
 import ORM.RelationshipType;
 import ORM.VariableMapping;
+import OWL.ClassIRI;
 import OWL.DataPropertyIRI;
+import OWL.ObjectPropertyIRI;
 import database.Column;
 import database.RelationshipAssociationTable;
 import database.Table;
@@ -136,8 +138,11 @@ public class Java2OWL {
 				GenericClass superclass = classes.get(superclassName);
 				jc.setSuperclass(superclass);
 				superclass.addSubclass(jc);
+				superclass.classAssertion(ClassIRI.ENTITY_SUPERCLASS);
+				
 				
 				InheritanceMapping im = new InheritanceMapping(this.ormfo, jc);
+				superclass.setObjectProperty(ObjectPropertyIRI.SUPERCLASS_MAPPED_BY, im);
 				inheritanceMappings.put(jc, im);
 			}
 		}

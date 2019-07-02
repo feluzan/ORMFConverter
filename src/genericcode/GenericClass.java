@@ -30,6 +30,7 @@ public abstract class GenericClass extends Type{
 	private ArrayList<GenericVariable> variables;
 	
 	public abstract String toCode();
+	public abstract String toCode(InheritanceMapping im);
 
 	public GenericClass(OWLOntology o, String iri) {
 		super(o, iri);
@@ -41,6 +42,7 @@ public abstract class GenericClass extends Type{
 		super(o, i);
 		this._abstract = false;
 		this.entity = false;
+		this.superclass=null;
 		this.setCodeNameFromIndividual();
 		this.subclasses = new ArrayList<GenericClass>();
 		this.variables = new ArrayList<GenericVariable>();

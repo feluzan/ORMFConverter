@@ -26,19 +26,21 @@ public class DjangoVariable extends GenericVariable {
 		Type type = this.getValueType().getType();
 		
 		
-		if(type instanceof PrimitiveType) {
-			
-		}else {
-			if(type instanceof GenericClass) {
-				
-				
-				
-			}else {
-				System.out.println("[ERROR] Problema ao identificar o tipo da variável.");
-				System.out.println("\tO programa será encerrado.");
-				System.exit(1);
-			}
-		}
+//		if(type instanceof PrimitiveType) {
+//			
+//			ret+="Tipo primitivo!\n";
+//			
+//		}else {
+//			if(type instanceof GenericClass) {
+//				
+//				ret+="É uma classe...";
+//				
+//			}else {
+//				System.out.println("[ERROR] Problema ao identificar o tipo da variável.");
+//				System.out.println("\tO programa será encerrado.");
+//				System.exit(1);
+//			}
+//		}
 		
 		
 		return ret;

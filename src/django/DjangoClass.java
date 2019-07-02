@@ -3,6 +3,7 @@ package django;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 
+import ORM.InheritanceMapping;
 import ORM.InheritanceStrategy;
 import genericcode.GenericClass;
 import genericcode.GenericVariable;
@@ -32,42 +33,48 @@ public class DjangoClass extends GenericClass {
 		return null;
 	}
 
-	public String toCode() {
+	public String toCode(InheritanceMapping im) {
 		String ret = "";
 		
 		String superclass = "models.Model";
 		
+		String metaClass = "\tclass Meta:\n";
+		
 		if(this.isSubclass()) {
 			superclass = this.getSuperclass().getCodeName();
 			
-//			switch(this.getInheritanceMapping().getInheritanceStrategy()) {
-//					
-//				case "table_per_concrete_class":
-//					String tableName = this.getTable().getCodeName();
-//					if(!this.codeName.equals(tableName)) {
-//						metaClass += "\t\tdb_table = '" + tableName + "'\n";	
-//					}
-//					break;
-//	
-//				default:
-//					System.out.println("[WARN]\tEstrategia de herança " + this.getInheritanceMapping().getInheritanceStrategy() + " não suportada.");
-//					System.out.println("\tPadrão do Django utilizada: Table per Concrete Class.");
-//					metaClass += "\t\tdb_table = '" + this.codeName + "'\n";
-//			}
-		}else {
-//			String tableName = this.getClassMapping(). ().getCodeName();
 			
-//			metaClass += "\t\tdb_table = '" + tableName + "'\n";	
-
+			switch(im.getInheritanceStrategy()) {
+				case TABLE_PER_CONCRETE_CLASS:
+					String tableName = this.getClassMapping().getTable().getTableName();
+					if(!this.getCodeName().equals(tableName)) {
+						metaClass += "\t\tdb_table = '" + tableName + "'\n";	
+					}
+					break;
+				default:
+					System.out.println("[INFO]\tEstrategia de herança " + im.getInheritanceStrategy() + " não suportada.");
+					System.out.println("\tPadrão do Django utilizada: Table per Concrete Class.");
+					metaClass += "\t\tdb_table = '" + this.getCodeName() + "'\n";
+					break;
+			}
 		}
-		
+
 		ret += "class " + this.getCodeName() + "(" + superclass + "):\n";
+
 		
 		for(GenericVariable v : this.getVariables()) {
-			if(v.isMapped()) ret += "\t" + ((DjangoVariable)v).toString();
+			if(v.isMapped()) ret += "\t" + ((DjangoVariable)v).toCode();
 			
 		}
 		
+		ret+=metaClass;
+		ret +="\n";
 		return ret;
+	}
+
+	@Override
+	public String toCode() {
+		return this.toCode(null);
+
 	}
 }

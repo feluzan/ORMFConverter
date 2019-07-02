@@ -27,7 +27,7 @@ public enum ClassIRI {
 	
 	ENTITY_CLASS{
 		public String toString() {
-			return "#ORMF-O::Entity_Class";
+			return "#ORM-O::Entity_Class";
 		}
 	},
 	
@@ -39,7 +39,7 @@ public enum ClassIRI {
 	
 	ENTITY_SUBCLASS{
 		public String toString() {
-			return "#ORMF-O::Entity_Subclass";
+			return "#ORM-O::Entity_Subclass";
 		}
 	},
 	
@@ -51,79 +51,79 @@ public enum ClassIRI {
 	
 	ENTITY_SUPERCLASS{
 		public String toString() {
-			return "#ORMF-O::Entity_Superclass";
+			return "#ORM-O::Entity_Superclass";
 		}
 	},
 	
 	CLASS_MAPPING{
 		public String toString() {
-			return "#ORMF-O::Class_Mapping";
+			return "#ORM-O::Class_Mapping";
 		}
 	},
 	
 	INHERITANCE_MAPPING{
 		public String toString() {
-			return "#ORMF-O::Inheritance_Mapping";
+			return "#ORM-O::Inheritance_Mapping";
 		}
 	},
 	
 	SINGLE_TABLE_INHERITANCE_MAPPING{
 		public String toString() {
-			return "#ORMF-O::Single_Table_Inheritance_Mapping";
+			return "#ORM-O::Single_Table_Inheritance_Mapping";
 		}
 	},
 	
 	TABLE_PER_CLASS_INHERITANCE_MAPPING{
 		public String toString() {
-			return "#ORMF-O::Table_per_Class_Inheritance_Mapping";
+			return "#ORM-O::Table_per_Class_Inheritance_Mapping";
 		}
 	},
 	
 	TABLE_PER_CONCRETE_CLASS_INHERITANCE_MAPPING{
 		public String toString() {
-			return "#ORMF-O::Table_per_Concrete_Class_Inheritance_Mapping";
+			return "#ORM-O::Table_per_Concrete_Class_Inheritance_Mapping";
 		}
 	},
 	
 	MAPPED_VARIABLE{
 		public String toString() {
-			return "#ORMF-O::Mapped_Variable";
+			return "#ORM-O::Mapped_Variable";
 		}
 	},
 	
 	MAPPED_PRIMARY_KEY{
 		public String toString() {
-			return "#ORMF-O::Mapped_Primary_Key";
+			return "#ORM-O::Mapped_Primary_Key";
 		}
 	},
 	
 	MAPPED_FOREIGN_KEY{
 		public String toString() {
-			return "#ORMF-O::Mapped_Foreign_Key";
+			return "#ORM-O::Mapped_Foreign_Key";
 		}
 	},
 	
 	MANY_TO_MANY_RELATIONSHIP_MAPPING{
 		public String toString() {
-			return "#ORMF-O::Many_to_Many_Reltionship_Mapping";
+			return "#ORM-O::Many_to_Many_Reltionship_Mapping";
 		}
 	},
 	
 	ONE_TO_MANY_RELATIONSHIP_MAPPING{
 		public String toString() {
-			return "#ORMF-O::One_to_Many_Reltionship_Mapping";
+			return "#ORM-O::One_to_Many_Reltionship_Mapping";
 		}
 	},
 	
 	MANY_TO_ONE_RELATIONSHIP_MAPPING{
 		public String toString() {
-			return "#ORMF-O::Many_to_One_Reltionship_Mapping";
+			return "#ORM-O::Many_to_One_Reltionship_Mapping";
 		}
 	},
 	
 	ONE_TO_ONE_RELATIONSHIP_MAPPING{
 		public String toString() {
-			return "#ORMF-O::One_to_One_Reltionship_Mapping";
+			return "#ORM-O::One_to_One_Reltionship_Mapping";
 		}
 	},
 	
@@ -153,43 +153,43 @@ public enum ClassIRI {
 	
 	VARIABLE_MAPPING{
 		public String toString() {
-			return "#ORMF-O::Variable_Mapping";
+			return "#ORM-O::Variable_Mapping";
 		}
 	},
 	
 	PRIMARY_KEY_MAPPING{
 		public String toString() {
-			return "#ORMF-O::Primary_Key_Mapping";
+			return "#ORM-O::Primary_Key_Mapping";
 		}
 	},
 	
 	FOREIGN_KEY_MAPPING{
 		public String toString() {
-			return "#ORMF-O::Foreign_Key_Mapping";
+			return "#ORM-O::Foreign_Key_Mapping";
 		}
 	},
 	
 	SINGLE_ENTITY_TABLE{
 		public String toString() {
-			return "#ORMF-O::Single_Entity_Table";
+			return "#ORM-O::Single_Entity_Table";
 		}
 	},
 	
 	MULTIPLE_ENTITY_TABLE{
 		public String toString() {
-			return "#ORMF-O::Multiple_Entities_Table";
+			return "#ORM-O::Multiple_Entities_Table";
 		}
 	},
 	
 	ENTITY_TABLE{
 		public String toString() {
-			return "#ORMF-O::Entity_Table";
+			return "#ORM-O::Entity_Table";
 		}
 	},
 	
 	RELATIONSHIP_ASSOCIATION_ENTITY_TABLE{
 		public String toString() {
-			return "#ORMF-O::Relationship_Association_Table";
+			return "#ORM-O::Relationship_Association_Table";
 		}
 	};
 	

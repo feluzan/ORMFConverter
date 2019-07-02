@@ -127,4 +127,10 @@ public class JavaVariable extends GenericVariable {
 	public String getCodeType() {
 		return this.codeType;
 	}
+
+	@Override
+	public String toCode() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

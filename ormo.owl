@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <Ontology xmlns="http://www.w3.org/2002/07/owl#"
-     xml:base="http://www.semanticweb.org/felixzanetti/ontologies/2019/3/ORMFO"
+     xml:base="http://www.semanticweb.org/felixzanetti/ontologies/2019/3/ORMO"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     ontologyIRI="http://www.semanticweb.org/felixzanetti/ontologies/2019/3/ORMFO"
-     versionIRI="http://www.semanticweb.org/felixzanetti/ontologies/2019/3/ORMFO">
-    <Prefix name="" IRI="http://www.semanticweb.org/felixzanetti/ontologies/2019/3/ORMFO"/>
+     ontologyIRI="http://www.semanticweb.org/felixzanetti/ontologies/2019/3/ORMO"
+     versionIRI="http://www.semanticweb.org/felixzanetti/ontologies/2019/3/ORMO">
+    <Prefix name="" IRI="http://www.semanticweb.org/felixzanetti/ontologies/2019/3/ORMO"/>
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
     <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
     <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
@@ -53,76 +53,76 @@
         <Class IRI="#OOC-O::Variable"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Class_Mapping"/>
+        <Class IRI="#ORM-O::Class_Mapping"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Entity_Class"/>
+        <Class IRI="#ORM-O::Entity_Class"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Entity_Subclass"/>
+        <Class IRI="#ORM-O::Entity_Subclass"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Entity_Superclass"/>
+        <Class IRI="#ORM-O::Entity_Superclass"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Entity_Table"/>
+        <Class IRI="#ORM-O::Inheritance_Mapping"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
+        <Class IRI="#ORM-O::Mapped_Foreign_Key"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Mapped_Primary_Key"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Many_To_Many_Relationship_Mapping"/>
+        <Class IRI="#ORM-O::Mapped_Variable"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Many_To_One_Relationship_Mapping"/>
+        <Class IRI="#ORM-O::Single_Table_Inheritance_Mapping"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Mapped_Foreign_Key"/>
+        <Class IRI="#ORM-O::Table_per_Class_Inheritance_Mapping"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Mapped_Primary_Key"/>
+        <Class IRI="#ORM-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <Class IRI="#ORM-O::Entity_Table"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Multiple_Entities_Table"/>
+        <Class IRI="#ORM-O::Foreign_Key_Mapping"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Nullability"/>
+        <Class IRI="#ORM-O::Many_To_Many_Relationship_Mapping"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::One_To_Many_Relationship_Mapping"/>
+        <Class IRI="#ORM-O::Many_To_One_Relationship_Mapping"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::One_To_One_Relationship_Mapping"/>
+        <Class IRI="#ORM-O::Multiple_Entities_Table"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+        <Class IRI="#ORM-O::Nullability"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Relationship_Association_Table"/>
+        <Class IRI="#ORM-O::One_To_Many_Relationship_Mapping"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+        <Class IRI="#ORM-O::One_To_One_Relationship_Mapping"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Single_Entity_Table"/>
+        <Class IRI="#ORM-O::Primary_Key_Mapping"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Single_Table_Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Relationship_Association_Table"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Table_per_Class_Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Relationship_Mapping"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Single_Entity_Table"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <Class IRI="#ORM-O::Variable_Mapping"/>
     </Declaration>
     <Declaration>
         <Class IRI="#RDBS-O::Column"/>
@@ -269,80 +269,80 @@
         <Class IRI="#OOC-O::Extendable_Class"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ORMF-O::Entity_Class"/>
+        <Class IRI="#ORM-O::Entity_Class"/>
         <Class IRI="#OOC-O::Class"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ORMF-O::Entity_Subclass"/>
+        <Class IRI="#ORM-O::Entity_Subclass"/>
         <Class IRI="#OOC-O::Subclass"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ORMF-O::Entity_Superclass"/>
+        <Class IRI="#ORM-O::Entity_Superclass"/>
         <Class IRI="#OOC-O::Superclass"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ORMF-O::Entity_Table"/>
-        <Class IRI="#RDBS-O::Table"/>
+        <Class IRI="#ORM-O::Mapped_Foreign_Key"/>
+        <Class IRI="#ORM-O::Mapped_Variable"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
-        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <Class IRI="#ORM-O::Mapped_Primary_Key"/>
+        <Class IRI="#ORM-O::Mapped_Variable"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ORMF-O::Many_To_Many_Relationship_Mapping"/>
-        <Class IRI="#ORMF-O::Relationship_Mapping"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ORMF-O::Many_To_One_Relationship_Mapping"/>
-        <Class IRI="#ORMF-O::Relationship_Mapping"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ORMF-O::Mapped_Foreign_Key"/>
-        <Class IRI="#ORMF-O::Mapped_Variable"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ORMF-O::Mapped_Primary_Key"/>
-        <Class IRI="#ORMF-O::Mapped_Variable"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <Class IRI="#ORM-O::Mapped_Variable"/>
         <Class IRI="#OOC-O::Instance_Variable"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ORMF-O::Multiple_Entities_Table"/>
-        <Class IRI="#ORMF-O::Entity_Table"/>
+        <Class IRI="#ORM-O::Single_Table_Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Inheritance_Mapping"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ORMF-O::One_To_Many_Relationship_Mapping"/>
-        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+        <Class IRI="#ORM-O::Table_per_Class_Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Inheritance_Mapping"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ORMF-O::One_To_One_Relationship_Mapping"/>
-        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+        <Class IRI="#ORM-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Inheritance_Mapping"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
-        <Class IRI="#ORMF-O::Variable_Mapping"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ORMF-O::Relationship_Association_Table"/>
+        <Class IRI="#ORM-O::Entity_Table"/>
         <Class IRI="#RDBS-O::Table"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ORMF-O::Single_Entity_Table"/>
-        <Class IRI="#ORMF-O::Entity_Table"/>
+        <Class IRI="#ORM-O::Foreign_Key_Mapping"/>
+        <Class IRI="#ORM-O::Variable_Mapping"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ORMF-O::Single_Table_Inheritance_Mapping"/>
-        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Many_To_Many_Relationship_Mapping"/>
+        <Class IRI="#ORM-O::Relationship_Mapping"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ORMF-O::Table_per_Class_Inheritance_Mapping"/>
-        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Many_To_One_Relationship_Mapping"/>
+        <Class IRI="#ORM-O::Relationship_Mapping"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ORMF-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
-        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Multiple_Entities_Table"/>
+        <Class IRI="#ORM-O::Entity_Table"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORM-O::One_To_Many_Relationship_Mapping"/>
+        <Class IRI="#ORM-O::Relationship_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORM-O::One_To_One_Relationship_Mapping"/>
+        <Class IRI="#ORM-O::Relationship_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORM-O::Primary_Key_Mapping"/>
+        <Class IRI="#ORM-O::Variable_Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORM-O::Relationship_Association_Table"/>
+        <Class IRI="#RDBS-O::Table"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ORM-O::Single_Entity_Table"/>
+        <Class IRI="#ORM-O::Entity_Table"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#RDBS-O::Column_Constraint"/>
@@ -370,19 +370,19 @@
     </SubClassOf>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#entity_class_mapped_by"/>
-        <Class IRI="#ORMF-O::Entity_Class"/>
+        <Class IRI="#ORM-O::Entity_Class"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#entity_class_mapped_to"/>
-        <Class IRI="#ORMF-O::Class_Mapping"/>
+        <Class IRI="#ORM-O::Class_Mapping"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#fk_mapped_by"/>
-        <Class IRI="#ORMF-O::Mapped_Foreign_Key"/>
+        <Class IRI="#ORM-O::Mapped_Foreign_Key"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#fk_mapped_to"/>
-        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
+        <Class IRI="#ORM-O::Foreign_Key_Mapping"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#inherited_from"/>
@@ -398,7 +398,7 @@
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#many_to_many_association_mapped_to"/>
-        <Class IRI="#ORMF-O::Many_To_Many_Relationship_Mapping"/>
+        <Class IRI="#ORM-O::Many_To_Many_Relationship_Mapping"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#member_belongs_to"/>
@@ -406,15 +406,15 @@
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#one_to_many_association_mapped_to"/>
-        <Class IRI="#ORMF-O::One_To_Many_Relationship_Mapping"/>
+        <Class IRI="#ORM-O::One_To_Many_Relationship_Mapping"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#pk_mapped_by"/>
-        <Class IRI="#ORMF-O::Mapped_Primary_Key"/>
+        <Class IRI="#ORM-O::Mapped_Primary_Key"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#pk_mapped_to"/>
-        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+        <Class IRI="#ORM-O::Primary_Key_Mapping"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#refers_to"/>
@@ -422,7 +422,7 @@
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#relationship_reverse_of"/>
-        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+        <Class IRI="#ORM-O::Relationship_Mapping"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#represents_relationship"/>
@@ -430,43 +430,43 @@
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#single_table_inheritance_mapped_to"/>
-        <Class IRI="#ORMF-O::Single_Table_Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Single_Table_Inheritance_Mapping"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#subclass_mapped_by"/>
-        <Class IRI="#ORMF-O::Entity_Subclass"/>
+        <Class IRI="#ORM-O::Entity_Subclass"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#superclass_mapped_by"/>
-        <Class IRI="#ORMF-O::Entity_Superclass"/>
+        <Class IRI="#ORM-O::Entity_Superclass"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#table_per_class_inheritance_mapped_to"/>
-        <Class IRI="#ORMF-O::Table_per_Class_Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Table_per_Class_Inheritance_Mapping"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#table_per_concrete_class_inheritance_mapped_to"/>
-        <Class IRI="#ORMF-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Table_per_Concrete_Class_Inheritance_Mapping"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#variable_mapped_by"/>
-        <Class IRI="#ORMF-O::Mapped_Variable"/>
+        <Class IRI="#ORM-O::Mapped_Variable"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#variable_mapped_to"/>
-        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <Class IRI="#ORM-O::Variable_Mapping"/>
     </ObjectPropertyDomain>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#entity_class_mapped_by"/>
-        <Class IRI="#ORMF-O::Class_Mapping"/>
+        <Class IRI="#ORM-O::Class_Mapping"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#entity_class_mapped_to"/>
-        <Class IRI="#ORMF-O::Entity_Table"/>
+        <Class IRI="#ORM-O::Entity_Table"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#fk_mapped_by"/>
-        <Class IRI="#ORMF-O::Foreign_Key_Mapping"/>
+        <Class IRI="#ORM-O::Foreign_Key_Mapping"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#fk_mapped_to"/>
@@ -486,7 +486,7 @@
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#many_to_many_association_mapped_to"/>
-        <Class IRI="#ORMF-O::Relationship_Association_Table"/>
+        <Class IRI="#ORM-O::Relationship_Association_Table"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#member_belongs_to"/>
@@ -494,11 +494,11 @@
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#one_to_many_association_mapped_to"/>
-        <Class IRI="#ORMF-O::Relationship_Association_Table"/>
+        <Class IRI="#ORM-O::Relationship_Association_Table"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#pk_mapped_by"/>
-        <Class IRI="#ORMF-O::Primary_Key_Mapping"/>
+        <Class IRI="#ORM-O::Primary_Key_Mapping"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#pk_mapped_to"/>
@@ -510,35 +510,35 @@
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#relationship_reverse_of"/>
-        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+        <Class IRI="#ORM-O::Relationship_Mapping"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#represents_relationship"/>
-        <Class IRI="#ORMF-O::Relationship_Mapping"/>
+        <Class IRI="#ORM-O::Relationship_Mapping"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#single_table_inheritance_mapped_to"/>
-        <Class IRI="#ORMF-O::Multiple_Entities_Table"/>
+        <Class IRI="#ORM-O::Multiple_Entities_Table"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#subclass_mapped_by"/>
-        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Inheritance_Mapping"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#superclass_mapped_by"/>
-        <Class IRI="#ORMF-O::Inheritance_Mapping"/>
+        <Class IRI="#ORM-O::Inheritance_Mapping"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#table_per_class_inheritance_mapped_to"/>
-        <Class IRI="#ORMF-O::Single_Entity_Table"/>
+        <Class IRI="#ORM-O::Single_Entity_Table"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#table_per_concrete_class_inheritance_mapped_to"/>
-        <Class IRI="#ORMF-O::Single_Entity_Table"/>
+        <Class IRI="#ORM-O::Single_Entity_Table"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#variable_mapped_by"/>
-        <Class IRI="#ORMF-O::Variable_Mapping"/>
+        <Class IRI="#ORM-O::Variable_Mapping"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#variable_mapped_to"/>

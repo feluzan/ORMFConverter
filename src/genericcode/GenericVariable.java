@@ -8,7 +8,7 @@ import ORM.VariableMapping;
 import OWL.Individual;
 import OWL.ObjectPropertyIRI;
 
-public class GenericVariable extends Individual{
+public abstract class GenericVariable extends Individual{
 	
 	private GenericClass _class;
 	private String codeName;
@@ -98,5 +98,5 @@ public class GenericVariable extends Individual{
 	}
 	
 	
-
+	public abstract String toCode();
 }

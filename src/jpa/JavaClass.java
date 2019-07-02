@@ -18,6 +18,7 @@ import com.github.javaparser.ast.expr.MemberValuePair;
 import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 
+import ORM.InheritanceMapping;
 import ORM.InheritanceStrategy;
 import OWL.ClassIRI;
 import OWL.DataPropertyIRI;
@@ -141,6 +142,12 @@ public class JavaClass extends GenericClass{
 
 	@Override
 	public String toCode() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String toCode(InheritanceMapping im) {
 		// TODO Auto-generated method stub
 		return null;
 	}

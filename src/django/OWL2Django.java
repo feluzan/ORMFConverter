@@ -107,7 +107,11 @@ public class OWL2Django {
 			
 			for(GenericClass c : classes.values()) {
 				if(!c.isSubclass()) continue;
-				printWriter.print(c.toCode());
+				InheritanceMapping im = null;
+				for(InheritanceMapping inh : inheritanceMappings.values()) {
+					if(inh.getSubclass().equals(c)) im = inh;
+				}
+				printWriter.print(c.toCode(im));
 				
 			}
 			
@@ -228,10 +232,12 @@ public class OWL2Django {
 	}
 	
 	private void retrieveSuperclasses() {
+		
 		OWLClass c = ClassIRI.ENTITY_SUPERCLASS.getOWLClass(o);
 
 		NodeSet<OWLNamedIndividual> individualsNodeSet = reasoner.getInstances(c,false);
 		Stream<OWLNamedIndividual> individuals = individualsNodeSet.entities();
+//		System.out.println(individuals.count() + " -------");
 
 		Stream<OWLNamedIndividual> rangesStream;
 		Set<OWLNamedIndividual> rangesSet;
@@ -243,9 +249,9 @@ public class OWL2Django {
 			OWLNamedIndividual i = individualsAsIterator.next();
 			GenericClass superclass = classes.get(i);
 			rangesStream = reasoner.getObjectPropertyValues(superclass.getIndividual(), ObjectPropertyIRI.SUPERCLASS_MAPPED_BY.getOWLObjectProperty(this.o)).entities();
-			rangesSet = rangesStream.collect(Collectors.toSet());
+//			rangesSet = rangesStream.collect(Collectors.toSet());
 			
-			Iterator<OWLNamedIndividual> rangesSetIterator = rangesSet.iterator();
+			Iterator<OWLNamedIndividual> rangesSetIterator = rangesStream.iterator();
 			while(rangesSetIterator.hasNext()) {
 				InheritanceMapping im = inheritanceMappings.get(rangesSetIterator.next());
 				im.setSuperclass(superclass);
