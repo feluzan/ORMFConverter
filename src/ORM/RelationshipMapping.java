@@ -1,5 +1,6 @@
 package ORM;
 
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 
 import OWL.ClassIRI;
@@ -20,31 +21,36 @@ public class RelationshipMapping extends Individual {
 		
 		this.relationshipType = gv.getRelationshipType();
 		switch(gv.getRelationshipType()) {
-		case MANY_TO_MANY:
-			this.classAssertion(ClassIRI.MANY_TO_MANY_RELATIONSHIP_MAPPING);
-			break;
+			case MANY_TO_MANY:
+				this.classAssertion(ClassIRI.MANY_TO_MANY_RELATIONSHIP_MAPPING);
+				break;
+				
+			case MANY_TO_ONE:
+				this.classAssertion(ClassIRI.MANY_TO_ONE_RELATIONSHIP_MAPPING);
+				break;
+				
+			case ONE_TO_MANY:
+				this.classAssertion(ClassIRI.ONE_TO_MANY_RELATIONSHIP_MAPPING);
+				break;
+				
+			case ONE_TO_ONE:
+				this.classAssertion(ClassIRI.ONE_TO_ONE_RELATIONSHIP_MAPPING);
+				break;
+				
+			default:
+				break;
 			
-		case MANY_TO_ONE:
-			this.classAssertion(ClassIRI.MANY_TO_ONE_RELATIONSHIP_MAPPING);
-			break;
-			
-		case ONE_TO_MANY:
-			this.classAssertion(ClassIRI.ONE_TO_MANY_RELATIONSHIP_MAPPING);
-			break;
-			
-		case ONE_TO_ONE:
-			this.classAssertion(ClassIRI.ONE_TO_ONE_RELATIONSHIP_MAPPING);
-			break;
-			
-		default:
-			break;
-		
 		}
+		gv.setRelationshipMapping(this);
 		
 		this.variable = gv;
 		gv.setObjectProperty(ObjectPropertyIRI.REPRESENTS_RELATIONSHIP, this);
 	}
 
+	
+	public RelationshipMapping(OWLOntology o,OWLNamedIndividual i) {
+		super(o, i);
+	}
 	public RelationshipMapping getReverse() {
 		return reverse;
 	}
@@ -56,9 +62,15 @@ public class RelationshipMapping extends Individual {
 	public GenericVariable getVariable() {
 		return this.variable;
 	}
-
+	public void setVariable(GenericVariable gv) {
+		this.variable = gv;
+	}
+	
 	public RelationshipType getRelationshipType() {
 		return relationshipType;
+	}
+	public void setRelationshipType(RelationshipType rt) {
+		this.relationshipType = rt;
 	}
 
 }

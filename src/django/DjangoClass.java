@@ -67,8 +67,9 @@ public class DjangoClass extends GenericClass {
 			
 		}
 		
-		ret+=metaClass;
-		ret +="\n";
+		metaClass+="\t\tpass\n";
+		ret+="\n"+metaClass;
+		ret +="\n\n";
 		return ret;
 	}
 

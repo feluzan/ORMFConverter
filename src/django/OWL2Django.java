@@ -32,6 +32,8 @@ import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
 import ORM.ClassMapping;
 import ORM.InheritanceMapping;
 import ORM.InheritanceStrategy;
+import ORM.RelationshipMapping;
+import ORM.RelationshipType;
 import ORM.VariableMapping;
 import OWL.ClassIRI;
 import OWL.DataPropertyIRI;
@@ -63,7 +65,7 @@ public class OWL2Django {
 	private Map<OWLIndividual, ValueType> valueTypes = new HashMap<OWLIndividual, ValueType>();
 	
 	private Map<OWLIndividual, PrimitiveType> primitiveTypes = new HashMap<OWLIndividual, PrimitiveType>();
-	
+	private Map<OWLIndividual, RelationshipMapping> relationshipMappings = new HashMap<OWLIndividual, RelationshipMapping>();
 	
 	public OWL2Django(String OWLPath) {
 		
@@ -404,6 +406,7 @@ public class OWL2Django {
 	}
 	
 	private void retrieveFields() {
+		
 		OWLClass c = ClassIRI.INSTANCE_VARIABLE.getOWLClass(o);
 
 		NodeSet<OWLNamedIndividual> individualsNodeSet = reasoner.getInstances(c,false);
@@ -436,19 +439,13 @@ public class OWL2Django {
 			this.retrieveVariableMappings(dv);
 			
 			
-//			Stream<OWLLiteral> dataPropertyStream;
 			Set<OWLLiteral> dataPropertySet;
 			Iterator<OWLLiteral> dataPropertyIterator;
-//			Iterator<OWLNamedIndividual> rangesSetIterator;
 			dataPropertySet = reasoner.getDataPropertyValues(dv.getIndividual(), DataPropertyIRI.VARIABLE_NAME.getOWLDataProperty(this.o));
 			dataPropertyIterator = dataPropertySet.iterator();
-//					reasoner.getDataPropertyValues(dv.getIndividual(), DataPropertyIRI.VARIABLE_NAME.getOWLDataProperty(this.o));
-//			rangesSet = rangesStream.collect(Collectors.toSet());
-//			rangesSetIterator = rangesSet.iterator();
 			if(dataPropertyIterator.hasNext()) {
 				String name =dataPropertyIterator.next().getLiteral();
 				dv.setCodeName(name);
-//				System.out.println("NOMEEEEEEEEEEEEEEEE: " + name);
 			}else {
 				System.out.println("[ERROR] Erro ao identificar o nome da variavel.");
 				System.out.println("\tO programa será encerrado.");
@@ -478,6 +475,41 @@ public class OWL2Django {
 				System.out.println("[ERROR] O ValueType da variável não foi identificado.");
 				System.out.println("\tO programa será encerrado.");
 				System.exit(1);
+			}
+			
+			rangesStream = reasoner.getObjectPropertyValues(dv.getIndividual(), ObjectPropertyIRI.REPRESENTS_RELATIONSHIP.getOWLObjectProperty(this.o)).entities();
+			rangesSet = rangesStream.collect(Collectors.toSet());
+			rangesSetIterator = rangesSet.iterator();
+			if(rangesSetIterator.hasNext()) {
+				RelationshipMapping rm = new RelationshipMapping(this.o, rangesSetIterator.next());
+				relationshipMappings.put(rm.getIndividual(), rm);
+				rm.setVariable(dv);
+				dv.setRelationshipMapping(rm);
+				Stream<OWLClass> rmAllClassesStream = reasoner.getTypes(rm.getIndividual()).entities();
+				Set<OWLClass> rmAllClasses = rmAllClassesStream.collect(Collectors.toSet());
+				
+				if(rmAllClasses.contains(ClassIRI.ONE_TO_ONE_RELATIONSHIP_MAPPING.getOWLClass(o))) {
+					rm.setRelationshipType(RelationshipType.ONE_TO_ONE);
+				}else {
+					if(rmAllClasses.contains(ClassIRI.ONE_TO_MANY_RELATIONSHIP_MAPPING.getOWLClass(o))) {
+						rm.setRelationshipType(RelationshipType.ONE_TO_MANY);
+					}else {
+						if(rmAllClasses.contains(ClassIRI.MANY_TO_ONE_RELATIONSHIP_MAPPING.getOWLClass(o))) {
+							rm.setRelationshipType(RelationshipType.MANY_TO_ONE);
+						}else {
+							if(rmAllClasses.contains(ClassIRI.MANY_TO_MANY_RELATIONSHIP_MAPPING.getOWLClass(o))) {
+								rm.setRelationshipType(RelationshipType.MANY_TO_MANY);
+							}else {
+								System.out.println("[ERROR] Erro ao identificar o Tipo de Relacionamento.");
+								System.out.println("\tO programa será encerrado.");
+								System.exit(1);
+							}
+						}
+						
+					}
+					
+				}
+				
 			}
 		}
 		

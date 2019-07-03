@@ -3,6 +3,7 @@ package genericcode;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 
+import ORM.RelationshipMapping;
 import ORM.RelationshipType;
 import ORM.VariableMapping;
 import OWL.Individual;
@@ -18,6 +19,7 @@ public abstract class GenericVariable extends Individual{
 	private VariableMapping variableMapping;
 	private ValueType valueType;
 	private RelationshipType relationshipType;
+	private RelationshipMapping relationshipMapping;
 	
 
 	public GenericVariable(OWLOntology o, String iri) {
@@ -97,6 +99,12 @@ public abstract class GenericVariable extends Individual{
 		this.relationshipType = relationshipType;
 	}
 	
+	public void setRelationshipMapping(RelationshipMapping rm) {
+		this.relationshipMapping = rm;
+	}
+	public RelationshipMapping getRelationshipMapping() {
+		return this.relationshipMapping;
+	}
 	
 	public abstract String toCode();
 }
