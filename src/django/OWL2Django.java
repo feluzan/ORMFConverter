@@ -185,12 +185,9 @@ public class OWL2Django {
 			
 			Set<OWLLiteral> dataPropertySet;
 			Iterator<OWLLiteral> dataPropertyIterator;
-//			Iterator<OWLNamedIndividual> rangesSetIterator;
 			dataPropertySet = reasoner.getDataPropertyValues(pt.getIndividual(), DataPropertyIRI.TYPE_NAME.getOWLDataProperty(this.o));
 			dataPropertyIterator = dataPropertySet.iterator();
-//					reasoner.getDataPropertyValues(dv.getIndividual(), DataPropertyIRI.VARIABLE_NAME.getOWLDataProperty(this.o));
-//			rangesSet = rangesStream.collect(Collectors.toSet());
-//			rangesSetIterator = rangesSet.iterator();
+
 			if(dataPropertyIterator.hasNext()) {
 				String name =dataPropertyIterator.next().getLiteral();
 				pt.setTypeName(name);

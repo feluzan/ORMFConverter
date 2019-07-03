@@ -25,10 +25,16 @@ public class DjangoVariable extends GenericVariable {
 	}
 
 	public String toCode() {
+		
+		if(!this.isMapped()) return "";
 
 		System.out.println("Gerando código de variável...");
 		String ret = "";
 		ArrayList<String> parameters = new ArrayList<String>();
+		
+		if(this.isPk()) {
+			parameters.add("primary_key=True");
+		}
 		
 		Type type = this.getValueType().getType();
 		
