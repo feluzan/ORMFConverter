@@ -135,6 +135,7 @@ public class OWL2Django {
 		} catch (Exception e) {
 			System.out.println("[ERROR] Erro ao imprimir no arquivo " + filePath);
 			System.out.println("\tO programa será encerrado.");
+//			e.printStackTrace();
 			System.exit(1);
 		}
 	}

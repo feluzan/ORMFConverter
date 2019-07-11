@@ -28,7 +28,7 @@ public class DjangoVariable extends GenericVariable {
 		
 		if(!this.isMapped()) return "";
 
-		System.out.println("Gerando código de variável...");
+//		System.out.println("Gerando código de variável...");
 		String ret = "";
 		ArrayList<String> parameters = new ArrayList<String>();
 		
@@ -52,9 +52,9 @@ public class DjangoVariable extends GenericVariable {
 				GenericClass gc = (GenericClass)type;
 				ret+=this.getCodeName() + " = ";
 				String classCodeName = gc.getCodeName();
-				System.out.println("Classe: " + classCodeName);
+//				System.out.println("Classe: " + classCodeName);
 				RelationshipType rt = this.getRelationshipMapping().getRelationshipType();
-				System.out.println(rt);
+//				System.out.println(rt);
 				switch(rt) {
 					case MANY_TO_MANY:
 						ret += "models.ManyToManyField";
@@ -75,7 +75,7 @@ public class DjangoVariable extends GenericVariable {
 						parameters.add("on_delete=models.CASCADE");
 						break;
 					default:
-						System.out.println("Defaaaault............................");
+//						System.out.println("Defaaaault............................");
 							
 				}
 			}else {

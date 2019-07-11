@@ -39,19 +39,19 @@ public class Converter {
 		
 		
 		Scanner scanner = new Scanner(System.in);
-	//	System.out.println("Digite o path da pasta que contem os arquivos das classes Java:");
-	//	String folderPath = scanner.nextLine();
-	//	
-	//	System.out.println("Digite o path da arquivo de saída que conterá a OWL:");
-	//	String owlPath = scanner.nextLine();
-	//	
-	//	System.out.println("Digite o path da arquivo de saída que conterá o código em Ptrhon com Django:");
-	//	String djangoPath = scanner.nextLine();
+		System.out.println("Digite o path da pasta que contem os arquivos das classes Java:");
+		String folderPath = scanner.nextLine();
+		
+		System.out.println("Digite o path da arquivo de saída que conterá a OWL:");
+		String owlPath = scanner.nextLine();
+		
+		System.out.println("Digite o path da arquivo de saída que conterá o código em Ptrhon com Django:");
+		String djangoPath = scanner.nextLine();
 		
 		
-		String folderPath = "D:\\Projetos\\DomainModelExample\\src\\model";
-		String owlPath = "output.owl";
-		String djangoPath = "outputDjango.py";
+//		String folderPath = "D:\\Projetos\\DomainModelExample\\src\\model";
+//		String owlPath = "output.owl";
+//		String djangoPath = "outputDjango.py";
 		
 			
 	
@@ -77,7 +77,7 @@ public class Converter {
 		System.out.println("\n[INFO] Iniciando escrita no arquivo " + djangoPath + "...");
 		owl2Django.printFile(djangoPath);
 
-		System.out.println(" OK!");
+		System.out.println("Fim!");
 		
 		
 		
